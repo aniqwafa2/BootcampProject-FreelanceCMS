@@ -1,0 +1,42 @@
+#ENV
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+#build & testing
+build
+coverage
+
+#NPM
+node_modules
+package-lock.json
+
+#PNPM
+pnpm-lock.yaml
+
+#YARN
+yarn.lock
+.pnp.*
+.yarn
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
