@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "test": "nodemon app.js"
+    "test": "nodemon app.js",
+    "dbinit": "sequelize-cli db:create && sequelize-cli db:migrate",
+    "dbdrop": "sequelize-cli db:drop"
   },
   "keywords": [],
   "author": "",
