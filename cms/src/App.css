@@ -1,38 +1,64 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
+
+body {
+  font-family: "DM Sans", sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navigation:hover {
+  text-decoration: underline;
+  text-underline-offset: 1.6rem;
+  font-weight: 600;
+  transition: all ease 0.2s;
+}
+.bs-info-bg-subtle {
+  background-color: #ebf5fa;
+}
+.bs-info-bg-subtle:hover {
+  background-color: #cff4fc;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card-style {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.text-container {
+  width: 100%;
+  height: 2.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap;  */
+  word-wrap: break-word;
 }
 
-.App-link {
-  color: #61dafb;
+.tags-style {
+  font-size: 13px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-styles {
+  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+}
+
+.scrollable-content {
+  height: 180px;
+  margin-top: -20px;
+  overflow-y: auto;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 200vh;
+  padding-right: 100px;
+  padding-left: 20px;
+  overflow-y: auto;
+  margin-top: 250px;
+  padding-bottom: 100px;
+  transition: transform 0.3s;
+  /* margin-bottom: -200px; */
+  /* background-color: #f8f9fa; */
+}
+
+.sidebar-hide {
+  transform: translate(10px, -70px);
 }
