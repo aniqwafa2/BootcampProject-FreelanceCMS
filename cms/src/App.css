@@ -59,6 +59,49 @@ body {
   /* background-color: #f8f9fa; */
 }
 
+.btn-custom {
+  background-color: #37474f;
+}
+.btn-custom:hover {
+  background-color: #263238;
+}
+
+.custom-color {
+  background-color: #37474f1f;
+}
+
+/* color : 263238 */
 .sidebar-hide {
   transform: translate(10px, -70px);
+}
+
+.img-footer {
+  width: 100px;
+}
+
+.hero-login {
+  background-image: url(./images/login.gif);
+  background-size: auto;
+  background-repeat: no-repeat;
+  height: 100%;
+  margin-top: 80px;
+}
+.hero-register {
+  background-image: url(./images/register.gif);
+  background-size: auto;
+  background-repeat: no-repeat;
+  height: 100%;
+  margin-top: 80px;
+}
+
+.login-form-style {
+  margin-top: 5rem;
+}
+
+.form-login {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+
+.link-styles {
+  text-decoration: none;
 }

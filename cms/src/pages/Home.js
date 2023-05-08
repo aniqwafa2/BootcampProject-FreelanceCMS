@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BsSearch, BsGeoAlt } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 
 const Home = () => {
@@ -52,12 +52,12 @@ const Home = () => {
               </ul>
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
-                  <Link className="nav-link navigation" to="#">
+                  <Link className="nav-link navigation" to="/login">
                     Login
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link navigation" to="#">
+                  <Link className="nav-link navigation" to="Register">
                     Register
                   </Link>
                 </li>
@@ -67,7 +67,7 @@ const Home = () => {
                 </div>
 
                 <li className="nav-item ">
-                  <Link className="btn btn-sm btn-info mt-1 text-white fw-bold" to="#">
+                  <Link className="btn btn-sm btn-custom mt-1 text-white fw-bold" to="#">
                     Employers / Post Job
                   </Link>
                 </li>
@@ -82,7 +82,7 @@ const Home = () => {
         <div class="container text-center">
           <div class="row mt-5">
             <div class="col-5">
-              <select className="bs-info-bg-subtle form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
+              <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
                 <option selected>job title, keyword or company</option>
                 <option data-icon="bi bi-heart">Option 2</option>
                 <option value="1">One</option>
@@ -91,7 +91,7 @@ const Home = () => {
               </select>
             </div>
             <div class="col-5">
-              <select class="bs-info-bg-subtle form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
+              <select class="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
                 <option selected data-icon="bi bi-funnel">
                   All location
                 </option>
@@ -101,7 +101,7 @@ const Home = () => {
               </select>
             </div>
             <div class="col-2">
-              <button type="button" class="border border-0 btn btn-lg btn-info w-100 text-white fs-5 lh-base">
+              <button type="button" class="border border-0 btn btn-lg btn-custom w-100 text-white fs-5 lh-base">
                 <BsSearch className="me-2"></BsSearch>Search
               </button>
             </div>
@@ -338,6 +338,34 @@ const Home = () => {
                 </p>
               </div>
             </div>
+
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-end">
+                <li class="page-item disabled">
+                  <Link class="page-link">Previous</Link>
+                </li>
+                <li class="page-item active">
+                  <Link class="page-link" href="#">
+                    1
+                  </Link>
+                </li>
+                <li class="page-item">
+                  <Link class="page-link" href="#">
+                    2
+                  </Link>
+                </li>
+                <li class="page-item">
+                  <Link class="page-link" href="#">
+                    3
+                  </Link>
+                </li>
+                <li class="page-item">
+                  <Link class="page-link" href="#">
+                    Next
+                  </Link>
+                </li>
+              </ul>
+            </nav>
           </div>
 
           {/* sidebar */}
@@ -355,7 +383,7 @@ const Home = () => {
                 </h6>
                 <h4 class="card-subtitle mb-2 text-body-secondary fw-bold">Revamp Our E-commerce Website with a Fresh & Clean UI Design</h4>
                 <Link to="#">
-                  <button type="submit" className="btn btn-lg btn-info text-white fw-bold">
+                  <button type="submit" className="btn btn-lg btn-custom text-white fw-bold">
                     Apply Now
                   </button>
                 </Link>
@@ -407,12 +435,23 @@ const Home = () => {
       </div>
 
       {/* footer */}
-      <div className="container-fluid py-3 border-top">
+      <div className="container-fluid py-2 mt-5 border-top">
         <div className="row">
-          <div className="col ms-5">
-            <Link className="navbar-brand" to="#">
-              <span className="fs-4 fw-bold">Footer</span>
-            </Link>
+          <div className="footer">
+            <div class="d-flex">
+              <div className="ms-5 fw-bold fs-4">
+                <div class="p-2 flex-grow-1">GigGenie</div>
+              </div>
+              <div className="ms-auto me-5 pt-2 fs-6 fw-semibold">
+                <div class="d-inline p-2">#TeamProject4</div>
+                <div class="d-inline p-2">
+                  <Link to="https://www.code.id/">
+                    <i>Powered by</i>
+                    <img src="https://static.wixstatic.com/media/ab2f5c_4090dbbaeafb4b0d975bd44c6cd498f6~mv2_d_5000_3314_s_4_2.png/v1/fill/w_262,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/code-colored.png" className="img-footer" alt="" />
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
