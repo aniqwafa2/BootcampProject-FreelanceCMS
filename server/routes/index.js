@@ -5,10 +5,35 @@ const userRoute = require("./user");
 const categoryRoute = require("./category");
 const jobsRoute = require("./job");
 const applicantsRoute = require("./applicant");
+const docsRoute = require("./docs");
 
-route.use("/users", userRoute);
-route.use("/categories", categoryRoute);
-route.use("/jobs", jobsRoute);
-route.use("/applicants", applicantsRoute);
+route.use(
+  // #swagger.tags = ['Users']
+  "/users",
+  userRoute
+);
+
+route.use(
+  // #swagger.tags = ['Categories']
+  "/categories",
+  categoryRoute
+);
+
+route.use(
+  // #swagger.tags = ['Jobs']
+  "/jobs",
+  jobsRoute
+);
+route.use(
+  // #swagger.tags = ['Applicants']
+  "/applicants",
+  applicantsRoute
+);
+
+route.use(
+  // #swagger.ignore = true
+  "/docs",
+  docsRoute
+);
 
 module.exports = route;

@@ -1,11 +1,12 @@
 const route = require("express").Router();
+const UserController = require("../controllers/user");
+const { authRequest, authAdmin } = require("../middlewares/auth");
 
-route.get("/", (req, res) => {
-  res.json("user");
-});
-route.get("/:id");
-route.post("/");
-route.delete("/:id");
-route.put("/:id");
+route.get("/", authAdmin, UserController.getUser);
+route.get("/:id", UserController.getUserById);
+route.post("/register", UserController.postUser);
+route.delete("/:id", authRequest, UserController.deleteUser);
+route.put("/:id", authRequest, UserController.putUser);
+route.post("/login", UserController.login);
 
 module.exports = route;
