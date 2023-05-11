@@ -9,21 +9,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      job.belongsTo(models.category);
+      job.belongsToMany(models.user, { through: models.applicant });
     }
   }
   job.init(
     {
-      name: DataTypes.STRING,
-      price: DataTypes.INTEGER,
-      description: DataTypes.STRING,
-      categoryId: DataTypes.INTEGER,
-      status: DataTypes.BOOLEAN,
-      file: DataTypes.STRING,
-      dueDate: DataTypes.DATE,
+      name: { type: DataTypes.STRING },
+      price: { type: DataTypes.INTEGER, validate: { isInt: true } },
+      description: { type: DataTypes.STRING },
+      categoryId: { type: DataTypes.INTEGER, validate: { isInt: true } },
+      status: { type: DataTypes.BOOLEAN },
+      file: { type: DataTypes.STRING },
+      dueDate: { type: DataTypes.DATE, validate: { isDate: true } },
     },
     {
       sequelize,
       modelName: "job",
+      hooks: {
+        beforeCreate: (job, options) => {
+          job.status = false;
+        },
+      },
     }
   );
   return job;

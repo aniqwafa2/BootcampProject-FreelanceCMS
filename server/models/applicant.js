@@ -9,17 +9,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      applicant.belongsTo(models.job);
+      applicant.belongsTo(models.user);
     }
   }
   applicant.init(
     {
-      jobId: DataTypes.INTEGER,
-      userId: DataTypes.INTEGER,
-      status: DataTypes.BOOLEAN,
+      jobId: { type: DataTypes.INTEGER, validate: { isInt: true } },
+      userId: { type: DataTypes.INTEGER, validate: { isInt: true } },
+      status: { type: DataTypes.BOOLEAN },
     },
     {
       sequelize,
       modelName: "applicant",
+      hooks: {
+        beforeCreate: (applicant, options) => {
+          applicant.status = false;
+        },
+      },
     }
   );
   return applicant;
