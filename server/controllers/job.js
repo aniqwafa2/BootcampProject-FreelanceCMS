@@ -54,12 +54,51 @@ class JobController {
   }
 
   static async postJob(req, res) {
-    // #swagger.summary = "Create new Job"
+    /*
+    #swagger.summary = "Create new Job"
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "multipart/form-data": {
+          schema: {
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+              },
+              price: {
+                type: "integer",
+              },
+              description: {
+                type: "string",
+              },
+              categoryId: {
+                type: "integer",
+              },
+              file: {
+                type: "string",
+                format: "binary",
+              },
+              dueDate: {
+                type: "string",
+              },
+            },
+            required: ["name", "price", "description", "dueDate"],
+          },
+        },
+      },
+    };
+    */
 
     let { name, price, description, categoryId, file, dueDate } = req.body;
-
+    let pathStatus;
     dueDate = new Date(Date.parse(dueDate));
-    console.log(dueDate);
+
+    try {
+      let { path } = req.file;
+      pathStatus = path.split("\\").slice(1).join("/");
+      file = `${req.headers.host}/${pathStatus}`;
+    } catch (error) {}
 
     try {
       const result = await job.create({
@@ -101,13 +140,69 @@ class JobController {
   }
 
   static async putJob(req, res) {
-    // #swagger.summary = "Update Job by ID"
+    /*
+    #swagger.summary = "Update Job by ID"
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "multipart/form-data": {
+          schema: {
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+              },
+              price: {
+                type: "integer",
+              },
+              description: {
+                type: "string",
+              },
+              categoryId: {
+                type: "integer",
+              },
+              file: {
+                type: "string",
+                format: "binary",
+              },
+              dueDate: {
+                type: "string",
+              },
+            },
+            required: ["name", "price", "description", "dueDate"],
+          },
+        },
+      },
+    };
+    */
 
     const id = +req.params.id;
     let { name, price, description, categoryId, file, dueDate } = req.body;
+    dueDate = new Date(Date.parse(dueDate));
     let data;
+    let pathStatus;
+    let delFile;
+    let delPath;
 
     try {
+      let { path } = req.file;
+      pathStatus = path.split("\\").slice(1).join("/");
+      file = `${req.headers.host}/${pathStatus}`;
+    } catch (error) {}
+
+    try {
+      if (pathStatus) {
+        delFile = await job.findByPk(id, { raw: true });
+
+        if (delFile.file || delFile.file === "") {
+          delPath = "./public/" + delFile.file.split("/").slice(1).join("/");
+        }
+      }
+
+      try {
+        await fs.rm(delPath);
+      } catch (error) {}
+
       const result = await job.update(
         {
           name,
@@ -130,6 +225,7 @@ class JobController {
         data,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "server error", error });
     }
   }

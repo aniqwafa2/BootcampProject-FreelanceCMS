@@ -11,12 +11,17 @@ const doc = {
       url: "http://localhost:3000",
       description: "local server",
     },
+    {
+      url: "ndaktau ini apa",
+      description: "deployed server",
+    },
   ],
   tags: [
     { name: "Users" },
     { name: "Categories" },
     { name: "Jobs" },
     { name: "Applicants" },
+    { name: "Messages" },
   ],
   securityDefinitions: {
     bearerAuth: {

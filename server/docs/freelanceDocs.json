@@ -9,6 +9,10 @@
     {
       "url": "http://localhost:3000",
       "description": "local server"
+    },
+    {
+      "url": "ndaktau ini apa",
+      "description": "deployed server"
     }
   ],
   "tags": [
@@ -23,6 +27,9 @@
     },
     {
       "name": "Applicants"
+    },
+    {
+      "name": "Messages"
     }
   ],
   "paths": {
@@ -197,30 +204,37 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "name": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "email": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "password": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "address": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "image": {
-                    "example": "any"
+                    "type": "string",
+                    "format": "binary"
                   },
                   "skill": {
-                    "example": "any"
+                    "type": "string"
                   }
-                }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ]
               }
             }
           }
@@ -244,30 +258,27 @@
           }
         },
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "name": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "email": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "password": {
-                    "example": "any"
-                  },
-                  "address": {
-                    "example": "any"
-                  },
-                  "image": {
-                    "example": "any"
-                  },
-                  "skill": {
-                    "example": "any"
+                    "type": "string"
                   }
-                }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ]
               }
             }
           }
@@ -569,6 +580,9 @@
           "401": {
             "description": "Unauthorized"
           },
+          "404": {
+            "description": "Not Found"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -579,30 +593,38 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "name": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "price": {
-                    "example": "any"
+                    "type": "integer"
                   },
                   "description": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "categoryId": {
-                    "example": "any"
+                    "type": "integer"
                   },
                   "file": {
-                    "example": "any"
+                    "type": "string",
+                    "format": "binary"
                   },
                   "dueDate": {
-                    "example": "any"
+                    "type": "string"
                   }
-                }
+                },
+                "required": [
+                  "name",
+                  "price",
+                  "description",
+                  "dueDate"
+                ]
               }
             }
           }
@@ -716,30 +738,38 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "name": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "price": {
-                    "example": "any"
+                    "type": "integer"
                   },
                   "description": {
-                    "example": "any"
+                    "type": "string"
                   },
                   "categoryId": {
-                    "example": "any"
+                    "type": "integer"
                   },
                   "file": {
-                    "example": "any"
+                    "type": "string",
+                    "format": "binary"
                   },
                   "dueDate": {
-                    "example": "any"
+                    "type": "string"
                   }
-                }
+                },
+                "required": [
+                  "name",
+                  "price",
+                  "description",
+                  "dueDate"
+                ]
               }
             }
           }
@@ -1000,6 +1030,101 @@
             "bearerAuth": []
           }
         ]
+      }
+    },
+    "/api/messages/{userId}": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Get All Messages by User ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/messages/detail/{contactId}": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Get Message Conversation by messageContact ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "contactId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/messages/": {
+      "post": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Create new Message by messageContact ID & User ID",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "senderId": {
+                    "example": "any"
+                  },
+                  "recipientId": {
+                    "example": "any"
+                  },
+                  "messageContent": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },

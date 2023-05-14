@@ -15,13 +15,21 @@ module.exports = (sequelize, DataTypes) => {
   }
   job.init(
     {
-      name: { type: DataTypes.STRING },
-      price: { type: DataTypes.INTEGER, validate: { isInt: true } },
-      description: { type: DataTypes.STRING },
+      name: { type: DataTypes.STRING, allowNull: false },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: { isInt: true },
+      },
+      description: { type: DataTypes.STRING, allowNull: false },
       categoryId: { type: DataTypes.INTEGER, validate: { isInt: true } },
       status: { type: DataTypes.BOOLEAN },
       file: { type: DataTypes.STRING },
-      dueDate: { type: DataTypes.DATE, validate: { isDate: true } },
+      dueDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: { isDate: true },
+      },
     },
     {
       sequelize,

@@ -14,6 +14,8 @@ npx sequelize-cli model:generate --name userProfile --attributes address:string,
 npx sequelize-cli model:generate --name applicant --attributes jobId:integer,userId:integer,status:boolean
 npx sequelize-cli model:generate --name job --attributes name:string,price:integer,description:string,categoryId:integer,status:boolean,file:string,dueDate:date
 npx sequelize-cli model:generate --name category --attributes name:string,description:string
+npx sequelize-cli model:generate --name messageContact --attributes senderId:integer,recipientId:integer
+npx sequelize-cli model:generate --name messageRecord --attributes messageContactId:integer,userId:integer,messageContent:string
 
 ```
 
