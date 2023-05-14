@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IconName } from "react-icons/bs";
 
-const Header = () => {
+const Navbar = () => {
   return (
     <>
       <div className="pb-2">
@@ -27,15 +28,28 @@ const Header = () => {
                 </li>
               </ul>
               <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
-                  <Link className="nav-link navigation" to="#">
-                    Login
+                <li className="nav-item dropdown">
+                  <Link className="nav-link dropdown-toggle fw-bold" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    JohnDoe
                   </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link navigation" to="#">
-                    Register
-                  </Link>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link className="dropdown-item" to="#">
+                        My Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/dashboard-user">
+                        Setting
+                      </Link>
+                    </li>
+                    <hr />
+                    <li>
+                      <Link className="dropdown-item fw-bold" to="#">
+                        Sign out
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
 
                 <div>
@@ -43,7 +57,7 @@ const Header = () => {
                 </div>
 
                 <li className="nav-item ">
-                  <Link className="btn btn-sm btn-info mt-1 text-white fw-bold" to="#">
+                  <Link className="btn btn-sm btn-custom mt-1 text-white fw-bold" to="#">
                     Employers / Post Job
                   </Link>
                 </li>
@@ -56,4 +70,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;
