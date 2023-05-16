@@ -146,3 +146,47 @@ body {
   max-width: 100px;
   border-radius: 50%;
 }
+
+/* navbar-left */
+.navbar-left {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: white;
+  padding-top: 100px;
+  border-right: var(--border-style2);
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li {
+  margin-bottom: 1px;
+  padding: 0 20px;
+  margin-top: 1px;
+}
+
+.menu-list li a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.menu-list li a:hover {
+  background-color: #f9fbfc;
+  border-radius: 10px;
+}
+
+.menu-list li a:active {
+  background-color: #37474f;
+}
+
+.dashboard-content {
+  padding-top: 100px;
+}

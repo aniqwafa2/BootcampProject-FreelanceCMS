@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "jquery": "^3.6.4",
+    "popper": "^1.0.1",
+    "react-bootstrap": "^2.7.4",
+    "react-scroll": "^1.8.9",
+    "react-scrollspy": "^3.4.3"
+  }
+}
