@@ -21,9 +21,9 @@ class UserController {
     let pages = {};
 
     try {
-      // NOTE: use scope nopwd to exclude password field
+      // NOTE: default scopes exclude password field
       // scope defined in model
-      const result = await user.scope("nopwd").findAndCountAll({
+      const result = await user.findAndCountAll({
         limit,
         offset,
         include: [userProfile],
@@ -46,7 +46,7 @@ class UserController {
     let id = +req.params.id;
 
     try {
-      const result = await user.scope("nopwd").findByPk(id, {
+      const result = await user.findByPk(id, {
         include: [userProfile],
       });
 

@@ -809,6 +809,94 @@
         }
       }
     },
+    "/api/applicants/find/job/{jobId}": {
+      "get": {
+        "tags": [
+          "Applicants"
+        ],
+        "summary": "Get All Applicants by Job ID or User ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/applicants/find/user/{userId}": {
+      "get": {
+        "tags": [
+          "Applicants"
+        ],
+        "summary": "Get All Applicants by Job ID or User ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/applicants/find": {
       "get": {
         "tags": [
@@ -1094,7 +1182,7 @@
         "tags": [
           "Messages"
         ],
-        "summary": "Create new Message by messageContact ID & User ID",
+        "summary": "Create new Message",
         "description": "",
         "parameters": [],
         "responses": {

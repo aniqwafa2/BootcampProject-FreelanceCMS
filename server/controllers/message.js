@@ -69,7 +69,7 @@ class MessageController {
   }
 
   static async postMessage(req, res) {
-    // #swagger.summary = "Create new Message by messageContact ID & User ID"
+    // #swagger.summary = "Create new Message"
 
     let { senderId, recipientId, messageContent } = req.body;
 

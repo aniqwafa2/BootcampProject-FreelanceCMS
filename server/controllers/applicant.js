@@ -22,7 +22,7 @@ class ApplicantController {
       const result = await applicant.findAndCountAll({
         limit,
         offset,
-        include: [job, user.scope("nopwd")],
+        include: [job, user],
       });
 
       const totalPage = Math.ceil(result.count / limit);
@@ -37,6 +37,58 @@ class ApplicantController {
   }
 
   static async getApplicantById(req, res) {
+    /* 
+      #swagger.summary = "Get All Applicants by Job ID or User ID"
+      #swagger.parameters['limit'] = {
+        type: 'integer',
+      } 
+      #swagger.parameters['page'] = {
+        type: 'integer',
+      } 
+    */
+
+    const limit = +req.query.limit || 10;
+    const pageCount = +req.query.page || 1;
+    const offset = (pageCount - 1) * limit;
+    let pages = {};
+
+    let userId = +req.params.userId;
+    let jobId = +req.params.jobId;
+    let typeId;
+
+    if (jobId) {
+      typeId = { jobId };
+    } else {
+      typeId = { userId };
+    }
+
+    // console.log(typeId, jobId, req.params);
+
+    try {
+      const result = await applicant.findAndCountAll({
+        limit,
+        offset,
+        where: typeId,
+        include: [job, user],
+      });
+
+      if (!result) {
+        return res.status(404).json({ message: "applicant id not found" });
+      }
+
+      const totalPage = Math.ceil(result.count / limit);
+      if (totalPage !== 0) {
+        pages = { limitPage: limit, currentPage: pageCount, totalPage };
+      }
+
+      res.json({ pages, data: result.rows });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "server error", error });
+    }
+  }
+
+  static async getApplicantByJobIdAndUserId(req, res) {
     /* 
       #swagger.summary = "Get Applicant by Job ID and User ID"
       #swagger.parameters['jobId'] = {
@@ -54,7 +106,7 @@ class ApplicantController {
     try {
       const result = await applicant.findOne({
         where: { jobId: +jobId, userId: +userId },
-        include: [job, user.scope("nopwd")],
+        include: [job, user],
       });
 
       if (!result) {
