@@ -90,7 +90,7 @@ const Home = () => {
                 </div>
 
                 <li className="nav-item ">
-                  <Link className="btn btn-sm btn-custom mt-1 text-white fw-bold" to="#">
+                  <Link className="btn btn-sm btn-custom mt-1 text-white fw-bold" to="/dashboard">
                     Employers / Post Job
                   </Link>
                 </li>

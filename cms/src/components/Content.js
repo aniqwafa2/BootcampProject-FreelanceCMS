@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Register, DashboardUser, EditProfile, Skills } from "../pages";
+import { Home, Login, Register, Dashboard } from "../pages";
 
 const Content = () => {
   return (
@@ -12,9 +12,7 @@ const Content = () => {
           <Route path="/register" element={<Register></Register>}></Route>
 
           {/* DashboardUser */}
-          <Route path="/dashboard-user" element={<DashboardUser></DashboardUser>}></Route>
-          <Route path="/edit-profile" element={<EditProfile></EditProfile>}></Route>
-          <Route path="/skills" element={<Skills></Skills>}></Route>
+          <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
         </>
       </Routes>
     </div>
