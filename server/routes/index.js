@@ -5,6 +5,7 @@ const userRoute = require("./user");
 const categoryRoute = require("./category");
 const jobsRoute = require("./job");
 const applicantsRoute = require("./applicant");
+const messagesRoute = require("./message");
 const docsRoute = require("./docs");
 
 route.use(
@@ -24,10 +25,17 @@ route.use(
   "/jobs",
   jobsRoute
 );
+
 route.use(
   // #swagger.tags = ['Applicants']
   "/applicants",
   applicantsRoute
+);
+
+route.use(
+  // #swagger.tags = ['Messages']
+  "/messages",
+  messagesRoute
 );
 
 route.use(

@@ -1,6 +1,7 @@
 const { user, userProfile, sequelize } = require("../models");
 const { decryptPass } = require("../helpers/bcrypt");
 const { signJwt } = require("../helpers/jwt");
+const fs = require("fs/promises");
 
 class UserController {
   static async getUser(req, res) {
@@ -16,7 +17,6 @@ class UserController {
 
     const limit = +req.query.limit || 10;
     const pageCount = +req.query.page || 1;
-    // const offset = +req.query.offset || 0;
     const offset = (pageCount - 1) * limit;
     let pages = {};
 
@@ -33,12 +33,6 @@ class UserController {
       if (totalPage !== 0) {
         pages = { limitPage: limit, currentPage: pageCount, totalPage };
       }
-
-      // const nextOffset = offset + limit;
-      // const countPrevious = nextOffset - Math.pow(limit, 2);
-      // const prevOffset = countPrevious < 0 ? 0 : countPrevious;
-
-      // console.log(result.count, totalPages, limit, offset);
 
       res.json({ pages, data: result.rows });
     } catch (error) {
@@ -67,7 +61,32 @@ class UserController {
   }
 
   static async postUser(req, res) {
-    // #swagger.summary = "Create / Register new User"
+    /*
+    #swagger.summary = "Create / Register new User"
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+              },
+              email: {
+                type: "string",
+              },
+              password: {
+                type: "string",
+              },
+              
+            },
+            required: ["name", "email", "password"],
+          },
+        },
+      },
+    };
+    */
 
     let { name, email, password, address, image, skill } = req.body;
 
@@ -128,12 +147,67 @@ class UserController {
   }
 
   static async putUser(req, res) {
-    // #swagger.summary = "Update User by ID"
+    /*
+    #swagger.summary = "Update User by ID"
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        "multipart/form-data": {
+          schema: {
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+              },
+              email: {
+                type: "string",
+              },
+              password: {
+                type: "string",
+              },
+              address: {
+                type: "string",
+              },
+              image: {
+                type: "string",
+                format: "binary",
+              },
+              skill: {
+                type: "string",
+              },
+            },
+            required: ["name", "email", "password"],
+          },
+        },
+      },
+    };
+    */
 
     const id = +req.params.id;
     let { name, email, password, address, image, skill } = req.body;
+    let pathStatus;
+    let delFile;
+    let delPath;
 
     try {
+      let { path } = req.file;
+      pathStatus = path.split("\\").slice(1).join("/");
+      image = `${req.headers.host}/${pathStatus}`;
+    } catch (error) {}
+
+    try {
+      if (pathStatus) {
+        delFile = await userProfile.findByPk(id, { raw: true });
+
+        if (delFile.image || delFile.image === "") {
+          delPath = "./public/" + delFile.image.split("/").slice(1).join("/");
+        }
+      }
+
+      try {
+        await fs.rm(delPath);
+      } catch (error) {}
+
       // REF: why use individualHooks?
       // https://github.com/sequelize/sequelize/issues/6253
       const result = await sequelize.transaction(async (t) => {
@@ -158,27 +232,6 @@ class UserController {
         return userUpdate[0];
       });
 
-      // const userUpdate = await user.update(
-      //   {
-      //     name,
-      //     email,
-      //     password,
-      //   },
-      //   { where: { id }}
-      // );
-
-      // const userProfileUpdate = await userProfile.update(
-      //   {
-      //     address,
-      //     image,
-      //     skill,
-      //   },
-      //   { where: { id } }
-      // );
-
-      // console.log(userUpdate[0]);
-      // console.log(userProfileUpdate[0]);
-
       if (!result) {
         return res.status(404).json({ message: "user id not found" });
       }
@@ -188,7 +241,7 @@ class UserController {
         data: { name, email, address, image, skill },
       });
     } catch (error) {
-      console.log(typeof error);
+      console.log(error);
       res.status(500).json({ message: "server error", error });
     }
   }

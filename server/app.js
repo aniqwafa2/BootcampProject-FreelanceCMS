@@ -22,6 +22,7 @@ app.get("/api", (req, res) => {
   );
 });
 
+app.use(express.static("public"));
 app.use("/api", routes);
 
 // NOTE: custom msg route notfound,

@@ -5,6 +5,10 @@
 .env.test.local
 .env.production.local
 
+#server files
+server/public/files
+server/public/images
+
 #build & testing
 build
 coverage

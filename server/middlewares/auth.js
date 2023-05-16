@@ -47,4 +47,25 @@ const authAdmin = async (req, res, next) => {
   next();
 };
 
-module.exports = { authRequest, authAdmin };
+// IDEA: ide lain buat authorize request,
+// hanya role admin atau user tersebut yang boleh next
+const authUserRole = async (req, res, next) => {
+  // #swagger.autoHeaders = false
+  // #swagger.autoQuery = false
+
+  let verify = req.authData;
+  let id = +req.params.id;
+  let userId = +req.query.userId;
+
+  if (verify.id === id) {
+    next();
+  } else if (verify.id === userId) {
+    next();
+  } else if (verify.role === 1) {
+    next();
+  } else {
+    return res.status(403).json({ message: "access forbidden" });
+  }
+};
+
+module.exports = { authRequest, authAdmin, authUserRole };

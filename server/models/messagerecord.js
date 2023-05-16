@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class applicant extends Model {
+  class messageRecord extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,25 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      applicant.belongsTo(models.job);
-      applicant.belongsTo(models.user);
+      messageRecord.belongsTo(models.messageContact);
+      messageRecord.belongsTo(models.user);
     }
   }
-  applicant.init(
+  messageRecord.init(
     {
-      jobId: { type: DataTypes.INTEGER, validate: { isInt: true } },
+      messageContactId: { type: DataTypes.INTEGER, validate: { isInt: true } },
       userId: { type: DataTypes.INTEGER, validate: { isInt: true } },
-      status: { type: DataTypes.BOOLEAN },
+      messageContent: DataTypes.STRING,
     },
     {
       sequelize,
-      modelName: "applicant",
-      hooks: {
-        beforeCreate: (applicant, options) => {
-          applicant.status = false;
-        },
-      },
+      modelName: "messageRecord",
     }
   );
-  return applicant;
+  return messageRecord;
 };
