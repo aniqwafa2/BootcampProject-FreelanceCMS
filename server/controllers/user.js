@@ -257,7 +257,9 @@ class UserController {
     }
 
     try {
-      const findEmail = await user.findOne({ where: { email } });
+      const findEmail = await user
+        .scope("withpwd")
+        .findOne({ where: { email } });
 
       if (!findEmail) {
         return res.status(404).json({ message: "user email not found" });
