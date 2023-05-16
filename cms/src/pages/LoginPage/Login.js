@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { loginUser } from "../../axios/user";
 
 const Login = () => {
+  const [form, setForm] = useState({});
+
+  const loginSubmitHandler = async (event) => {
+    event.preventDefault();
+
+    try {
+      await loginUser(form, (result) => {
+        //TODO: should navigate to dashboard pages, not reloading the page
+        if (result) {
+          window.location.reload();
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -10,20 +28,42 @@ const Login = () => {
             <div className="hero-login"></div>
           </div>
           <div className="col-6">
-            <form className="login-form-style mx-4 rounded-4 p-4 form-login">
+            <form
+              className="login-form-style mx-4 rounded-4 p-4 form-login"
+              onSubmit={loginSubmitHandler}
+            >
               <h2 className="fw-bold">Login to Account</h2>
               <p>Hey, Enter your details to get log in to your account</p>
               <div class="col-md-10 mt-4 mx-4 mb-3 rounded-3">
                 <label class="form-label">Email</label>
-                <input type="email" class="form-control" placeholder="Type your email" required />
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Type your email"
+                  required
+                  onChange={(e) => {
+                    setForm({ ...form, email: e.target.value });
+                  }}
+                />
               </div>
               <div class="col-md-10 mx-4 mb-4">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" placeholder="Type your password" required />
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Type your password"
+                  required
+                  onChange={(e) => {
+                    setForm({ ...form, password: e.target.value });
+                  }}
+                />
               </div>
 
               <div class="col-md-10 mx-4 mb-4">
-                <button className="btn btn-custom text-white fw-bold fs-5 rounded-3 w-100 " type="submit">
+                <button
+                  className="btn btn-custom text-white fw-bold fs-5 rounded-3 w-100"
+                  type="submit"
+                >
                   Log in
                 </button>
               </div>
