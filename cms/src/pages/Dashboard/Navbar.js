@@ -20,27 +20,16 @@ const Navbar = () => {
                 <BsUbuntu className="me-2"></BsUbuntu>GigGenie
               </h3>
               <ul className="menu-list">
-                <li className={activeMenu === "dashboard" ? "active" : ""}>
-                  <a href="/dashboard" onClick={() => handleMenuClick("dashboard")}>
-                    <FiGrid className="fs-5 me-2" />
-                    Dashboard
-                  </a>
-                </li>
-                <li className={activeMenu === "post" ? "active" : ""}>
-                  <a href="/post" onClick={() => handleMenuClick("post")}>
-                    <FiArchive className="fs-5 me-2" /> Post Job
-                  </a>
-                </li>
-                {/* <li>
-                  <NavLink exact to="/dashboard" activeClassName="active">
+                <li>
+                  <Link to="/dashboard" activeClassName="active">
                     <FiGrid className="fs-5 me-2"></FiGrid> Dashboard
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="/post" activeClassName="active">
+                  <Link to="/post" activeClassName="active">
                     <FiArchive className="fs-5 me-2"></FiArchive> Post Job
-                  </NavLink>
-                </li> */}
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>

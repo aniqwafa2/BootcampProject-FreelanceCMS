@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const YourPost = () => {
-  const [activeMenu, setActiveMenu] = useState("post");
   return (
     <>
       <Navbar />
@@ -18,7 +17,16 @@ const YourPost = () => {
           <div className="col-md">
             <div className="dashboard-content">
               <div>
-                <h5 className="fw-bold border-bottom lh-lg">Post Job</h5>
+                <div class="row justify-content-between">
+                  <div class="col-4 text-center">
+                    <h5 className="fw-bold">Post Job</h5>
+                  </div>
+                  <div class="col-4 text-center">
+                    <Link to="/post-job" className="btn btn-sm btn-primary fw-bold">
+                      +Post Job
+                    </Link>
+                  </div>
+                </div>
               </div>
               <div className="p-3 my-3 rounded-4 bg-white">
                 <div class="row justify-content-between m-2 border-bottom lh-lg">

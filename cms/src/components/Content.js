@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Register, Dashboard, YourPost } from "../pages";
+import { Home, Login, Register, Dashboard, YourPost, PostJob } from "../pages";
 
 const Content = () => {
   return (
@@ -14,6 +14,7 @@ const Content = () => {
           {/* DashboardUser */}
           <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
           <Route path="/post" element={<YourPost></YourPost>}></Route>
+          <Route path="/post-job" element={<PostJob></PostJob>}></Route>
         </>
       </Routes>
     </div>
