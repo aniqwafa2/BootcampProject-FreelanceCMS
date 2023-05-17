@@ -16,15 +16,16 @@ class CategoryController {
     const pageCount = +req.query.page || 1;
     const offset = (pageCount - 1) * limit;
     let pages = {};
+    let queryProperties = {};
+    if (limit && limit !== 0) {
+      queryProperties = { limit, offset };
+    }
 
     try {
-      const result = await category.findAndCountAll({
-        limit,
-        offset,
-      });
+      const result = await category.findAndCountAll(queryProperties);
 
       const totalPage = Math.ceil(result.count / limit);
-      if (totalPage !== 0) {
+      if (totalPage) {
         pages = { limitPage: limit, currentPage: pageCount, totalPage };
       }
 

@@ -13,20 +13,20 @@ class ApplicantController {
       } 
     */
 
-    const limit = +req.query.limit || 10;
+    const limit = +req.query.limit;
     const pageCount = +req.query.page || 1;
     const offset = (pageCount - 1) * limit;
     let pages = {};
+    let queryProperties = { include: [job, user] };
+    if (limit && limit !== 0) {
+      queryProperties = { limit, offset, include: [job, user] };
+    }
 
     try {
-      const result = await applicant.findAndCountAll({
-        limit,
-        offset,
-        include: [job, user],
-      });
+      const result = await applicant.findAndCountAll(queryProperties);
 
       const totalPage = Math.ceil(result.count / limit);
-      if (totalPage !== 0) {
+      if (totalPage) {
         pages = { limitPage: limit, currentPage: pageCount, totalPage };
       }
 
@@ -47,30 +47,30 @@ class ApplicantController {
       } 
     */
 
-    const limit = +req.query.limit || 10;
+    const limit = +req.query.limit;
     const pageCount = +req.query.page || 1;
     const offset = (pageCount - 1) * limit;
     let pages = {};
 
     let userId = +req.params.userId;
     let jobId = +req.params.jobId;
-    let typeId;
 
+    let typeId;
     if (jobId) {
       typeId = { jobId };
     } else {
       typeId = { userId };
     }
 
+    let queryProperties = { where: typeId, include: [job, user] };
+    if (limit && limit !== 0) {
+      queryProperties = { limit, offset, where: typeId, include: [job, user] };
+    }
+
     // console.log(typeId, jobId, req.params);
 
     try {
-      const result = await applicant.findAndCountAll({
-        limit,
-        offset,
-        where: typeId,
-        include: [job, user],
-      });
+      const result = await applicant.findAndCountAll(queryProperties);
 
       if (!result) {
         return res.status(404).json({ message: "applicant id not found" });

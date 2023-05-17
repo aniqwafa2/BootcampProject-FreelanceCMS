@@ -15,22 +15,22 @@ class UserController {
       } 
     */
 
-    const limit = +req.query.limit || 10;
+    const limit = +req.query.limit;
     const pageCount = +req.query.page || 1;
     const offset = (pageCount - 1) * limit;
     let pages = {};
+    let queryProperties = { include: [userProfile] };
+    if (limit && limit !== 0) {
+      queryProperties = { limit, offset, include: [userProfile] };
+    }
 
     try {
       // NOTE: default scopes exclude password field
       // scope defined in model
-      const result = await user.findAndCountAll({
-        limit,
-        offset,
-        include: [userProfile],
-      });
+      const result = await user.findAndCountAll(queryProperties);
 
       const totalPage = Math.ceil(result.count / limit);
-      if (totalPage !== 0) {
+      if (totalPage) {
         pages = { limitPage: limit, currentPage: pageCount, totalPage };
       }
 
