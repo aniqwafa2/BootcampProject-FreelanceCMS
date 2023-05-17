@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../axios/user";
 
 const Login = () => {
   const [form, setForm] = useState({});
+
+  const navigate = useNavigate();
 
   const loginSubmitHandler = async (event) => {
     event.preventDefault();
 
     try {
       await loginUser(form, (result) => {
-        //TODO: should navigate to dashboard pages, not reloading the page
-        if (result) {
-          window.location.reload();
+        if (result === 1) {
+          navigate("/dashboard");
+        } else if (result === 2) {
+          navigate("/");
         }
       });
     } catch (error) {

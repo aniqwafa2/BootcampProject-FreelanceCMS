@@ -86,10 +86,21 @@ const updateUser = async (id, data, cb) => {
 const loginUser = async (data, cb) => {
   try {
     const result = await axios.post(`${url}/login`, data);
+
+    let check = result.data.access_token.split(".")[1];
+    check = JSON.parse(atob(check));
+    if (check.role !== 1) {
+      return Swal.fire("Not Authorized", "Bapak admin bukan?", "error").then(
+        () => {
+          cb(2);
+        }
+      );
+    }
+
     const authData = `${result.data.type} ${result.data.access_token}`;
 
     localStorage.setItem("access_token", authData);
-    cb(true);
+    cb(1);
   } catch (error) {
     // console.log(error);
     if (error.response.status === 500) {
