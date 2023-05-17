@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { BsBell, BsUbuntu } from "react-icons/bs";
-import { FiArchive, FiGrid } from "react-icons/fi";
+import { FiArchive, FiGrid, FiSettings } from "react-icons/fi";
 
 const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState("/");
@@ -28,6 +28,11 @@ const Navbar = () => {
                 <li>
                   <Link to="/post" activeClassName="active">
                     <FiArchive className="fs-5 me-2"></FiArchive> Post Job
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/post" activeClassName="active">
+                    <FiSettings className="fs-5 me-2"></FiSettings> Settings
                   </Link>
                 </li>
               </ul>
