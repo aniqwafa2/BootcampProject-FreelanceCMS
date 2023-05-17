@@ -155,8 +155,8 @@ body {
   width: 280px;
   height: 100vh;
   background-color: white;
-  padding-top: 100px;
-  border-right: var(--border-style2);
+  /* padding-top: 50px; */
+  border-right: var(--border-style1);
 }
 
 .menu-list {
@@ -179,14 +179,17 @@ body {
 }
 
 .menu-list li a:hover {
-  background-color: #f9fbfc;
+  /* background-color: #f9fbfc; */
+  font-weight: bold;
   border-radius: 10px;
 }
 
-.menu-list li a:active {
-  background-color: #37474f;
+.menu-list li.active a {
+  background-color: #555;
+  color: #fff;
+  border-radius: 10px;
 }
 
 .dashboard-content {
-  padding-top: 100px;
+  padding-top: 50px;
 }
