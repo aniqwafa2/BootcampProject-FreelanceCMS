@@ -145,9 +145,9 @@ const Home = () => {
                 <h6 className="card-title">
                   <div className="container text-center text-secondary">
                     <div className="row row-cols-auto fw-bold ">
-                      <div className="col lh-lg py-1 me-2 rounded-4 bg-light">
+                      {/* <div className="col lh-lg py-1 me-2 rounded-4 bg-light">
                         <FiMapPin className="me-1 fs-5"></FiMapPin>Bandung
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </h6>
@@ -155,129 +155,25 @@ const Home = () => {
                 <small className="card-text text-secondary fs-6">Posted 23 minutes ago</small>
 
                 <div className="text-center mt-2 lh-sm">
-                  <div className="row row-cols-4 row-cols-lg-3 g-3 g-lg-3">
-                    <div className="col">
+                  <div className="row row-cols-6 row-cols-lg-2 g-3 g-lg-3">
+                    <div className="col-md">
                       <div className="py-2 border border-2 rounded-4 fw-bold">
                         $290 <br />
                         <span className="text-secondary fs-6 mono">Fixed-price</span>
                       </div>
                     </div>
-                    <div className="col">
+                    <div className="col-md">
                       <div className="py-2 border border-2 rounded-4 fw-bold">
                         14 Days <br />
                         <span className="text-secondary fs-6 mono">Duration</span>
                       </div>
                     </div>
-                    <div className="col">
+                    {/* <div className="col">
                       <div className="py-2 border border-2 rounded-4 fw-bold">
                         10 to 50 <br />
                         <span className="text-secondary fs-6 mono">Proposal</span>
                       </div>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="card-text text-container text-secondary lh-sm mt-2">
-                  Our e-commerce website is in need of a revamp and we are looking for a talented UI designer to help us create a fresh, modern, and user-friendly design. We are seeking a proffesional who can bring their creativity and
-                  design skills to the table to help us create a visually appealing website that will enhance the shopping experience for out costumers.
-                </p>
-                <small className="card-text text-secondary fs-6">Tags</small>
-                <div className="row row-cols-auto small fw-bold text-secondary">
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">UI Design</div>
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">Graphic Design</div>
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">Web Design</div>
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">Figma</div>
-                </div>
-              </div>
-            </div>
-
-            {/* content */}
-            <div className="card border border-0 rounded-4 card-style mb-3">
-              <div className="card-body">
-                <h6 className="card-title">
-                  <div className="container text-center text-secondary">
-                    <div className="row row-cols-auto fw-bold ">
-                      <div className="col lh-lg py-1 me-2 rounded-4 bg-light">
-                        <FiMapPin className="me-1 fs-5"></FiMapPin>Bandung
-                      </div>
-                    </div>
-                  </div>
-                </h6>
-                <h5 className="card-subtitle mb-2 text-body-secondary">Revamp Our E-commerce Website with a Fresh & Clean UI Design</h5>
-                <small className="card-text text-secondary fs-6">Posted 23 minutes ago</small>
-
-                <div className="text-center mt-2 lh-sm">
-                  <div className="row row-cols-4 row-cols-lg-3 g-3 g-lg-3">
-                    <div className="col">
-                      <div className="py-2 border border-2 rounded-4 fw-bold">
-                        $290 <br />
-                        <span className="text-secondary fs-6 mono">Fixed-price</span>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="py-2 border border-2 rounded-4 fw-bold">
-                        14 Days <br />
-                        <span className="text-secondary fs-6 mono">Duration</span>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="py-2 border border-2 rounded-4 fw-bold">
-                        10 to 50 <br />
-                        <span className="text-secondary fs-6 mono">Proposal</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <p className="card-text text-container text-secondary lh-sm mt-2">
-                  Our e-commerce website is in need of a revamp and we are looking for a talented UI designer to help us create a fresh, modern, and user-friendly design. We are seeking a proffesional who can bring their creativity and
-                  design skills to the table to help us create a visually appealing website that will enhance the shopping experience for out costumers.
-                </p>
-                <small className="card-text text-secondary fs-6">Tags</small>
-                <div className="row row-cols-auto small fw-bold text-secondary">
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">UI Design</div>
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">Graphic Design</div>
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">Web Design</div>
-                  <div className="col lh-sm m-1 ms-2 p-2 rounded-4 bg-light">Figma</div>
-                </div>
-              </div>
-            </div>
-
-            {/* content */}
-            <div className="card border border-0 rounded-4 card-style mb-3">
-              <div className="card-body">
-                <h6 className="card-title">
-                  <div className="container text-center text-secondary">
-                    <div className="row row-cols-auto fw-bold ">
-                      <div className="col lh-lg py-1 me-2 rounded-4 bg-light">
-                        <FiMapPin className="me-1 fs-5"></FiMapPin>Bandung
-                      </div>
-                    </div>
-                  </div>
-                </h6>
-                <h5 className="card-subtitle mb-2 text-body-secondary">Revamp Our E-commerce Website with a Fresh & Clean UI Design</h5>
-                <small className="card-text text-secondary fs-6">Posted 23 minutes ago</small>
-
-                <div className="text-center mt-2 lh-sm">
-                  <div className="row row-cols-4 row-cols-lg-3 g-3 g-lg-3">
-                    <div className="col">
-                      <div className="py-2 border border-2 rounded-4 fw-bold">
-                        $290 <br />
-                        <span className="text-secondary fs-6 mono">Fixed-price</span>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="py-2 border border-2 rounded-4 fw-bold">
-                        14 Days <br />
-                        <span className="text-secondary fs-6 mono">Duration</span>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="py-2 border border-2 rounded-4 fw-bold">
-                        10 to 50 <br />
-                        <span className="text-secondary fs-6 mono">Proposal</span>
-                      </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -325,26 +221,26 @@ const Home = () => {
           </div>
 
           {/* sidebar */}
-          <div className="container col-7 sidebar sidebar-hide">
-            <div className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show" role="alert">
+          <div className="container col-7 sidebar sidebar-hide ">
+            <div className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show " role="alert">
               <div className="card-body">
                 <h6 className="card-title">
-                  <div className="container text-center">
+                  {/* <div className="container text-center">
                     <div className="row row-cols-auto fw-bold ">
                       <div className="col lh-lg me-2 rounded-4 bg-light">
                         <FiMapPin className="me-1 fs-5"></FiMapPin>Bandung
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </h6>
                 <h4 className="card-subtitle mb-2 text-body-secondary fw-bold">Revamp Our E-commerce Website with a Fresh & Clean UI Design</h4>
-                <Link to="#">
+                {/* <Link to="#">
                   <button type="submit" className="btn btn-lg btn-custom text-white fw-bold">
-                    Apply Now
+                    Details
                   </button>
-                </Link>
+                </Link> */}
               </div>
-              <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
             </div>
             <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" className="scrollable-content border border-2 px-4 py-4 rounded-2" tabindex="0">
               <div id="item-1">
