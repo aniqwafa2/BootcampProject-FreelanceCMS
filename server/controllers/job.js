@@ -12,20 +12,20 @@ class JobController {
       } 
     */
 
-    const limit = +req.query.limit || 10;
+    const limit = +req.query.limit;
     const pageCount = +req.query.page || 1;
     const offset = (pageCount - 1) * limit;
     let pages = {};
+    let queryProperties = { include: [category] };
+    if (limit && limit !== 0) {
+      queryProperties = { limit, offset, include: [category] };
+    }
 
     try {
-      const result = await job.findAndCountAll({
-        limit,
-        offset,
-        include: [category],
-      });
+      const result = await job.findAndCountAll(queryProperties);
 
       const totalPage = Math.ceil(result.count / limit);
-      if (totalPage !== 0) {
+      if (totalPage) {
         pages = { limitPage: limit, currentPage: pageCount, totalPage };
       }
 

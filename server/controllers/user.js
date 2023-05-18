@@ -15,22 +15,22 @@ class UserController {
       } 
     */
 
-    const limit = +req.query.limit || 10;
+    const limit = +req.query.limit;
     const pageCount = +req.query.page || 1;
     const offset = (pageCount - 1) * limit;
     let pages = {};
+    let queryProperties = { include: [userProfile] };
+    if (limit && limit !== 0) {
+      queryProperties = { limit, offset, include: [userProfile] };
+    }
 
     try {
-      // NOTE: use scope nopwd to exclude password field
+      // NOTE: default scopes exclude password field
       // scope defined in model
-      const result = await user.scope("nopwd").findAndCountAll({
-        limit,
-        offset,
-        include: [userProfile],
-      });
+      const result = await user.findAndCountAll(queryProperties);
 
       const totalPage = Math.ceil(result.count / limit);
-      if (totalPage !== 0) {
+      if (totalPage) {
         pages = { limitPage: limit, currentPage: pageCount, totalPage };
       }
 
@@ -46,7 +46,7 @@ class UserController {
     let id = +req.params.id;
 
     try {
-      const result = await user.scope("nopwd").findByPk(id, {
+      const result = await user.findByPk(id, {
         include: [userProfile],
       });
 
@@ -257,7 +257,9 @@ class UserController {
     }
 
     try {
-      const findEmail = await user.findOne({ where: { email } });
+      const findEmail = await user
+        .scope("withpwd")
+        .findOne({ where: { email } });
 
       if (!findEmail) {
         return res.status(404).json({ message: "user email not found" });

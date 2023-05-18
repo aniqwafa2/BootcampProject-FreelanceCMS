@@ -2,6 +2,12 @@
 
 body {
   font-family: "DM Sans", sans-serif;
+  background-color: #f9fbfc;
+}
+
+:root {
+  --border-style1: 1px solid #e1e9ed9e;
+  --border-style2: 2px solid #e1e9ed9e;
 }
 
 .navigation:hover {
@@ -104,4 +110,98 @@ body {
 
 .link-styles {
   text-decoration: none;
+}
+
+.sidebar-user {
+  width: 320px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 20px;
+  margin: 100px;
+}
+
+.flex-grow-1 {
+  margin-right: 50px;
+  margin-left: -30px;
+  padding: 5px;
+}
+
+.btn-cancel {
+  background-color: white;
+  border: var(--border-style2);
+}
+.btn-cancel:hover {
+  background-color: white;
+  /* border: 2px solid rgb(236, 232, 232); */
+}
+
+.border-2px {
+  border: var(--border-style2);
+}
+
+.img-upload {
+  max-width: 100px;
+  border-radius: 50%;
+}
+
+/* navbar-left */
+.navbar-left {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: white;
+  /* padding-top: 50px; */
+  border-right: var(--border-style1);
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li {
+  margin-bottom: 1px;
+  padding: 0 20px;
+  margin-top: 1px;
+}
+
+.menu-list li a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.menu-list li a:hover {
+  /* background-color: #f9fbfc; */
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.menu-list li.active a {
+  background-color: #555;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.dashboard-content {
+  padding-top: 50px;
+}
+
+.display-endline {
+  white-space: pre-line;
+}
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  padding: 0.2rem 0.2rem;
+  border-radius: 40px;
 }

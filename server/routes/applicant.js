@@ -3,7 +3,9 @@ const ApplicantController = require("../controllers/applicant");
 const { authRequest, authAdmin, authUserRole } = require("../middlewares/auth");
 
 route.get("/", ApplicantController.getApplicant);
-route.get("/find", ApplicantController.getApplicantById);
+route.get("/find/job/:jobId", ApplicantController.getApplicantById);
+route.get("/find/user/:userId", ApplicantController.getApplicantById);
+route.get("/find", ApplicantController.getApplicantByJobIdAndUserId);
 route.post("/apply", authRequest, ApplicantController.postApply);
 // TODO: admin only
 route.delete("/:userId", authRequest, ApplicantController.deleteApplicant);

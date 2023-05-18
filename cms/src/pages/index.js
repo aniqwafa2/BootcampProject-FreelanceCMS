@@ -1,8 +1,14 @@
 import Home from "./Home";
-import Dashboard from "./Dashboard";
-import Navbar from "./Navbar";
-import Header from "./UI/Header";
 import Login from "./LoginPage/Login";
 import Register from "./LoginPage/Register";
 
-export { Home, Dashboard, Navbar, Header, Login, Register };
+// Dashboard
+import Dashboard from "./Dashboard/Dashboard";
+import YourPost from "./Dashboard/YourPost";
+import PostJob from "./Dashboard/PostJob";
+
+import DetailPage from "./Detail/DetailPage";
+
+// Employers
+
+export { Home, Login, Register, Dashboard, YourPost, PostJob, DetailPage };

@@ -66,9 +66,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       // NOTE: buat exclude password saat getData
+      defaultScope: { attributes: { exclude: "password" } },
       scopes: {
-        nopwd: {
-          attributes: { exclude: "password" },
+        withpwd: {
+          attributes: { include: "password" },
         },
       },
     }
