@@ -7,6 +7,8 @@ import Dashboard from "./Dashboard/Dashboard";
 import YourPost from "./Dashboard/YourPost";
 import PostJob from "./Dashboard/PostJob";
 
+import DetailPage from "./DetailPage/DetailPage";
+
 // Employers
 
-export { Home, Login, Register, Dashboard, YourPost, PostJob };
+export { Home, Login, Register, Dashboard, YourPost, PostJob, DetailPage };

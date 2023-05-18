@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../axios/user";
 
-const Login = () => {
+const Login = ({ loginState }) => {
   const [form, setForm] = useState({});
 
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ const Login = () => {
     try {
       await loginUser(form, (result) => {
         if (result === 1) {
+          loginState(true);
           navigate("/dashboard");
         } else if (result === 2) {
           navigate("/");

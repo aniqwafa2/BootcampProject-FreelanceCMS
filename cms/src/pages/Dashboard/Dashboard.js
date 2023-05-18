@@ -1,115 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
-import { FiEdit, FiTrash, FiCalendar, FiDollarSign, FiArchive, FiInfo } from "react-icons/fi";
-import { BsInfoCircle } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
+import { DashboardHome, JobList, ApplicantList } from "./DashPages";
 
 const Dashboard = () => {
+  const [locationPage, setLocationPage] = useState();
+
+  const location = useLocation();
+
+  const pageHandler = () => {
+    switch (location.pathname) {
+      case "/dashboard/jobs":
+        return <JobList></JobList>;
+
+      // TODO: nerusin buat dashboardmenu lainnya
+      case "/dashboard/applicants":
+        return <ApplicantList></ApplicantList>;
+
+      default:
+        return <DashboardHome></DashboardHome>;
+    }
+  };
+
+  useEffect(() => {
+    setLocationPage(pageHandler());
+  }, [location]);
+
   return (
     <>
       <Navbar />
-
-      <div className="container">
-        <div className="row">
-          {/* sidebar */}
-          <div className="col-md-3"></div>
-
-          {/* content */}
-          <div className="col-md">
-            <div className="dashboard-content">
-              <div>
-                <h5 className="fw-bold border-bottom lh-lg">Hello, JohnDoe!</h5>
-              </div>
-              <div className="p-3 my-3 rounded-4 bg-white">
-                <div class="row justify-content-between m-2 border-bottom lh-lg">
-                  <div class="col-4">
-                    <Link to="" className="icon-link">
-                      Your Postings
-                    </Link>
-                  </div>
-                  <div class="col-4 text-end">
-                    <Link to="" className="icon-link icon-link-hover">
-                      All Job Postings <BsArrowRight></BsArrowRight>
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="col-md">
-                  <div id="post" className="p-3">
-                    <div className="row p-3">
-                      <table class="table text-center">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Project</th>
-                            <th scope="col">Freelance</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>We need ui/ux design project figma</td>
-                            <td>
-                              <small className="text-bg-info text-white rounded-4 px-3 py-1 fw-bold lh-lg">Otto</small>
-                            </td>
-                            <td>
-                              <select class="form-select form-select-sm rounded-4 border-0 bg-warning fw-bold" aria-label=".form-select-sm example">
-                                <option selected>status on</option>
-                                <option value="1">accept</option>
-                                <option value="2">reject</option>
-                              </select>
-                            </td>
-                            <td>
-                              <small className="text-bg-primary text-white m-2 p-1 rounded-4 px-3 fw-bold lh-lg">Detail</small>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>BackEnd Project Login/Register</td>
-                            <td>
-                              <small className="text-bg-info text-white rounded-4 px-3 py-1 fw-bold lh-lg">Thornton</small>
-                            </td>
-                            <td>
-                              <select class="form-select form-select-sm rounded-4 border-0 bg-warning fw-bold" aria-label=".form-select-sm example">
-                                <option selected>status on</option>
-                                <option value="1">accept</option>
-                                <option value="2">reject</option>
-                              </select>
-                            </td>
-                            <td>
-                              <small className="text-bg-primary text-white m-2 p-1 rounded-4 px-3 fw-bold lh-lg">Detail</small>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Design Logo</td>
-                            <td>
-                              <small className="text-bg-info text-white rounded-4 px-3 py-1 fw-bold lh-lg">LarrytheBird</small>
-                            </td>
-                            <td>
-                              <select class="form-select form-select-sm rounded-4 border-0 bg-warning fw-bold" aria-label=".form-select-sm example">
-                                <option selected>status on</option>
-                                <option value="1">accept</option>
-                                <option value="2">reject</option>
-                              </select>
-                            </td>
-                            <td>
-                              <small className="text-bg-primary text-white m-2 p-1 rounded-4 px-3 fw-bold lh-lg">Detail</small>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {locationPage}
     </>
   );
 };

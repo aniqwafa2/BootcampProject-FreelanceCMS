@@ -6,9 +6,9 @@ const url = `${apiUrl}/jobs`;
 
 const readJob = async (cb) => {
   try {
-    const result = await axios.get(url);
+    const result = await axios.get(`${url}/?`);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
