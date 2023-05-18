@@ -7,7 +7,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import YourPost from "./Dashboard/YourPost";
 import PostJob from "./Dashboard/PostJob";
 
-import DetailPage from "./DetailPage/DetailPage";
+import DetailPage from "./Detail/DetailPage";
 
 // Employers
 

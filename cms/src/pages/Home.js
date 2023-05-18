@@ -224,15 +224,6 @@ const Home = () => {
                   onClick={() => jobSelectHandler(item.id)}
                 >
                   <div className="card-body">
-                    {/* <h6 className="card-title">
-                      <div className="container text-center text-secondary">
-                        <div className="row row-cols-auto fw-bold ">
-                          <div className="col lh-lg py-1 me-2 rounded-4 bg-light">
-                            <FiMapPin className="me-1 fs-5"></FiMapPin>Bandung
-                          </div>
-                        </div>
-                      </div>
-                    </h6> */}
                     <h5 className="card-subtitle mb-2 text-body-secondary fw-bold">
                       {item.name}
                     </h5>
@@ -260,51 +251,26 @@ const Home = () => {
                             </span>
                           </div>
                         </div>
-                        {/* <div className="text-center mt-2 lh-sm">
-                          <div className="row row-cols-6 row-cols-lg-2 g-3 g-lg-3">
-                            <div className="col-md">
-                              <div className="py-2 border border-2 rounded-4 fw-bold">
-                                $290 <br />
-                                <span className="text-secondary fs-6 mono">
-                                  Fixed-price
-                                </span>
-                              </div>
-                            </div>
-                            <div className="col-md">
-                              <div className="py-2 border border-2 rounded-4 fw-bold">
-                                14 Days <br />
-                                <span className="text-secondary fs-6 mono">
-                                  Duration
-                                </span>
-                              </div>
-                            </div> */}
-                        {/* <div className="col">
-                              <div className="py-2 border border-2 rounded-4 fw-bold">
-                                10 to 50 <br />
-                                <span className="text-secondary fs-6 mono">
-                                  Proposal
-                                </span>
-                              </div>
-                            </div> */}
+                      </div>
+                    </div>
 
-                        <p className="card-text text-container text-secondary lh-sm mt-2 text-start display-endline">
-                          {item.description}
-                        </p>
+                    <p className="card-text text-container text-secondary lh-sm mt-2 display-endline">
+                      {item.description}
+                    </p>
 
-                        <div className="row row-cols-auto small fw-bold text-secondary">
-                          <div className="card-text text-secondary fs-6">
-                            Category:
-                          </div>
-                          <div className="col lh-sm m-1 ms-2 rounded-4 bg-light">
-                            {item.category.name}
-                          </div>
-                        </div>
+                    <div className="row row-cols-auto small fw-bold text-secondary">
+                      <div className="card-text text-secondary fs-6">
+                        Category:
+                      </div>
+                      <div className="col lh-sm m-1 ms-2 rounded-4 bg-light">
+                        {item.category.name}
                       </div>
                     </div>
                   </div>
                 </div>
               );
             })}
+
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
                 <li className="page-item disabled">
@@ -343,15 +309,6 @@ const Home = () => {
                   role="alert"
                 >
                   <div className="card-body">
-                    {/* <h6 className="card-title">
-                  <div className="container text-center">
-                    <div className="row row-cols-auto fw-bold ">
-                      <div className="col lh-lg me-2 rounded-4 bg-light">
-                        <FiMapPin className="me-1 fs-5"></FiMapPin>Bandung
-                      </div>
-                    </div>
-                  </div>
-                </h6> */}
                     <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">
                       {jobItemSelected.name}
                     </h2>
@@ -385,45 +342,31 @@ const Home = () => {
                     </p>
                   </div>
                   {/* <div id="item-1-1">
-                <h5 className="fw-bold">File Requirements</h5>
-                <p className="text-secondary lh-sm">
-                  Our e-commerce website is in need of a revamp and we are
-                  looking for a talented UI designer to help us create a fresh,
-                  modern, and user-friendly design. We are seeking a
-                  proffesional who can bring their creativity and design skills
-                  to the table to help us create a visually appealing website
-                  that will enhance the shopping experience for out costumers.
-                </p>
-              </div>
-               <div id="item-1-2">
-                <h5>Item 1-2</h5>
-                <p>
-                  This is some placeholder content for the scrollspy page. Note
-                  that as you scroll down the page, the appropriate navigation
-                  link is highlighted. It's repeated throughout the component
-                  example. We keep adding some more example copy here to
-                  emphasize the scrolling and highlighting. Keep in mind that
-                  the JavaScript plugin tries to pick the right element among
-                  all that may be visible. Multiple visible scrollspy targets at
-                  the same time may cause some issues.
-                </p>
-              </div>
-              <div id="item-2">
-                <h4>Item 2</h4>
-                <p>...</p>
-              </div>
-              <div id="item-3">
-                <h4>Item 3</h4>
-                <p>...</p>
-              </div>
-              <div id="item-3-1">
-                <h5>Item 3-1</h5>
-                <p>...</p>
-              </div>
-              <div id="item-3-2">
-                <h5>Item 3-2</h5>
-                <p>...</p>
-              </div> */}
+                    <h5 className="fw-bold">File Requirements</h5>
+                    <p className="text-secondary lh-sm">
+                      Our e-commerce website is in need of a revamp and we are
+                      looking for a talented UI designer to help us create a
+                      fresh, modern, and user-friendly design. We are seeking a
+                      proffesional who can bring their creativity and design
+                      skills to the table to help us create a visually appealing
+                      website that will enhance the shopping experience for out
+                      costumers.
+                    </p>
+                  </div>
+                  <div id="item-1-2">
+                    <h5>Item 1-2</h5>
+                    <p>
+                      This is some placeholder content for the scrollspy page.
+                      Note that as you scroll down the page, the appropriate
+                      navigation link is highlighted. It's repeated throughout
+                      the component example. We keep adding some more example
+                      copy here to emphasize the scrolling and highlighting.
+                      Keep in mind that the JavaScript plugin tries to pick the
+                      right element among all that may be visible. Multiple
+                      visible scrollspy targets at the same time may cause some
+                      issues.
+                    </p>
+                  </div> */}
                 </div>
               </>
             ) : (

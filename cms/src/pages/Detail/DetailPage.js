@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { readJobDetail } from "../../axios/job";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
 import JobDetail from "./DetailPages/JobDetail";
