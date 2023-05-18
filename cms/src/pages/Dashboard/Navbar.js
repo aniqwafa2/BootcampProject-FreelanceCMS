@@ -1,14 +1,11 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { BsBell, BsUbuntu } from "react-icons/bs";
-import { FiArchive, FiGrid } from "react-icons/fi";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { BsUbuntu } from "react-icons/bs";
+import { FiArchive, FiGrid, FiExternalLink, FiBell } from "react-icons/fi";
 
 const Navbar = () => {
-  const [activeMenu, setActiveMenu] = useState("/");
+  const location = useLocation();
 
-  const handleMenuClick = (menu) => {
-    setActiveMenu(menu);
-  };
   return (
     <>
       {/* SideBar */}
@@ -20,26 +17,20 @@ const Navbar = () => {
                 <BsUbuntu className="me-2"></BsUbuntu>GigGenie
               </h3>
               <ul className="menu-list">
-                <li className={activeMenu === "dashboard" ? "active" : ""}>
-                  <a href="/dashboard" onClick={() => handleMenuClick("dashboard")}>
-                    <FiGrid className="fs-5 me-2" />
-                    Dashboard
-                  </a>
+                <li className={location.pathname === "/dashboard" ? "active" : ""}>
+                  <Link to="/dashboard" activeClassName="active">
+                    <FiGrid className="fs-5 me-2"></FiGrid> Dashboard
+                  </Link>
                 </li>
-                <li className={activeMenu === "post" ? "active" : ""}>
-                  <a href="/post" onClick={() => handleMenuClick("post")}>
-                    <FiArchive className="fs-5 me-2" /> Post Job
-                  </a>
+                <li className={location.pathname === "/post" ? "active" : ""}>
+                  <Link to="/post" activeClassName="active">
+                    <FiArchive className="fs-5 me-2"></FiArchive> Post Job
+                  </Link>
                 </li>
                 {/* <li>
-                  <NavLink exact to="/dashboard" activeClassName="active">
-                    <FiGrid className="fs-5 me-2"></FiGrid> Dashboard
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/post" activeClassName="active">
-                    <FiArchive className="fs-5 me-2"></FiArchive> Post Job
-                  </NavLink>
+                  <Link to="/post" activeClassName="active">
+                    <FiSettings className="fs-5 me-2"></FiSettings> Settings
+                  </Link>
                 </li> */}
               </ul>
             </nav>
@@ -57,9 +48,14 @@ const Navbar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav ms-auto">
+                    <li className="nav-item">
+                      <Link to="/" className="btn btn-sm fw-bold mt-1 rounded-3 bg-white shadow-sm m-2" title="Homepage">
+                        <FiExternalLink className="fs-5" />
+                      </Link>
+                    </li>
                     <li className="nav-item ">
-                      <button type="button" className="btn btn-sm mt-1 fw-bold position-relative border border-1 rounded-3" to="#">
-                        <BsBell className="text-dark fs-6"></BsBell>
+                      <button type="button" className="btn btn-sm mt-1 fw-bold position-relative shadow-sm bg-white rounded-3" to="#" title="Notification">
+                        <FiBell className="text-dark fs-5" />
                         <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
                           <span class="visually-hidden">New alerts</span>
                         </span>
@@ -69,6 +65,7 @@ const Navbar = () => {
                     <div>
                       <span className="fs-4 mx-4">|</span>
                     </div>
+
                     <li className="nav-item dropdown">
                       <Link className="nav-link dropdown-toggle fw-bold" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         JohnDoe

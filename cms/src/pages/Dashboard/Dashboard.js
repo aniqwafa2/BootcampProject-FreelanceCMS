@@ -6,11 +6,6 @@ import { FiEdit, FiTrash, FiCalendar, FiDollarSign, FiArchive, FiInfo } from "re
 import { BsInfoCircle } from "react-icons/bs";
 
 const Dashboard = () => {
-  const [activeMenu, setActiveMenu] = useState("dashboard");
-
-  const handleMenuClick = (menu) => {
-    setActiveMenu(menu);
-  };
   return (
     <>
       <Navbar />
