@@ -242,6 +242,7 @@ const Home = () => {
 
                     <div className="text-center mt-2 lh-sm">
                       <div className="row row-cols-lg-3 g-lg-3">
+                        {/* <div className="row row-cols-6 row-cols-lg-2 g-3 g-lg-3"> */}
                         <div className="col me-2">
                           <div className="py-2 border border-2 rounded-4 fw-bold">
                             Rp. {priceFormat(item.price)} <br />
@@ -251,6 +252,7 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="col me-2">
+                          {/* <div className="col md"> */}
                           <div className="py-2 border border-2 rounded-4 fw-bold">
                             14 Days <br />
                             <span className="text-secondary fs-6 mono">
@@ -258,26 +260,51 @@ const Home = () => {
                             </span>
                           </div>
                         </div>
-                      </div>
-                    </div>
+                        {/* <div className="text-center mt-2 lh-sm">
+                          <div className="row row-cols-6 row-cols-lg-2 g-3 g-lg-3">
+                            <div className="col-md">
+                              <div className="py-2 border border-2 rounded-4 fw-bold">
+                                $290 <br />
+                                <span className="text-secondary fs-6 mono">
+                                  Fixed-price
+                                </span>
+                              </div>
+                            </div>
+                            <div className="col-md">
+                              <div className="py-2 border border-2 rounded-4 fw-bold">
+                                14 Days <br />
+                                <span className="text-secondary fs-6 mono">
+                                  Duration
+                                </span>
+                              </div>
+                            </div> */}
+                        {/* <div className="col">
+                              <div className="py-2 border border-2 rounded-4 fw-bold">
+                                10 to 50 <br />
+                                <span className="text-secondary fs-6 mono">
+                                  Proposal
+                                </span>
+                              </div>
+                            </div> */}
 
-                    <p className="card-text text-container text-secondary lh-sm mt-2 display-endline">
-                      {item.description}
-                    </p>
+                        <p className="card-text text-container text-secondary lh-sm mt-2 text-start display-endline">
+                          {item.description}
+                        </p>
 
-                    <div className="row row-cols-auto small fw-bold text-secondary">
-                      <div className="card-text text-secondary fs-6">
-                        Category:
-                      </div>
-                      <div className="col lh-sm m-1 ms-2 rounded-4 bg-light">
-                        {item.category.name}
+                        <div className="row row-cols-auto small fw-bold text-secondary">
+                          <div className="card-text text-secondary fs-6">
+                            Category:
+                          </div>
+                          <div className="col lh-sm m-1 ms-2 rounded-4 bg-light">
+                            {item.category.name}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               );
             })}
-
             <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
                 <li className="page-item disabled">
