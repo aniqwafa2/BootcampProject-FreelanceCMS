@@ -188,6 +188,7 @@ body {
   background-color: #555;
   color: #fff;
   border-radius: 10px;
+  font-weight: bold;
 }
 
 .dashboard-content {

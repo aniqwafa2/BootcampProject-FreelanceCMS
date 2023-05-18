@@ -41,29 +41,16 @@ const YourPost = () => {
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
+                        <td>Web Design</td>
                         <td>Otto</td>
                         <td>
                           <div class="d-inline p-1">
-                            <small className="text-bg-primary text-white p-1 rounded-4 px-3 fw-bold lh-lg">
-                              <BsPencilSquare className="me-1 fs-6" />
-                              <small>Edit</small>
-                            </small>
+                            <small className="text-bg-success text-white p-1 rounded-4 px-3 fw-bold lh-lg">Edit</small>
                           </div>
                           <div class="d-inline p-1">
-                            <small className="text-bg-primary text-white p-1 rounded-4 px-3 fw-bold lh-lg">Delete</small>
+                            <small className="text-bg-danger text-white p-1 rounded-4 px-3 fw-bold lh-lg">Delete</small>
                           </div>
                         </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry the Bird</td>
-                        <td>@twitter</td>
                       </tr>
                     </tbody>
                   </table>
