@@ -49,14 +49,7 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
-                      <Link to="#" className="btn btn-sm fw-bold mt-1 rounded-3 bg-white shadow-sm m-2" title="Homepage">
-                        <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
-                          Tooltip on bottom
-                        </button>
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link to="#" className="btn btn-sm fw-bold mt-1 rounded-3 bg-white shadow-sm m-2" title="Homepage">
+                      <Link to="/" className="btn btn-sm fw-bold mt-1 rounded-3 bg-white shadow-sm m-2" title="Homepage">
                         <FiExternalLink className="fs-5" />
                       </Link>
                     </li>
