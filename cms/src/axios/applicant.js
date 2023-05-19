@@ -68,7 +68,7 @@ const deleteApplicantbyUserId = async (id) => {
   }
 };
 
-const acceptApplicant = async (jobId, userId) => {
+const acceptApplicant = async (jobId, userId, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -89,6 +89,7 @@ const acceptApplicant = async (jobId, userId) => {
         );
 
         console.log(result);
+        cb(result);
         Swal.fire("Success", "Succesfully accepted the applicant", "success");
       }
     });

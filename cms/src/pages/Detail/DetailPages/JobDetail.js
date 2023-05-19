@@ -23,8 +23,9 @@ const JobDetail = (props) => {
   };
 
   const acceptHandler = (jobId, userId) => {
-    acceptApplicant(jobId, userId);
-    window.location.reload();
+    acceptApplicant(jobId, userId, (result) => {
+      window.location.reload();
+    });
   };
 
   useEffect(() => {
