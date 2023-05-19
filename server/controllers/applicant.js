@@ -1,4 +1,4 @@
-const { applicant, job, user, sequelize } = require("../models");
+const { applicant, job, user, sequelize, userProfile } = require("../models");
 const { Op } = require("sequelize");
 
 class ApplicantController {
@@ -62,7 +62,10 @@ class ApplicantController {
       typeId = { userId };
     }
 
-    let queryProperties = { where: typeId, include: [job, user] };
+    let queryProperties = {
+      where: typeId,
+      include: [job, { model: user, include: [userProfile] }],
+    };
     if (limit && limit !== 0) {
       queryProperties = { limit, offset, where: typeId, include: [job, user] };
     }
@@ -77,7 +80,7 @@ class ApplicantController {
       }
 
       const totalPage = Math.ceil(result.count / limit);
-      if (totalPage !== 0) {
+      if (totalPage) {
         pages = { limitPage: limit, currentPage: pageCount, totalPage };
       }
 
@@ -107,6 +110,33 @@ class ApplicantController {
       const result = await applicant.findOne({
         where: { jobId: +jobId, userId: +userId },
         include: [job, user],
+      });
+
+      if (!result) {
+        return res.status(404).json({ message: "applicant id not found" });
+      }
+
+      res.json(result);
+    } catch (error) {
+      res.status(500).json({ message: "server error", error });
+    }
+  }
+
+  static async getApplicantByJobIdStatus(req, res) {
+    /* 
+      #swagger.summary = "Get Applicant by Job ID Status"
+      #swagger.parameters['jobId'] = {
+        required: true,
+        type: 'integer',
+      } 
+    */
+
+    let { jobId } = req.query;
+
+    try {
+      const result = await applicant.findOne({
+        where: { jobId: +jobId, status: "true" },
+        include: [job, { model: user, include: [userProfile] }],
       });
 
       if (!result) {

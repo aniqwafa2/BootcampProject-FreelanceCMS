@@ -57,7 +57,7 @@ const JobList = () => {
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Project</th>
-                          <th scope="col">Posted at</th>
+                          <th scope="col">Last Apply Date</th>
                           <th scope="col">Status</th>
                           <th scope="col">Action</th>
                         </tr>
@@ -93,8 +93,14 @@ const JobList = () => {
                               <th scope="row">{id + 1}</th>
                               <td className="fs-5 fw-semibold">{item.name}</td>
                               <td>
-                                <small className="text-bg-info text-white rounded-4 px-3 py-1 fw-bold btn btn-sm">
-                                  {dateFormat(item.createdAt)}
+                                <small
+                                  className={`text-white rounded-4 px-3 py-1 fw-bold btn btn-sm ${
+                                    Date.parse(item.dueDate) < Date.now()
+                                      ? "text-bg-danger"
+                                      : "text-bg-info"
+                                  }`}
+                                >
+                                  {dateFormat(item.dueDate)}
                                 </small>
                               </td>
                               <td>
