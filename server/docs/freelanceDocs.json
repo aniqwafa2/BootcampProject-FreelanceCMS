@@ -902,19 +902,11 @@
         "tags": [
           "Applicants"
         ],
-        "summary": "Get Applicant by Job ID and User ID",
+        "summary": "Get Applicant by Job ID Status",
         "description": "",
         "parameters": [
           {
             "name": "jobId",
-            "required": true,
-            "in": "query",
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "userId",
             "required": true,
             "in": "query",
             "schema": {

@@ -15,23 +15,20 @@ const readApplicant = async (cb) => {
   }
 };
 
-// TODO: server buat ini dulu
 const readApplicantByJob = async (jobId, cb) => {
   try {
-    const result = await axios.get(`${url}/${jobId}`);
+    const result = await axios.get(`${url}/find/job/${jobId}`);
 
-    console.log(result);
+    // console.log(result.data);
     cb(result.data);
   } catch (error) {
     console.log(error);
   }
 };
 
-const readApplicantDetail = async (jobId, userId, cb) => {
+const readApplicantDetail = async (jobId, cb) => {
   try {
-    const result = await axios.get(
-      `${url}/find?jobId=${jobId}&userId=${userId}`
-    );
+    const result = await axios.get(`${url}/find?jobId=${jobId}`);
 
     console.log(result);
     cb(result.data);
@@ -71,18 +68,31 @@ const deleteApplicantbyUserId = async (id) => {
   }
 };
 
-const acceptApplicant = async (id, cb) => {
+const acceptApplicant = async (jobId, userId, cb) => {
   try {
-    const result = await axios.put(
-      `${url}/accept?jobId=${jobId}&userId=${userId}`,
-      {
-        headers: { Authorization: getToken.toString() },
-      }
-    );
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action will accept this user application for this job.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Accept this applicant!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const result = await axios.put(
+          `${url}/accept?jobId=${jobId}&userId=${userId}`,
+          {},
+          {
+            headers: { Authorization: getToken() },
+          }
+        );
 
-    console.log(result);
-    cb(result);
-    Swal.fire("Success", "Succesfully accepted the applicant", "success");
+        console.log(result);
+        cb(result);
+        Swal.fire("Success", "Succesfully accepted the applicant", "success");
+      }
+    });
   } catch (error) {
     console.log(error);
     Swal.fire("Failed", "Failed to accept applicant", "error");

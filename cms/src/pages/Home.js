@@ -238,16 +238,16 @@ const Home = () => {
                           <div className="py-2 border border-2 rounded-4 fw-bold">
                             Rp. {priceFormat(item.price)} <br />
                             <span className="text-secondary fs-6 mono">
-                              Fixed-price
+                              Salary
                             </span>
                           </div>
                         </div>
                         <div className="col me-2">
                           {/* <div className="col md"> */}
                           <div className="py-2 border border-2 rounded-4 fw-bold">
-                            14 Days <br />
+                            {dateFormat(item.dueDate)} <br />
                             <span className="text-secondary fs-6 mono">
-                              Duration
+                              Last Apply Date
                             </span>
                           </div>
                         </div>

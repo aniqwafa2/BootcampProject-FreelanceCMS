@@ -35,8 +35,12 @@ const DetailPage = () => {
   };
 
   useEffect(() => {
-    const id = location.state.id;
-    itemDetailHandler(id);
+    try {
+      const id = location.state.id;
+      itemDetailHandler(id);
+    } catch (error) {
+      navigate("/");
+    }
   }, []);
 
   return (
@@ -45,7 +49,7 @@ const DetailPage = () => {
         <div className="container">
           <div className="row">
             {/* content */}
-            <div className="col-md m-3">
+            <div className="col">
               <div className="dashboard-content">
                 <div className="row align-items-center border-bottom ">
                   <div className="col-md-auto">
@@ -64,7 +68,7 @@ const DetailPage = () => {
                     <h5 className="fw-boldlh-lg">{title} Detail</h5>
                   </div>
                 </div>
-                <div className="p-3 my-3 rounded-4 bg-white">{detailPage}</div>
+                {detailPage}
               </div>
             </div>
           </div>
