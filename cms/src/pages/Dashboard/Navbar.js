@@ -55,6 +55,15 @@ const Navbar = () => {
                     <FiArchive className="fs-5 me-2" /> Applicants Lists
                   </Link>
                 </li>
+                <li
+                  className={
+                    location.pathname === "/dashboard/messages" ? "active" : ""
+                  }
+                >
+                  <Link to="/dashboard/messages">
+                    <FiArchive className="fs-5 me-2" /> Messages Lists
+                  </Link>
+                </li>
                 {/* <li>
                   <Link to="/post" activeClassName="active">
                     <FiSettings className="fs-5 me-2"></FiSettings> Settings

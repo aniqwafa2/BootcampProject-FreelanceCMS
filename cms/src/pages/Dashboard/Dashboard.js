@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { useLocation } from "react-router-dom";
-import { DashboardHome, JobList, ApplicantList } from "./DashPages";
+import {
+  DashboardHome,
+  JobList,
+  ApplicantList,
+  MessageList,
+} from "./DashPages";
 
 const Dashboard = () => {
   const [locationPage, setLocationPage] = useState();
@@ -16,6 +21,9 @@ const Dashboard = () => {
       // TODO: nerusin buat dashboardmenu lainnya
       case "/dashboard/applicants":
         return <ApplicantList></ApplicantList>;
+
+      case "/dashboard/messages":
+        return <MessageList></MessageList>;
 
       default:
         return <DashboardHome></DashboardHome>;

@@ -48,6 +48,7 @@ const Content = () => {
                 <Route path="jobs" element={<Dashboard />}></Route>
                 <Route path="applicants" element={<Dashboard />}></Route>
                 {/* TODO: child dashboard menu lainnya bisa taruh dibawah comment ini */}
+                <Route path="messages" element={<Dashboard />}></Route>
               </Route>
               <Route path="/dashboard/detail" element={<DetailPage />}></Route>
               <Route path="/post" element={<YourPost></YourPost>}></Route>
