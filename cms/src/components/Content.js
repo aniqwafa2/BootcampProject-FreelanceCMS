@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import {
-  Home,
-  Login,
-  Register,
-  Dashboard,
-  YourPost,
-  PostJob,
-  DetailPage,
-} from "../pages";
+import { Home, Login, Register, Dashboard, YourPost, PostJob, DetailPage } from "../pages";
 
 const Content = () => {
   const [loginStatus, setLoginStatus] = useState();
@@ -35,16 +27,17 @@ const Content = () => {
       <Routes>
         <>
           <Route path="" element={<Home></Home>}></Route>
-          <Route
-            path="/login"
-            element={<Login loginState={setLoginStatus}></Login>}
-          ></Route>
+          <Route path="/login" element={<Login loginState={setLoginStatus}></Login>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
 
           {/* DashboardUser */}
           {loginStatus ? (
             <>
               <Route path="/dashboard" element={<Dashboard></Dashboard>}>
+                {/* Category */}
+                <Route path="category" element={<Dashboard />}></Route>
+                <Route path="createcategory" element={<Dashboard />}></Route>
+
                 <Route path="jobs" element={<Dashboard />}></Route>
                 <Route path="applicants" element={<Dashboard />}></Route>
                 {/* TODO: child dashboard menu lainnya bisa taruh dibawah comment ini */}
@@ -52,17 +45,11 @@ const Content = () => {
               <Route path="/dashboard/detail" element={<DetailPage />}></Route>
               <Route path="/post" element={<YourPost></YourPost>}></Route>
               <Route path="/post-job" element={<PostJob></PostJob>}></Route>
-              <Route
-                path="*"
-                element={<Navigate replace to="/login"></Navigate>}
-              ></Route>
+              <Route path="*" element={<Navigate replace to="/login"></Navigate>}></Route>
             </>
           ) : (
             <>
-              <Route
-                path="*"
-                element={<Navigate replace to="/login"></Navigate>}
-              ></Route>
+              <Route path="*" element={<Navigate replace to="/login"></Navigate>}></Route>
             </>
           )}
         </>

@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  FiEdit,
-  FiTrash,
-  FiCalendar,
-  FiDollarSign,
-  FiArchive,
-  FiInfo,
-} from "react-icons/fi";
+import { FiEdit, FiTrash, FiCalendar, FiDollarSign, FiArchive, FiInfo } from "react-icons/fi";
 import { BsInfoCircle, BsArrowRight } from "react-icons/bs";
 import { readJob } from "../../../axios/job";
 import { dateFormat } from "../../../helpers";
@@ -91,27 +84,15 @@ const JobList = () => {
                           return (
                             <tr key={item.id}>
                               <th scope="row">{id + 1}</th>
-                              <td className="fs-5 fw-semibold">{item.name}</td>
+                              <td className="fw-bold">{item.name}</td>
                               <td>
-                                <small
-                                  className={`text-white rounded-4 px-3 py-1 fw-bold btn btn-sm ${
-                                    Date.parse(item.dueDate) < Date.now()
-                                      ? "text-bg-danger"
-                                      : "text-bg-info"
-                                  }`}
-                                >
-                                  {dateFormat(item.dueDate)}
-                                </small>
+                                <small className={`text-white rounded-4 px-3 py-1 fw-bold btn btn-sm ${Date.parse(item.dueDate) < Date.now() ? "text-bg-danger" : "text-bg-info"}`}>{dateFormat(item.dueDate)}</small>
                               </td>
                               <td>
                                 {item.status ? (
-                                  <small className="rounded-4 px-3 py-1 text-bg-success fw-bold btn btn-sm">
-                                    Applicant accepted
-                                  </small>
+                                  <small className="rounded-4 px-3 py-1 text-bg-success fw-bold btn btn-sm">Applicant accepted</small>
                                 ) : (
-                                  <small className="rounded-4 px-3 py-1 text-bg-warning fw-bold btn btn-sm">
-                                    No applicant accepted
-                                  </small>
+                                  <small className="rounded-4 px-3 py-1 text-bg-warning fw-bold btn btn-sm">No applicant accepted</small>
                                 )}
                               </td>
                               <td>
