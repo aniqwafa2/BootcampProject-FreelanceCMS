@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import { imageUrl } from "../../../config/config";
 import { readMessage } from "../../../axios/message";
 import {
   dateFormat,
@@ -78,7 +79,7 @@ const MessageList = () => {
                                       className="img-fluid rounded-circle"
                                       alt=""
                                       width="50px"
-                                      src={
+                                      src={`${imageUrl}/${
                                         item.recipient.id !== getIdFromToken()
                                           ? item.recipient.userProfile.image
                                             ? item.recipient.userProfile.image
@@ -86,7 +87,7 @@ const MessageList = () => {
                                           : item.sender.userProfile.image
                                           ? item.sender.userProfile.image
                                           : "https://via.placeholder.com/100"
-                                      }
+                                      }`}
                                     ></img>
                                   </div>
                                   <div className="col-md-auto">

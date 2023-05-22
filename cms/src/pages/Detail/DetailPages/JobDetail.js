@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { fileUrl } from "../../../config/config";
 import { dateFormat, priceFormat, getIdFromToken } from "../../../helpers";
 import {
   acceptApplicant,
@@ -99,7 +100,7 @@ const JobDetail = (props) => {
               </div>
               <a
                 className="btn btn-sm rounded-4 fw-bold bg-light text-secondary"
-                href={props.data.file}
+                href={`${fileUrl}/${props.data.file}`}
                 target="_blank"
                 rel="noreferrer noopener"
                 download

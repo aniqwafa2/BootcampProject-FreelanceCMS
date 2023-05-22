@@ -9,6 +9,7 @@
     "dbinit": "sequelize-cli db:create & sequelize-cli db:migrate",
     "dbdrop": "sequelize-cli db:drop",
     "dbseed": "sequelize-cli db:create & sequelize-cli db:migrate & sequelize-cli db:seed --seed 20230504060536-devSeed.js",
+    "dbmigrate:undo": "sequelize-cli db:migrate:undo:all",
     "swaggen": "node ./docs/swaggerGenerator.js"
   },
   "keywords": [],

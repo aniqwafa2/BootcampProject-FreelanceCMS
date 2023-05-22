@@ -15,7 +15,7 @@ server/public/images/*
 #build & testing
 build
 coverage
-!cms/.env
+# !cms/.env
 
 #NPM
 node_modules
@@ -48,3 +48,6 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify

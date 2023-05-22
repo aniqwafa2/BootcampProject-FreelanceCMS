@@ -8,12 +8,12 @@ const doc = {
   },
   servers: [
     {
-      url: "http://localhost:3000",
-      description: "local server",
+      url: "https://freelance-api.cyclic.app",
+      description: "production server",
     },
     {
-      url: "https://good-gray-squid-tux.cyclic.app",
-      description: "deployed server",
+      url: "http://localhost:3000",
+      description: "local server",
     },
   ],
   tags: [
