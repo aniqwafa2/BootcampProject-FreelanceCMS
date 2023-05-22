@@ -1,4 +1,9 @@
-const { messageContact, messageRecord } = require("../models");
+const {
+  messageContact,
+  messageRecord,
+  user,
+  userProfile,
+} = require("../models");
 const { Op } = require("sequelize");
 
 class MessageController {
@@ -18,7 +23,22 @@ class MessageController {
       const result = await messageContact.findAndCountAll({
         where: { [Op.or]: [{ senderId: id }, { recipientId: id }] },
         include: [
-          { model: messageRecord, limit: 1, order: [["createdAt", "DESC"]] },
+          {
+            model: messageRecord,
+            limit: 1,
+            order: [["createdAt", "DESC"]],
+            include: [{ model: user, include: [userProfile] }],
+          },
+          {
+            model: user,
+            include: [userProfile],
+            as: "sender",
+          },
+          {
+            model: user,
+            include: [userProfile],
+            as: "recipient",
+          },
         ],
       });
 
@@ -47,15 +67,43 @@ class MessageController {
     */
 
     const messageContactId = +req.params.contactId;
+    let { order } = req.query;
+    try {
+      if (
+        order.toLowerCase() === "descending" ||
+        order.toLowerCase() === "desc"
+      ) {
+        order = "DESC";
+      } else if (
+        order.toLowerCase() === "ascending" ||
+        order.toLowerCase() === "asc"
+      ) {
+        order = "ASC";
+      }
+    } catch (error) {
+      order = "ASC";
+    }
 
     try {
       const contactId = await messageContact.findOne({
         where: { id: messageContactId },
+        include: [
+          {
+            model: user,
+            include: [userProfile],
+            as: "sender",
+          },
+          {
+            model: user,
+            include: [userProfile],
+            as: "recipient",
+          },
+        ],
       });
       const result = await messageRecord.findAll({
         where: { messageContactId },
-        order: [["createdAt", "ASC"]],
-        // include: [messageContact],
+        order: [["createdAt", order]],
+        include: [{ model: user, include: [userProfile] }],
       });
 
       if (!result) {
@@ -99,7 +147,7 @@ class MessageController {
 
       res.json({
         message: "message successfully created",
-        data: { result },
+        data: result,
       });
     } catch (error) {
       // console.log(error);

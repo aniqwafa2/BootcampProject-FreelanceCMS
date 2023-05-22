@@ -7,12 +7,12 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000",
-      "description": "local server"
+      "url": "https://freelance-api.cyclic.app",
+      "description": "production server"
     },
     {
-      "url": "ndaktau ini apa",
-      "description": "deployed server"
+      "url": "http://localhost:3000",
+      "description": "local server"
     }
   ],
   "tags": [
@@ -33,10 +33,45 @@
     }
   ],
   "paths": {
-    "/api": {
+    "/files/{filename}": {
       "get": {
+        "tags": [
+          "Get Files"
+        ],
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/images/{imagename}": {
+      "get": {
+        "tags": [
+          "Get Files"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "imagename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -579,9 +614,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1151,6 +1183,13 @@
             "name": "contactId",
             "in": "path",
             "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "in": "query",
             "schema": {
               "type": "string"
             }

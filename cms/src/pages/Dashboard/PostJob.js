@@ -14,7 +14,7 @@ const PostJob = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="container">
         <div className="row">
@@ -24,7 +24,7 @@ const PostJob = () => {
           <div className="col-md">
             <div className="dashboard-content">
               <div className="p-3 my-3 rounded-4 bg-white">
-                <h2 className="mb-4 ms-3">Create Job</h2>
+                <h3 className="mb-4 ms-3 fw-bold">Post a New Job</h3>
                 <form>
                   <div class="row justify-content-between m-2  mb-3">
                     <div class="col-md">

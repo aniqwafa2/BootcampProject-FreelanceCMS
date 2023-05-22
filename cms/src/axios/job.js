@@ -19,7 +19,7 @@ const readJobDetail = async (id, cb) => {
   try {
     const result = await axios.get(`${url}/${id}`);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
@@ -54,7 +54,7 @@ const deleteJob = async (id) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.delete(`${url}/${id}`, {
-          headers: { Authorization: getToken.toString() },
+          headers: { Authorization: getToken() },
         });
 
         Swal.fire("Deleted!", "Job has been deleted.", "success").then(() => {

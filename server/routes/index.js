@@ -8,6 +8,13 @@ const applicantsRoute = require("./applicant");
 const messagesRoute = require("./message");
 const docsRoute = require("./docs");
 
+route.get("/", (req, res) => {
+  // #swagger.ignore = true
+  res.json(
+    `welcome to CMS API, go to ${req.headers.host}/api/docs to open documentation`
+  );
+});
+
 route.use(
   // #swagger.tags = ['Users']
   "/users",

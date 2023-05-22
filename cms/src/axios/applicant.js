@@ -30,7 +30,7 @@ const readApplicantDetail = async (jobId, cb) => {
   try {
     const result = await axios.get(`${url}/find?jobId=${jobId}`);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
@@ -68,7 +68,7 @@ const deleteApplicantbyUserId = async (id) => {
   }
 };
 
-const acceptApplicant = async (jobId, userId, cb) => {
+const acceptApplicant = async (jobId, userId) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -89,8 +89,12 @@ const acceptApplicant = async (jobId, userId, cb) => {
         );
 
         console.log(result);
-        cb(result);
-        Swal.fire("Success", "Succesfully accepted the applicant", "success");
+        // cb(result);
+        Swal.fire(
+          "Success",
+          "Succesfully accepted the applicant",
+          "success"
+        ).then(() => window.location.reload());
       }
     });
   } catch (error) {

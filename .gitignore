@@ -6,12 +6,16 @@
 .env.production.local
 
 #server files
-server/public/files
-server/public/images
+server/dashboard
+server/public/files/*
+server/public/images/*
+!server/public/files/text_file.txt
+!server/public/images/profile_avatar.png
 
 #build & testing
 build
 coverage
+# !cms/.env
 
 #NPM
 node_modules
@@ -44,3 +48,6 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify

@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  FiEdit,
-  FiTrash,
-  FiCalendar,
-  FiDollarSign,
-  FiArchive,
-  FiInfo,
-} from "react-icons/fi";
-import { BsInfoCircle, BsArrowRight } from "react-icons/bs";
-import { readJob } from "../../../axios/job";
+import { BsArrowRight } from "react-icons/bs";
+import { readJob, deleteJob } from "../../../axios/job";
 import { dateFormat } from "../../../helpers";
 
 const JobList = () => {
   const [jobsList, setJobsList] = useState([]);
 
   const location = useLocation();
+
+  const deleteHandler = (id) => {
+    deleteJob(id);
+  };
 
   useEffect(() => {
     readJob((result) => {
@@ -63,35 +59,11 @@ const JobList = () => {
                         </tr>
                       </thead>
                       <tbody className="align-middle">
-                        {/* <tr>
-                          <th scope="row">1</th>
-                          <td>We need ui/ux design project figma</td>
-                          <td>
-                            <small className="text-bg-info text-white rounded-4 px-3 py-1 fw-bold lh-lg">
-                              Otto
-                            </small>
-                          </td>
-                          <td>
-                            <select
-                              className="form-select form-select-sm rounded-4 border-0 bg-warning fw-bold"
-                              aria-label=".form-select-sm example"
-                            >
-                              <option selected>status on</option>
-                              <option value="1">accept</option>
-                              <option value="2">reject</option>
-                            </select>
-                          </td>
-                          <td>
-                            <small className="text-bg-primary text-white m-2 p-1 rounded-4 px-3 fw-bold lh-lg">
-                              Detail
-                            </small>
-                          </td>
-                        </tr> */}
                         {jobsList.map((item, id) => {
                           return (
                             <tr key={item.id}>
                               <th scope="row">{id + 1}</th>
-                              <td className="fs-5 fw-semibold">{item.name}</td>
+                              <td className="fw-bold">{item.name}</td>
                               <td>
                                 <small
                                   className={`text-white rounded-4 px-3 py-1 fw-bold btn btn-sm ${
@@ -115,17 +87,29 @@ const JobList = () => {
                                 )}
                               </td>
                               <td>
-                                <Link
-                                  to={`/dashboard/detail`}
-                                  state={{
-                                    prevPath: location.pathname,
-                                    id: item.id,
-                                  }}
-                                  className="text-bg-primary text-white m-2 p-1 rounded-4 px-3 fw-bold btn btn-sm"
-                                  style={{ fontSize: "smaller" }}
-                                >
-                                  Detail
-                                </Link>
+                                <div className="row justify-content-center lh-lg">
+                                  <div className="col-md-auto">
+                                    <button
+                                      className="text-bg-danger text-white p-1 rounded-4 px-3 fw-bold btn btn-sm"
+                                      onClick={() => deleteHandler(item.id)}
+                                    >
+                                      Delete
+                                    </button>
+                                  </div>
+                                  <div className="col-md-auto">
+                                    <Link
+                                      to={`/dashboard/detail`}
+                                      state={{
+                                        prevPath: location.pathname,
+                                        id: item.id,
+                                      }}
+                                      className="text-bg-primary text-white p-1 rounded-4 px-3 fw-bold btn btn-sm"
+                                      style={{ fontSize: "smaller" }}
+                                    >
+                                      Detail
+                                    </Link>
+                                  </div>
+                                </div>
                               </td>
                             </tr>
                           );

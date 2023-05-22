@@ -2,12 +2,26 @@
 
 body {
   font-family: "DM Sans", sans-serif;
-  background-color: #f9fbfc;
+  background-color: #f8f7f1;
+  /* background-color: #f9fbfc; */
 }
 
 :root {
   --border-style1: 1px solid #e1e9ed9e;
   --border-style2: 2px solid #e1e9ed9e;
+  --bs-warning-bg-subtle: #fff3cd;
+}
+
+.bg-yellow {
+  background-color: var(--bs-warning-bg-subtle);
+  border: 2px solid #ffc107;
+}
+.bg-yellow:hover {
+  background-color: white;
+}
+
+.bg-greentea {
+  background-color: #c6d0bc;
 }
 
 .navigation:hover {
@@ -154,7 +168,7 @@ body {
   top: 0;
   width: 280px;
   height: 100vh;
-  background-color: white;
+  background-color: #4f4f4e;
   /* padding-top: 50px; */
   border-right: var(--border-style1);
 }
@@ -174,25 +188,26 @@ body {
 .menu-list li a {
   display: block;
   padding: 10px;
-  color: #333;
+  color: white;
   text-decoration: none;
 }
 
 .menu-list li a:hover {
-  /* background-color: #f9fbfc; */
+  /* background-color: white; */
   font-weight: bold;
   border-radius: 10px;
 }
 
 .menu-list li.active a {
-  background-color: #555;
-  color: #fff;
-  border-radius: 10px;
+  /* background-color: #555; */
+  color: #f5d78b;
+  /* border-radius: 10px; */
   font-weight: bold;
 }
 
 .dashboard-content {
-  padding-top: 50px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 .display-endline {
@@ -204,4 +219,14 @@ body {
   height: 40px;
   padding: 0.2rem 0.2rem;
   border-radius: 40px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+.hide-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
 }
