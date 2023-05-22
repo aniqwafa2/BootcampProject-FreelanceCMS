@@ -43,7 +43,7 @@ const MessageDetail = (props) => {
     contentHandler();
   }, []);
 
-  console.log(contactDetail);
+  // console.log(messageBody);
 
   return (
     <div className="row">
@@ -65,6 +65,7 @@ const MessageDetail = (props) => {
                 placeholder="Type your message body"
                 rows="3"
                 maxLength="500"
+                value={messageBody ? messageBody.messageContent : ""}
                 onChange={(e) =>
                   setMessageBody({
                     ...messageBody,

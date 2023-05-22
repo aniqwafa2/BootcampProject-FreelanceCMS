@@ -63,7 +63,7 @@ const JobList = () => {
                           return (
                             <tr key={item.id}>
                               <th scope="row">{id + 1}</th>
-                              <td className="fs-5 fw-semibold">{item.name}</td>
+                              <td className="fw-bold">{item.name}</td>
                               <td>
                                 <small
                                   className={`text-white rounded-4 px-3 py-1 fw-bold btn btn-sm ${

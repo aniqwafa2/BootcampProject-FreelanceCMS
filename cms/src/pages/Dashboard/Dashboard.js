@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import {
   DashboardHome,
   JobList,
-  ApplicantList,
+  ApplicantList, Category, CreateCategory,
   MessageList,
 } from "./DashPages";
 
@@ -15,6 +15,12 @@ const Dashboard = () => {
 
   const pageHandler = () => {
     switch (location.pathname) {
+      case "/dashboard/category":
+        return <Category></Category>;
+
+      case "/dashboard/createcategory":
+        return <CreateCategory></CreateCategory>;
+
       case "/dashboard/jobs":
         return <JobList></JobList>;
 
