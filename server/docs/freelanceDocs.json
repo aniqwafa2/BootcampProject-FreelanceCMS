@@ -33,17 +33,6 @@
     }
   ],
   "paths": {
-    "/api": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/users/": {
       "get": {
         "tags": [
