@@ -7,8 +7,10 @@
 
 #server files
 server/dashboard
-server/public/files
-server/public/images
+server/public/files/*
+server/public/images/*
+!server/public/files/text_file.txt
+!server/public/images/profile_avatar.png
 
 #build & testing
 build

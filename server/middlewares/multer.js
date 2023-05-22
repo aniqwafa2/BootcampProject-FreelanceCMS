@@ -1,8 +1,12 @@
+require("dotenv").config();
 const multer = require("multer");
 const fs = require("fs/promises");
 const path = require("path");
+const multerS3 = require("multer-s3");
+const { S3Client } = require("@aws-sdk/client-s3");
 
 let uploadtype;
+let storage;
 let imageTypes = [".jpg", ".jpeg", ".png", ".svg", ".webp"];
 let fileTypes = [
   ".doc",
@@ -17,17 +21,31 @@ let fileTypes = [
   ".rar",
   ".7z",
 ];
+let s3 = new S3Client();
 
-const storage = multer.diskStorage({
-  destination: async (req, file, cb) => {
-    let dest = `./public/${uploadtype}s`;
-    await fs.mkdir(dest, { recursive: true });
-    cb(null, dest);
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
+if (process.env.NODE_ENV === "production") {
+  storage = multerS3({
+    s3: s3,
+    bucket: process.env.AWS_BUCKET,
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    key: function (req, file, cb) {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  });
+} else {
+  storage = multer.diskStorage({
+    destination: async (req, file, cb) => {
+      let dest = `./public/${uploadtype}s`;
+      await fs.mkdir(dest, { recursive: true });
+      cb(null, dest);
+    },
+    filename: (req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  });
+}
 
 const fileFilter = (req, file, cb) => {
   const ext = path.extname(file.originalname);
@@ -67,6 +85,7 @@ const upload = (type) => {
           error: `make sure file input placed on ${uploadtype} field`,
         });
       } else if (err) {
+        console.log(err);
         return res.status(500).json({ message: err });
       }
 

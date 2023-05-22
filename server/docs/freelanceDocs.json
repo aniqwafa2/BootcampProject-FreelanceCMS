@@ -11,7 +11,7 @@
       "description": "local server"
     },
     {
-      "url": "ndaktau ini apa",
+      "url": "https://good-gray-squid-tux.cyclic.app",
       "description": "deployed server"
     }
   ],
@@ -33,6 +33,52 @@
     }
   ],
   "paths": {
+    "/files/{filename}": {
+      "get": {
+        "tags": [
+          "Get Files"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/images/{imagename}": {
+      "get": {
+        "tags": [
+          "Get Files"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "imagename",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/users/": {
       "get": {
         "tags": [
@@ -568,9 +614,6 @@
           },
           "401": {
             "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"

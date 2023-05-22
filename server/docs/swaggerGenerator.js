@@ -12,7 +12,7 @@ const doc = {
       description: "local server",
     },
     {
-      url: "ndaktau ini apa",
+      url: "https://good-gray-squid-tux.cyclic.app",
       description: "deployed server",
     },
   ],

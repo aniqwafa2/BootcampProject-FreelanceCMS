@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { user, userProfile, sequelize } = require("../models");
 const { decryptPass } = require("../helpers/bcrypt");
 const { signJwt } = require("../helpers/jwt");
@@ -190,23 +191,33 @@ class UserController {
     let delPath;
 
     try {
-      let { path } = req.file;
-      pathStatus = path.split("\\").slice(1).join("/");
-      image = `${req.headers.host}/${pathStatus}`;
-    } catch (error) {}
+      if (process.env.NODE_ENV === "production") {
+        let { key } = req.file;
+        file = key;
+      } else {
+        let { filename } = req.file;
+        file = filename;
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
     try {
-      if (pathStatus) {
-        delFile = await userProfile.findByPk(id, { raw: true });
+      if (process.env.NODE_ENV === "production") {
+        // TODO: jika perlu ya hapus object sebelumnya
+      } else {
+        if (pathStatus) {
+          delFile = await userProfile.findByPk(id, { raw: true });
 
-        if (delFile.image || delFile.image === "") {
-          delPath = "./public/" + delFile.image.split("/").slice(1).join("/");
+          if (delFile.image || delFile.image === "") {
+            delPath = "./public/images" + delFile.image;
+          }
         }
-      }
 
-      try {
-        await fs.rm(delPath);
-      } catch (error) {}
+        try {
+          await fs.rm(delPath);
+        } catch (error) {}
+      }
 
       // REF: why use individualHooks?
       // https://github.com/sequelize/sequelize/issues/6253

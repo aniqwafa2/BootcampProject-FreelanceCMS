@@ -13,7 +13,6 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    let portlokal = process.env.PORT || 3000;
     let data = [
       {
         name: "admin",
@@ -36,7 +35,7 @@ module.exports = {
         email: "anotheruser@mail.com",
         password: "anotheruserpass",
         address: "Jl. anotheruser, perempatan belok kiri",
-        image: `http://localhost:${portlokal}/default/profile_avatar.png`,
+        image: `profile_avatar.png`,
         skill: "Software Engineer",
       },
     ];
@@ -82,7 +81,7 @@ module.exports = {
           price: 100000,
           description: "ini deskripsi panjang",
           categoryId: 2,
-          file: `http://localhost:${portlokal}/default/text_file.txt`,
+          file: `text_file.txt`,
           dueDate: "2023-07-23",
         },
         {
