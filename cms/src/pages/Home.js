@@ -239,13 +239,13 @@ const Home = () => {
                 <div className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show" role="alert">
                   <div className="card-body">
                     <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">{jobItemSelected.name}</h2>
-                    <Link to="https:client_app_link">
+                    {/* <Link to="https:client_app_link">
                       <button type="submit" className="btn btn-md btn-custom text-white fw-bold">
                         Apply Now
                       </button>
-                    </Link>
+                    </Link> */}
                   </div>
-                  <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
                 </div>
                 <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" className="scrollable-content border border-2 px-4 py-4 rounded-2" tabIndex="0">
                   <div id="item-1">
