@@ -92,11 +92,7 @@ const Home = () => {
                     Find Projects
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link className="nav-link navigation" to="#">
-                    Features
-                  </Link>
-                </li>
+                
               </ul>
               <ul className="navbar-nav ms-auto">
                 {loginStatus ? (
