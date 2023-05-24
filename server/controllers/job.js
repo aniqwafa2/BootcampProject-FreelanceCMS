@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { job, category } = require("../models");
 
 class JobController {
@@ -91,14 +92,19 @@ class JobController {
     */
 
     let { name, price, description, categoryId, file, dueDate } = req.body;
-    let pathStatus;
     dueDate = new Date(Date.parse(dueDate));
 
     try {
-      let { path } = req.file;
-      pathStatus = path.split("\\").slice(1).join("/");
-      file = `${req.headers.host}/${pathStatus}`;
-    } catch (error) {}
+      if (process.env.NODE_ENV === "production") {
+        let { key } = req.file;
+        file = key;
+      } else {
+        let { filename } = req.file;
+        file = filename;
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
     try {
       const result = await job.create({
@@ -115,6 +121,7 @@ class JobController {
         data: { result },
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: error });
     }
   }
@@ -185,23 +192,33 @@ class JobController {
     let delPath;
 
     try {
-      let { path } = req.file;
-      pathStatus = path.split("\\").slice(1).join("/");
-      file = `${req.headers.host}/${pathStatus}`;
-    } catch (error) {}
+      if (process.env.NODE_ENV === "production") {
+        let { key } = req.file;
+        file = key;
+      } else {
+        let { filename } = req.file;
+        file = filename;
+      }
+    } catch (error) {
+      console.error(error);
+    }
 
     try {
-      if (pathStatus) {
-        delFile = await job.findByPk(id, { raw: true });
+      if (process.env.NODE_ENV === "production") {
+        // TODO: jika perlu ya hapus object sebelumnya
+      } else {
+        if (pathStatus) {
+          delFile = await job.findByPk(id, { raw: true });
 
-        if (delFile.file || delFile.file === "") {
-          delPath = "./public/" + delFile.file.split("/").slice(1).join("/");
+          if (delFile.file || delFile.file === "") {
+            delPath = "./public/files" + delFile.file;
+          }
         }
-      }
 
-      try {
-        await fs.rm(delPath);
-      } catch (error) {}
+        try {
+          await fs.rm(delPath);
+        } catch (error) {}
+      }
 
       const result = await job.update(
         {

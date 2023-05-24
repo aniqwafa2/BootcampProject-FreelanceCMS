@@ -3,7 +3,7 @@ import { readJobDetail } from "../../axios/job";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
-import JobDetail from "./DetailPages/JobDetail";
+import { JobDetail, MessageDetail } from "./DetailPages";
 
 const DetailPage = () => {
   const [title, setTitle] = useState();
@@ -17,13 +17,15 @@ const DetailPage = () => {
     switch (location.state.prevPath) {
       case "/dashboard/jobs":
         readJobDetail(id, (result) => {
-          setTitle("Job");
+          setTitle("Job Detail");
           setDetailPage(<JobDetail data={result}></JobDetail>);
         });
         break;
 
       // TODO: nerusin buat detail lainnya
-      case "/dashboard/applicants":
+      case "/dashboard/messages":
+        setTitle("Message Conversation");
+        setDetailPage(<MessageDetail data={id}></MessageDetail>);
         break;
 
       case "/dashboard/users":
@@ -39,13 +41,14 @@ const DetailPage = () => {
       const id = location.state.id;
       itemDetailHandler(id);
     } catch (error) {
+      console.log(error);
       navigate("/");
     }
   }, []);
 
   return (
     <>
-      {detailPage ? (
+      {detailPage && (
         <div className="container">
           <div className="row">
             {/* content */}
@@ -65,7 +68,7 @@ const DetailPage = () => {
                     </h5>
                   </div>
                   <div className="col">
-                    <h5 className="fw-boldlh-lg">{title} Detail</h5>
+                    <h5 className="fw-bold lh-lg">{title}</h5>
                   </div>
                 </div>
                 {detailPage}
@@ -73,8 +76,6 @@ const DetailPage = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <></>
       )}
     </>
   );

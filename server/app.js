@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const routes = require("./routes");
+const getStorage = require("./routes/storage");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -16,13 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 // routes
-app.get("/api", (req, res) => {
-  res.json(
-    `welcome to CMS API, go to ${req.headers.host}/api/docs to open documentation`
-  );
-});
-
+// app.use(express.static("dashboard"));
 app.use(express.static("public"));
+app.use(getStorage);
 app.use("/api", routes);
 
 // NOTE: custom msg route notfound,

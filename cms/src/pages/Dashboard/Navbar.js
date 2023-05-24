@@ -53,6 +53,11 @@ const Navbar = () => {
                     <BsFolderCheck className="fs-5 me-2" /> Applicants Lists
                   </Link>
                 </li>
+                {/* <li>
+                  <Link to="/post" activeClassName="active">
+                    <FiSettings className="fs-5 me-2"></FiSettings> Settings
+                  </Link>
+                </li> */}
               </ul>
             </nav>
           </div>

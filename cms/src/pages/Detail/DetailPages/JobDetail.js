@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { dateFormat, priceFormat } from "../../../helpers";
+import { useLocation, useNavigate } from "react-router-dom";
+import { fileUrl } from "../../../config/config";
+import { dateFormat, priceFormat, getIdFromToken } from "../../../helpers";
 import {
   acceptApplicant,
   readApplicantByJob,
   readApplicantDetail,
 } from "../../../axios/applicant";
+import { postMessage } from "../../../axios/message";
 
 const JobDetail = (props) => {
   const [applicantList, setApplicantList] = useState([]);
   const [acceptedApply, setAcceptedApply] = useState();
+  const [messageBody, setMessageBody] = useState();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const appplicantHandler = () => {
     if (props.data.status) {
@@ -23,8 +30,26 @@ const JobDetail = (props) => {
   };
 
   const acceptHandler = (jobId, userId) => {
-    acceptApplicant(jobId, userId, (result) => {
-      window.location.reload();
+    acceptApplicant(jobId, userId);
+  };
+
+  const sendMessageHandler = (senderId, recipientId) => {
+    const data = {
+      senderId,
+      recipientId,
+      messageContent: messageBody.messageContent,
+    };
+
+    postMessage(data, (result) => {
+      if (result) {
+        window.location.replace("/dashboard/messages");
+        // navigate("/dashboard", {
+        //   state: {
+        //     prevPath: location.pathname,
+        //     id: result.data.messageContactId,
+        //   },
+        // });
+      }
     });
   };
 
@@ -32,15 +57,15 @@ const JobDetail = (props) => {
     appplicantHandler();
   }, []);
 
-  console.log(acceptedApply);
+  // console.log(acceptedApply);
 
   return (
     <div className="row">
       <div className="col-md-5">
         <div className="p-3 my-3 rounded-4 bg-white">
-          <h5 className="card-subtitle mb-2 text-body-secondary fw-bold">
+          <h4 className="card-subtitle mb-2 text-body-secondary fw-bold">
             {props.data.name}
-          </h5>
+          </h4>
           <small className="card-text text-secondary fs-6">
             Posted in {dateFormat(props.data.createdAt)}
           </small>
@@ -68,24 +93,21 @@ const JobDetail = (props) => {
             {props.data.description}
           </p>
 
-          {props.data.file ? (
+          {props.data.file && (
             <div className="row row-cols-auto small fw-bold">
               <div className="card-text text-secondary fs-6">
                 Example/Support File:
               </div>
               <a
                 className="btn btn-sm rounded-4 fw-bold bg-light text-secondary"
-                href={props.data.file}
+                href={`${fileUrl}/${props.data.file}`}
                 target="_blank"
                 rel="noreferrer noopener"
                 download
-                // download={props.data.file.split("/")[3]}
               >
                 Download
               </a>
             </div>
-          ) : (
-            <></>
           )}
 
           <div className="row row-cols-auto small fw-bold text-secondary">
@@ -99,10 +121,21 @@ const JobDetail = (props) => {
       <div className="col-md-7">
         <div className="p-3 my-3 rounded-4 bg-white">
           {props.data.status ? (
-            acceptedApply ? (
-              <div>
-                <div className="row justify-content-between m-2 lh-lg mb-3">
-                  <h4 className="fw-bold"> Accepted applicant of this job</h4>
+            acceptedApply && (
+              <div className="m-2">
+                <div className="row justify-content-between lh-lg mb-3">
+                  <div className="col-md-auto">
+                    <h4 className="fw-bold">Accepted applicant of this job</h4>
+                  </div>
+                  <div className="col-md-auto">
+                    <button
+                      className="btn btn-sm text-bg-secondary rounded-4 fw-bold"
+                      data-bs-toggle="modal"
+                      data-bs-target="#chatMessageModal"
+                    >
+                      Message this Applicant
+                    </button>
+                  </div>
                 </div>
                 <h5 className="card-subtitle mb-2 text-body-secondary fw-bold">
                   Name: {acceptedApply.user.name}
@@ -114,9 +147,78 @@ const JobDetail = (props) => {
                 <p className="card-text text-container text-secondary lh-sm mt-2 display-endline">
                   Skill: {acceptedApply.user.userProfile.skill}
                 </p>
+
+                <div
+                  className="modal fade"
+                  id="chatMessageModal"
+                  tabIndex="-1"
+                  data-bs-backdrop="static"
+                  aria-labelledby="MessageModal"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          sendMessageHandler(
+                            getIdFromToken(),
+                            acceptedApply.user.id
+                          );
+                        }}
+                      >
+                        <div className="modal-header">
+                          <h1 className="modal-title fs-5" id="MessageModal">
+                            Send message to: {acceptedApply.user.name}
+                          </h1>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            onClick={() => setMessageBody()}
+                          ></button>
+                        </div>
+                        <div className="modal-body">
+                          <textarea
+                            type="text"
+                            className="form-control"
+                            placeholder="Type your message body"
+                            rows="3"
+                            maxLength="500"
+                            value={
+                              messageBody ? messageBody.messageContent : ""
+                            }
+                            onChange={(e) =>
+                              setMessageBody({
+                                ...messageBody,
+                                messageContent: e.target.value,
+                              })
+                            }
+                            required
+                          />
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="submit"
+                            className="btn btn-sm rounded-4 fw-bold btn-success"
+                          >
+                            Send
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-sm rounded-4 fw-bold btn-danger"
+                            data-bs-dismiss="modal"
+                            onClick={() => setMessageBody()}
+                          >
+                            Close/Cancel
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ) : (
-              <></>
             )
           ) : applicantList.length > 0 ? (
             <div>
@@ -124,7 +226,7 @@ const JobDetail = (props) => {
                 <h4 className="fw-bold"> Applicant list of this job</h4>
               </div>
               <div className="m-2">
-                <table className="table">
+                <table className="table text-center">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -134,7 +236,7 @@ const JobDetail = (props) => {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="align-middle">
                     {applicantList.map((item, id) => {
                       return (
                         // TODO: ndaktau ini keynya oke engga
@@ -144,21 +246,14 @@ const JobDetail = (props) => {
                           <td>{item.user.email}</td>
                           <td>{item.user.userProfile.skill}</td>
                           <td>
-                            <div className="d-inline p-1">
-                              <button
-                                className="text-bg-success text-white py-1 rounded-4 px-3 fw-bold btn btn-sm"
-                                onClick={() =>
-                                  acceptHandler(item.jobId, item.userId)
-                                }
-                              >
-                                Accept
-                              </button>
-                            </div>
-                            <div className="d-inline y1">
-                              <button className="text-bg-danger text-white py-1 rounded-4 px-3 fw-bold btn btn-sm">
-                                Delete
-                              </button>
-                            </div>
+                            <button
+                              className="text-bg-success text-white py-1 rounded-4 px-3 fw-bold btn btn-sm"
+                              onClick={() =>
+                                acceptHandler(item.jobId, item.userId)
+                              }
+                            >
+                              Accept
+                            </button>
                           </td>
                         </tr>
                       );
