@@ -57,8 +57,7 @@ const Home = () => {
     let lastScrollTop = 0;
 
     const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop) {
         sidebar.classList.add("sidebar-hide");
       } else {
@@ -83,59 +82,37 @@ const Home = () => {
             <Link className="navbar-brand" to="#">
               <span className="fs-4 fw-bold">GigGenie</span>
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav ms-5 ">
                 <li className="nav-item ">
-                  <Link
-                    className="nav-link active navigation"
-                    aria-current="page"
-                    to="#"
-                  >
+                  <Link className="nav-link active navigation" aria-current="page" to="#">
                     Find Projects
                   </Link>
                 </li>
-                
               </ul>
               <ul className="navbar-nav ms-auto">
                 {loginStatus ? (
                   <>
                     <li className="nav-item dropdown">
-                      <Link
-                        className="nav-link dropdown-toggle fw-bold active"
-                        to="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                      <Link className="nav-link dropdown-toggle fw-bold active" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         JohnDoe
                       </Link>
                       <ul className="dropdown-menu">
                         <li>
-                          <Link className="dropdown-item" to="#">
-                            My Profile
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="dropdown-item" to="/dashboard-user">
-                            Setting
+                          <Link className="dropdown-item" to="/dashboard">
+                            Dashboard
                           </Link>
                         </li>
                         <hr />
                         <li>
                           <button
                             className="dropdown-item fw-bold"
-                            onClick={logoutHandler}
+                            onClick={() => {
+                              logoutHandler();
+                            }}
                           >
                             Sign out
                           </button>
@@ -163,10 +140,7 @@ const Home = () => {
                 </div>
 
                 <li className="nav-item ">
-                  <Link
-                    className="btn btn-sm btn-custom mt-1 text-white fw-bold"
-                    to="/dashboard"
-                  >
+                  <Link className="btn btn-sm btn-custom mt-1 text-white fw-bold" to="/post">
                     Employers / Post Job
                   </Link>
                 </li>
@@ -181,10 +155,7 @@ const Home = () => {
         <div className="container text-center">
           <div className="row mt-5">
             <div className="col-5">
-              <select
-                className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary"
-                aria-label=".form-select-lg example"
-              >
+              <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
                 <option selected>job title, keyword or company</option>
                 <option data-icon="bi bi-heart">Option 2</option>
                 <option value="1">One</option>
@@ -193,10 +164,7 @@ const Home = () => {
               </select>
             </div>
             <div className="col-5">
-              <select
-                className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary"
-                aria-label=".form-select-lg example"
-              >
+              <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
                 <option selected data-icon="bi bi-funnel">
                   All location
                 </option>
@@ -206,10 +174,7 @@ const Home = () => {
               </select>
             </div>
             <div className="col-2">
-              <button
-                type="button"
-                className="border border-0 btn btn-lg btn-custom w-100 text-white fs-5 lh-base"
-              >
+              <button type="button" className="border border-0 btn btn-lg btn-custom w-100 text-white fs-5 lh-base">
                 <BsSearch className="me-2"></BsSearch>Search
               </button>
             </div>
@@ -228,53 +193,22 @@ const Home = () => {
             {jobsList &&
               jobsList.map((item) => {
                 return (
-                  <div
-                    className="card border border-0 rounded-4 card-style mb-3"
-                    key={item.id}
-                    onClick={() => jobSelectHandler(item.id)}
-                  >
+                  <div className="card border border-0 rounded-4 mb-3" key={item.id} onClick={() => jobSelectHandler(item.id)}>
                     <div className="card-body">
-                      <h5 className="card-subtitle mb-2 text-body-secondary fw-bold">
-                        {item.name}
-                      </h5>
-                      <small className="card-text text-secondary fs-6">
-                        Posted in {dateFormat(item.createdAt)}
-                      </small>
+                      <h5 className="card-subtitle text-body-secondary fw-bold ps-1 pt-1">{item.name}</h5>
+                      <div className="card-text text-secondary small ps-1">Posted in {dateFormat(item.createdAt)}</div>
 
-                      <div className="text-center mt-2 lh-sm">
-                        <div className="row row-cols-lg-3 g-lg-3">
-                          {/* <div className="row row-cols-6 row-cols-lg-2 g-3 g-lg-3"> */}
-                          <div className="col me-2">
-                            <div className="py-2 border border-2 rounded-4 fw-bold">
-                              Rp. {priceFormat(item.price)} <br />
-                              <span className="text-secondary fs-6 mono">
-                                Salary
-                              </span>
-                            </div>
-                          </div>
-                          <div className="col me-2">
-                            {/* <div className="col md"> */}
-                            <div className="py-2 border border-2 rounded-4 fw-bold">
-                              {dateFormat(item.dueDate)} <br />
-                              <span className="text-secondary fs-6 mono">
-                                Last Apply Date
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+                      <div className="p-1 py-3">
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">Rp. {priceFormat(item.price)}</div>
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-bold small border text-secondary">{dateFormat(item.dueDate)} last update</div>
                       </div>
 
-                      <p className="card-text text-container text-secondary lh-sm mt-2 display-endline">
-                        {item.description}
-                      </p>
+                      <div className="card-text text-container text-secondary lh-sm p-1 display-endline">{item.description}</div>
 
-                      <div className="row row-cols-auto small fw-bold text-secondary">
-                        <div className="card-text text-secondary fs-6">
-                          Category:
-                        </div>
-                        <div className="col lh-sm m-1 ms-2 rounded-4 bg-light">
-                          {item.category.name}
-                        </div>
+                      <hr />
+
+                      <div className="p-1">
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">{item.category.name}</div>
                       </div>
                     </div>
                   </div>
@@ -314,42 +248,22 @@ const Home = () => {
           <div className="container col-7 sidebar sidebar-hide">
             {jobItemSelected ? (
               <>
-                <div
-                  className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show"
-                  role="alert"
-                >
+                <div className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show" role="alert">
                   <div className="card-body">
-                    <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">
-                      {jobItemSelected.name}
-                    </h2>
+                    <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">{jobItemSelected.name}</h2>
+
                     <Link to="https:client_app_link">
-                      <button
-                        type="submit"
-                        className="btn btn-md btn-custom text-white fw-bold"
-                      >
+                      <button type="submit" className="btn btn-md btn-custom text-white fw-bold">
                         Apply Now
                       </button>
                     </Link>
                   </div>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                  ></button>
+                  {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
                 </div>
-                <div
-                  data-bs-spy="scroll"
-                  data-bs-target="#navbar-example3"
-                  data-bs-smooth-scroll="true"
-                  className="scrollable-content border border-2 px-4 py-4 rounded-2"
-                  tabIndex="0"
-                >
+                <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" className="scrollable-content border border-2 px-4 py-4 rounded-3 bg-white" tabIndex="0">
                   <div id="item-1">
                     <h5 className="fw-bold">Job Descriptions</h5>
-                    <p className="text-secondary lh-sm display-endline">
-                      {jobItemSelected.description}
-                    </p>
+                    <p className="text-secondary lh-sm display-endline">{jobItemSelected.description}</p>
                   </div>
                 </div>
               </>
@@ -373,11 +287,7 @@ const Home = () => {
                 <div className="d-inline p-2">
                   <Link to="https://www.code.id/">
                     <i>Powered by</i>
-                    <img
-                      src="https://static.wixstatic.com/media/ab2f5c_4090dbbaeafb4b0d975bd44c6cd498f6~mv2_d_5000_3314_s_4_2.png/v1/fill/w_262,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/code-colored.png"
-                      className="img-footer"
-                      alt=""
-                    />
+                    <img src="https://static.wixstatic.com/media/ab2f5c_4090dbbaeafb4b0d975bd44c6cd498f6~mv2_d_5000_3314_s_4_2.png/v1/fill/w_262,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/code-colored.png" className="img-footer" alt="" />
                   </Link>
                 </div>
               </div>
