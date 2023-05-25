@@ -181,7 +181,7 @@ const JobEdit = (props) => {
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    value={form ? form.price : ""}
+                    value={form ? form.categoryId : ""}
                     onChange={(e) =>
                       setForm({ ...form, categoryId: e.target.value })
                     }
