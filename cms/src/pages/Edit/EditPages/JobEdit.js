@@ -26,8 +26,6 @@ const JobEdit = (props) => {
       formData.append("file", formFile);
     }
 
-    console.log(formData);
-
     updateJob(props.data.id, formData, (result) => {
       if (result) {
         window.location.replace("/dashboard/jobs");

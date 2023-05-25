@@ -9,6 +9,7 @@ import {
   PostJob,
   DetailPage,
   EditPage,
+  CreatePage,
 } from "../pages";
 import { isTokenExpired, getToken } from "../helpers";
 
@@ -17,12 +18,6 @@ const Content = () => {
   const [loadingStatus, setLoadingStatus] = useState(true);
 
   const loginHandler = () => {
-    // const token = getToken()
-    // if (token) {
-    //   setLoginStatus(true);
-    // } else {
-    //   setLoginStatus(false);
-    // }
     if (!getToken()) {
       return setLoginStatus(false);
     }
@@ -68,6 +63,7 @@ const Content = () => {
               </Route>
               <Route path="/dashboard/detail" element={<DetailPage />}></Route>
               <Route path="/dashboard/edit" element={<EditPage />}></Route>
+              <Route path="/dashboard/create" element={<CreatePage />}></Route>
               <Route path="/post" element={<YourPost></YourPost>}></Route>
               <Route path="/post-job" element={<PostJob></PostJob>}></Route>
               <Route path="*" element={<Navigate replace to="/login" />} />
