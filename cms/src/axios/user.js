@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import getToken, { apiUrl } from "../config/config";
+import { apiUrl } from "../config/config";
+import { getToken } from "../helpers";
 
 const url = `${apiUrl}/users`;
 
@@ -18,7 +19,7 @@ const readUser = async (cb) => {
 const readUserDetail = async (id, cb) => {
   try {
     const result = await axios.get(`${url}/${id}`, {
-      headers: { Authorization: getToken.toString() },
+      headers: { Authorization: getToken() },
     });
 
     console.log(result);
@@ -54,7 +55,7 @@ const deleteUser = async (id) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.delete(`${url}/${id}`, {
-          headers: { Authorization: getToken.toString() },
+          headers: { Authorization: getToken() },
         });
 
         Swal.fire("Deleted!", "User has been deleted.", "success").then(() => {
@@ -71,7 +72,7 @@ const deleteUser = async (id) => {
 const updateUser = async (id, data, cb) => {
   try {
     const result = await axios.putForm(`${url}/${id}`, data, {
-      headers: { Authorization: getToken.toString() },
+      headers: { Authorization: getToken() },
     });
 
     console.log(result);

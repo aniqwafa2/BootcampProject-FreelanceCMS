@@ -87,28 +87,53 @@ const JobList = () => {
                                 )}
                               </td>
                               <td>
-                                <div className="row justify-content-center lh-lg">
-                                  <div className="col-md-auto">
-                                    <button
-                                      className="text-bg-danger text-white p-1 rounded-4 px-3 fw-bold btn btn-sm"
-                                      onClick={() => deleteHandler(item.id)}
-                                    >
-                                      Delete
-                                    </button>
-                                  </div>
-                                  <div className="col-md-auto">
-                                    <Link
-                                      to={`/dashboard/detail`}
-                                      state={{
-                                        prevPath: location.pathname,
-                                        id: item.id,
-                                      }}
-                                      className="text-bg-primary text-white p-1 rounded-4 px-3 fw-bold btn btn-sm"
-                                      style={{ fontSize: "smaller" }}
-                                    >
-                                      Detail
-                                    </Link>
-                                  </div>
+                                <div class="dropdown">
+                                  <button
+                                    class="text-bg-primary text-white p-1 rounded-4 px-3 fw-bold btn btn-sm dropdown-toggle"
+                                    type="button"
+                                    id="detailDropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                  >
+                                    More
+                                  </button>
+                                  <ul
+                                    class="dropdown-menu"
+                                    aria-labelledby="detailDropdown"
+                                  >
+                                    <li>
+                                      <Link
+                                        to={`/dashboard/detail`}
+                                        state={{
+                                          prevPath: location.pathname,
+                                          id: item.id,
+                                        }}
+                                        className="dropdown-item"
+                                      >
+                                        Open Detail
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <Link
+                                        to={`/dashboard/edit`}
+                                        state={{
+                                          prevPath: location.pathname,
+                                          id: item.id,
+                                        }}
+                                        className="dropdown-item"
+                                      >
+                                        Edit this Job
+                                      </Link>
+                                    </li>
+                                    <li>
+                                      <button
+                                        className="dropdown-item"
+                                        onClick={() => deleteHandler(item.id)}
+                                      >
+                                        Delete this Job
+                                      </button>
+                                    </li>
+                                  </ul>
                                 </div>
                               </td>
                             </tr>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import getToken, { apiUrl } from "../config/config";
+import { apiUrl } from "../config/config";
+import { getToken } from "../helpers";
 
 const url = `${apiUrl}/categories`;
 
@@ -8,7 +9,7 @@ const readCategory = async (cb) => {
   try {
     const result = await axios.get(url);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
@@ -29,7 +30,7 @@ const readCategoryDetail = async (id, cb) => {
 const createCategory = async (data, cb) => {
   try {
     await axios.post(url, data, {
-      headers: { Authorization: getToken.toString() },
+      headers: { Authorization: getToken() },
     });
 
     Swal.fire("Success", "Category has been added", "success").then(() => {
@@ -54,7 +55,7 @@ const deleteCategory = async (id) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.delete(`${url}/${id}`, {
-          headers: { Authorization: getToken.toString() },
+          headers: { Authorization: getToken() },
         });
 
         Swal.fire("Deleted!", "Category has been deleted.", "success").then(
@@ -73,12 +74,19 @@ const deleteCategory = async (id) => {
 const updateCategory = async (id, data, cb) => {
   try {
     const result = await axios.putForm(`${url}/${id}`, data, {
-      headers: { Authorization: getToken.toString() },
+      headers: { Authorization: getToken() },
     });
 
-    console.log(result);
-    cb(result);
-    Swal.fire("Success", "Succesfully updated the category", "success");
+    // console.log(result);
+    if (result) {
+      Swal.fire("Success", "Succesfully updated the category", "success").then(
+        () => {
+          cb(true);
+        }
+      );
+    } else {
+      throw Error;
+    }
   } catch (error) {
     console.log(error);
     Swal.fire("Failed", "Failed to update category", "error");

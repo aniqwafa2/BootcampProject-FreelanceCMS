@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import getToken, { apiUrl } from "../config/config";
+import { apiUrl } from "../config/config";
+import { getToken } from "../helpers";
 
 const url = `${apiUrl}/applicants`;
 
@@ -50,7 +51,7 @@ const deleteApplicantbyUserId = async (id) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.delete(`${url}/${id}`, {
-          headers: { Authorization: getToken.toString() },
+          headers: { Authorization: getToken() },
         });
 
         Swal.fire(
