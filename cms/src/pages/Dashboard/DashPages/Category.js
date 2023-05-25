@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { readCategory, deleteCategory } from "../../../axios/category";
+import { useNavigate } from "react-router-dom";
+import LoadData from "../../../helpers/LoadData";
 
 const Category = () => {
+  const [categories, setCategoreis] = useState([]);
+
+  useEffect(() => {
+    readCategory((result) => setCategoreis(result));
+  }, []);
+
+  const navigation = useNavigate();
+  const deleteHandler = (id) => {
+    deleteCategory(id);
+    navigation("/category");
+  };
   return (
     <>
       <div className="container">
@@ -34,19 +48,30 @@ const Category = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td className="fw-bold">Designer</td>
-                        {/* <td>Otto</td> */}
-                        <td>
-                          <div class="d-inline p-1">
-                            <small className="text-bg-success text-white p-1 rounded-4 px-3 fw-bold lh-lg">Edit</small>
-                          </div>
-                          <div class="d-inline p-1">
-                            <small className="text-bg-danger text-white p-1 rounded-4 px-3 fw-bold lh-lg">Delete</small>
-                          </div>
-                        </td>
-                      </tr>
+                      {categories.length > 0 ? (
+                        categories.map((Category, index) => {
+                          const { id, name } = Category;
+                          return (
+                            <tr>
+                              <th key={id} scope="row">
+                                {index + 1}
+                              </th>
+                              <td className="fw-bold">{name}</td>
+
+                              <td>
+                                <div class="d-inline p-1">
+                                  <small className="text-bg-success text-white p-1 rounded-4 px-3 fw-bold lh-lg">Edit</small>
+                                </div>
+                                <div class="d-inline p-1">
+                                  <small className="text-bg-danger text-white p-1 rounded-4 px-3 fw-bold lh-lg">Delete</small>
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <LoadData></LoadData>
+                      )}
                     </tbody>
                   </table>
                 </div>
