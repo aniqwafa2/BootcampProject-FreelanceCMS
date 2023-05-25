@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom";
 import {
   DashboardHome,
   JobList,
-  ApplicantList, Category, CreateCategory,
+  Category,
+  CreateCategory,
   MessageList,
 } from "./DashPages";
 
@@ -23,10 +24,6 @@ const Dashboard = () => {
 
       case "/dashboard/jobs":
         return <JobList></JobList>;
-
-      // TODO: nerusin buat dashboardmenu lainnya
-      case "/dashboard/applicants":
-        return <ApplicantList></ApplicantList>;
 
       case "/dashboard/messages":
         return <MessageList></MessageList>;

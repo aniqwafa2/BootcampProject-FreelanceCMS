@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { FiMapPin } from "react-icons/fi";
 import { readJob, readJobDetail } from "../axios/job";
-import { dateFormat, priceFormat } from "../helpers";
+import { dateFormat, isTokenExpired, priceFormat, getToken } from "../helpers";
 
 const Home = () => {
   const [loginStatus, setLoginStatus] = useState();
@@ -21,16 +21,29 @@ const Home = () => {
     window.location.reload();
   };
 
+  const loginHandler = () => {
+    // if (localStorage.getItem("access_token")) {
+    //   setLoginStatus(true);
+    // } else {
+    //   setLoginStatus(false);
+    // }
+    if (!getToken()) {
+      return setLoginStatus(false);
+    }
+    if (isTokenExpired()) {
+      localStorage.removeItem("access_token");
+      return setLoginStatus(false);
+    }
+
+    setLoginStatus(true);
+  };
+
   const jobSelectHandler = async (id) => {
     await readJobDetail(id, (result) => setJobItemSelected(result));
   };
 
   useEffect(() => {
-    if (localStorage.getItem("access_token")) {
-      setLoginStatus(true);
-    } else {
-      setLoginStatus(false);
-    }
+    loginHandler();
 
     readJob((result) => {
       setJobsList(result.data);

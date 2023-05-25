@@ -1,8 +1,13 @@
-import getToken from "../config/config";
-
 const dateFormat = (date) => {
   try {
     date = new Date(date).toDateString();
+    return date;
+  } catch (error) {}
+};
+
+const dateFormatforInput = (date) => {
+  try {
+    date = new Date(date).toISOString().split("T")[0];
     return date;
   } catch (error) {}
 };
@@ -23,9 +28,31 @@ const priceFormat = (price) => {
   } catch (error) {}
 };
 
+const getToken = () => {
+  return localStorage.getItem("access_token");
+};
+
 const getIdFromToken = () => {
   const tokenID = JSON.parse(atob(getToken().split(" ")[1].split(".")[1]));
   return Number(tokenID.id);
 };
 
-export { dateFormat, priceFormat, getIdFromToken, dateFormatWithHour };
+const isTokenExpired = () => {
+  try {
+    const TokenExp = JSON.parse(atob(getToken().split(" ")[1].split(".")[1]));
+    const dateNow = Math.floor(Date.now() / 1000);
+    return TokenExp.exp < dateNow;
+  } catch (error) {
+    return null;
+  }
+};
+
+export {
+  dateFormat,
+  priceFormat,
+  getIdFromToken,
+  dateFormatWithHour,
+  dateFormatforInput,
+  isTokenExpired,
+  getToken,
+};

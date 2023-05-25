@@ -48,11 +48,11 @@ const Navbar = () => {
                     <BsFolder2Open className="fs-5 me-2" /> Jobs Lists
                   </Link>
                 </li>
-                <li className={location.pathname === "/dashboard/applicants" ? "active" : ""}>
+                {/* <li className={location.pathname === "/dashboard/applicants" ? "active" : ""}>
                   <Link to="/dashboard/applicants">
                     <BsFolderCheck className="fs-5 me-2" /> Applicants Lists
                   </Link>
-                </li>
+                </li> */}
                 <li
                   className={
                     location.pathname === "/dashboard/messages" ? "active" : ""

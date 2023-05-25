@@ -193,13 +193,14 @@ class UserController {
     try {
       if (process.env.NODE_ENV === "production") {
         let { key } = req.file;
-        file = key;
+        image = key;
       } else {
         let { filename } = req.file;
-        file = filename;
+        image = filename;
       }
     } catch (error) {
-      console.error(error);
+      const find = await job.findByPk(id);
+      image = find.image;
     }
 
     try {
