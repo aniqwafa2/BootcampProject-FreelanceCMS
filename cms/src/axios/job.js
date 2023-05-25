@@ -29,7 +29,7 @@ const readJobDetail = async (id, cb) => {
 
 const createJob = async (data, cb) => {
   try {
-    await axios.post(url, data, {
+    await axios.postForm(url, data, {
       headers: { Authorization: getToken() },
     });
 

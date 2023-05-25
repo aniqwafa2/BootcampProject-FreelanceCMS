@@ -49,8 +49,14 @@ const MessageList = () => {
             <div className="p-3 my-3 rounded-4 bg-white">
               <div className="row justify-content-end m-2 border-bottom lh-lg">
                 <div className="col-4 text-end">
-                  <Link to="" className="icon-link icon-link-hover">
-                    Create New Message <BsArrowRight></BsArrowRight>
+                  <Link
+                    to={`/dashboard/create`}
+                    state={{
+                      prevPath: location.pathname,
+                    }}
+                    className="icon-link icon-link-hover"
+                  >
+                    Create New Chat <BsArrowRight></BsArrowRight>
                   </Link>
                 </div>
               </div>
@@ -79,15 +85,15 @@ const MessageList = () => {
                                       className="img-fluid rounded-circle"
                                       alt=""
                                       width="50px"
-                                      src={`${imageUrl}/${
+                                      src={
                                         item.recipient.id !== getIdFromToken()
                                           ? item.recipient.userProfile.image
-                                            ? item.recipient.userProfile.image
+                                            ? `${imageUrl}/${item.recipient.userProfile.image}`
                                             : "https://via.placeholder.com/100"
                                           : item.sender.userProfile.image
-                                          ? item.sender.userProfile.image
+                                          ? `${imageUrl}/${item.sender.userProfile.image}`
                                           : "https://via.placeholder.com/100"
-                                      }`}
+                                      }
                                     ></img>
                                   </div>
                                   <div className="col-md-auto">

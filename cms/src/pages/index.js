@@ -9,6 +9,7 @@ import PostJob from "./Dashboard/PostJob";
 
 import DetailPage from "./Detail/DetailPage";
 import EditPage from "./Edit/EditPage";
+import CreatePage from "./Create/CreatePage";
 
 // Employers
 
@@ -21,4 +22,5 @@ export {
   PostJob,
   DetailPage,
   EditPage,
+  CreatePage,
 };

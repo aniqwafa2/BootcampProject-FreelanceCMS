@@ -32,15 +32,10 @@ const JobList = () => {
               <h5 className="fw-bold border-bottom lh-lg">Job Listings</h5>
             </div>
             <div className="p-3 my-3 rounded-4 bg-white">
-              <div className="row justify-content-between m-2 border-bottom lh-lg">
-                <div className="col-4">
-                  <Link to="" className="icon-link">
-                    Your Postings
-                  </Link>
-                </div>
+              <div className="row justify-content-end m-2 border-bottom lh-lg">
                 <div className="col-4 text-end">
-                  <Link to="" className="icon-link icon-link-hover">
-                    All Job Postings <BsArrowRight></BsArrowRight>
+                  <Link to={`/post`} className="icon-link icon-link-hover">
+                    Create New Job <BsArrowRight></BsArrowRight>
                   </Link>
                 </div>
               </div>

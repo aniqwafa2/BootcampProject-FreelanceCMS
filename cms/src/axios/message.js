@@ -8,7 +8,7 @@ const readMessage = async (id, cb) => {
   try {
     const result = await axios.get(`${url}/${id}`);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
