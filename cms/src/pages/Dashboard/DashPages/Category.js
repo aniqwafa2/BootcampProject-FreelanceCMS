@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { readCategory, deleteCategory } from "../../../axios/category";
 import { useNavigate } from "react-router-dom";
 import LoadData from "../../../helpers/LoadData";
 
 const Category = () => {
-  const [categories, setCategoreis] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    readCategory((result) => setCategoreis(result));
-  }, []);
+  const location = useLocation();
 
-  const navigation = useNavigate();
   const deleteHandler = (id) => {
     deleteCategory(id);
-    navigation("/category");
   };
+
+  useEffect(() => {
+    readCategory((result) => {
+      setCategories(result.data);
+    });
+  }, []);
+
   return (
     <>
       <div className="container">
@@ -48,30 +51,34 @@ const Category = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {categories.length > 0 ? (
-                        categories.map((Category, index) => {
-                          const { id, name } = Category;
-                          return (
-                            <tr>
-                              <th key={id} scope="row">
-                                {index + 1}
-                              </th>
-                              <td className="fw-bold">{name}</td>
+                      {categories.map((item, id) => {
+                        return (
+                          <tr key={item.id}>
+                            <th scope="row">{id + 1}</th>
+                            <td className="fw-bold">{item.name}</td>
 
-                              <td>
-                                <div class="d-inline p-1">
-                                  <small className="text-bg-success text-white p-1 rounded-4 px-3 fw-bold lh-lg">Edit</small>
-                                </div>
-                                <div class="d-inline p-1">
-                                  <small className="text-bg-danger text-white p-1 rounded-4 px-3 fw-bold lh-lg">Delete</small>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <LoadData></LoadData>
-                      )}
+                            <td>
+                              <div class="d-inline p-1">
+                                <Link
+                                  to={`/dashboard/edit`}
+                                  state={{
+                                    prevPath: location.pathname,
+                                    id: item.id,
+                                  }}
+                                  className="btn btn-sm btn-warning rounded-4"
+                                >
+                                  Edit
+                                </Link>
+                              </div>
+                              <div class="d-inline p-1">
+                                <button className="btn btn-sm btn-danger rounded-4" onClick={() => deleteHandler(item.id)}>
+                                  Delete
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
