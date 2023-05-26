@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { readCategory, deleteCategory } from "../../../axios/category";
-import { useNavigate } from "react-router-dom";
-import LoadData from "../../../helpers/LoadData";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -10,7 +8,11 @@ const Category = () => {
   const location = useLocation();
 
   const deleteHandler = (id) => {
-    deleteCategory(id);
+    deleteCategory(id, (result) => {
+      if (result) {
+        window.location.reload();
+      }
+    });
   };
 
   useEffect(() => {

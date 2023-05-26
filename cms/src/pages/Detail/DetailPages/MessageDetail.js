@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { getIdFromToken, dateFormatWithHour } from "../../../helpers";
 import { postMessage, readMessageDetail } from "../../../axios/message";
 
@@ -7,7 +7,7 @@ const MessageDetail = (props) => {
   const [contactDetail, setContactDetail] = useState({});
   const [messageBody, setMessageBody] = useState();
 
-  const contentHandler = () => {
+  const contentHandler = useCallback(() => {
     readMessageDetail(props.data, (result) => {
       if (result.contactId.recipientId !== getIdFromToken()) {
         setContactDetail(result.contactId.recipient);
@@ -16,7 +16,7 @@ const MessageDetail = (props) => {
       }
       setMessageList(result.data);
     });
-  };
+  }, [props]);
 
   const sendMessageHandler = (senderId, recipientId) => {
     const data = {
@@ -41,7 +41,7 @@ const MessageDetail = (props) => {
 
   useEffect(() => {
     contentHandler();
-  }, []);
+  }, [contentHandler]);
 
   // console.log(messageBody);
 

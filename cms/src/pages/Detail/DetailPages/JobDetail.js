@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useCallback, useEffect, useState } from "react";
 import { fileUrl } from "../../../config/config";
 import { dateFormat, priceFormat, getIdFromToken } from "../../../helpers";
 import {
@@ -14,10 +13,7 @@ const JobDetail = (props) => {
   const [acceptedApply, setAcceptedApply] = useState();
   const [messageBody, setMessageBody] = useState();
 
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const appplicantHandler = () => {
+  const appplicantHandler = useCallback(() => {
     if (props.data.status) {
       readApplicantDetail(props.data.id, (result) => {
         setAcceptedApply(result);
@@ -27,10 +23,14 @@ const JobDetail = (props) => {
         setApplicantList(result.data);
       });
     }
-  };
+  }, [props]);
 
   const acceptHandler = (jobId, userId) => {
-    acceptApplicant(jobId, userId);
+    acceptApplicant(jobId, userId, (result) => {
+      if (result) {
+        window.location.reload();
+      }
+    });
   };
 
   const sendMessageHandler = (senderId, recipientId) => {
@@ -49,7 +49,7 @@ const JobDetail = (props) => {
 
   useEffect(() => {
     appplicantHandler();
-  }, []);
+  }, [appplicantHandler]);
 
   return (
     <div className="row">

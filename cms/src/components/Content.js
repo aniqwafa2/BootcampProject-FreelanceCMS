@@ -32,7 +32,7 @@ const Content = () => {
   useEffect(() => {
     loginHandler();
     setLoadingStatus(false);
-  });
+  }, []);
 
   if (loadingStatus) {
     return <div>{/* Loading ... */}</div>;

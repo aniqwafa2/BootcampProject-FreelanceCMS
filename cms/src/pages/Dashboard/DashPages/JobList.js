@@ -10,7 +10,11 @@ const JobList = () => {
   const location = useLocation();
 
   const deleteHandler = (id) => {
-    deleteJob(id);
+    deleteJob(id, (result) => {
+      if (result) {
+        window.location.reload();
+      }
+    });
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
@@ -11,7 +11,7 @@ const CreatePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const itemCreateHandler = (id) => {
+  const itemCreateHandler = useCallback(() => {
     switch (location.state.prevPath) {
       case "/dashboard/messages":
         setTitle(`Create new chat`);
@@ -24,7 +24,7 @@ const CreatePage = () => {
       default:
         break;
     }
-  };
+  }, [location]);
 
   useEffect(() => {
     try {
@@ -33,7 +33,7 @@ const CreatePage = () => {
       console.log(error);
       navigate("/");
     }
-  }, []);
+  }, [itemCreateHandler, location, navigate]);
 
   return (
     <>

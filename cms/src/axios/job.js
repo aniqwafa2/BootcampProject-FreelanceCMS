@@ -42,7 +42,7 @@ const createJob = async (data, cb) => {
   }
 };
 
-const deleteJob = async (id) => {
+const deleteJob = async (id, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -59,7 +59,7 @@ const deleteJob = async (id) => {
         });
 
         Swal.fire("Deleted!", "Job has been deleted.", "success").then(() => {
-          window.location.reload();
+          cb(true);
         });
       }
     });

@@ -5,7 +5,6 @@ import { readCategory } from "../../../axios/category";
 import { updateJob } from "../../../axios/job";
 
 const JobEdit = (props) => {
-  const [loading, setloading] = useState(false);
   const [categoryList, setCategoryList] = useState([]);
   const [form, setForm] = useState();
   const [formFile, setFormFile] = useState();
@@ -38,7 +37,7 @@ const JobEdit = (props) => {
     if (props.data) {
       setForm(props.data);
     }
-  }, []);
+  }, [props]);
 
   return (
     <div className="container px-5">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
@@ -13,36 +13,38 @@ const EditPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const itemEditHandler = (id) => {
-    switch (location.state.prevPath) {
-      case "/dashboard/jobs":
-        readJobDetail(id, (result) => {
-          setTitle(`Editing Job: ${result.name}`);
-          setEditPage(<JobEdit data={result}></JobEdit>);
-        });
-        break;
+  const itemEditHandler = useCallback(
+    (id) => {
+      switch (location.state.prevPath) {
+        case "/dashboard/jobs":
+          readJobDetail(id, (result) => {
+            setTitle(`Editing Job: ${result.name}`);
+            setEditPage(<JobEdit data={result}></JobEdit>);
+          });
+          break;
 
-      case "/dashboard/category":
-        readCategoryDetail(id, (result) => {
-          setTitle(`Editing Category: ${result.name}`);
-          setEditPage(<CategoryEdit data={result}></CategoryEdit>);
-        });
-        break;
+        case "/dashboard/category":
+          readCategoryDetail(id, (result) => {
+            setTitle(`Editing Category: ${result.name}`);
+            setEditPage(<CategoryEdit data={result}></CategoryEdit>);
+          });
+          break;
 
-      default:
-        break;
-    }
-  };
+        default:
+          break;
+      }
+    },
+    [location]
+  );
 
   useEffect(() => {
     try {
       const id = location.state.id;
       itemEditHandler(id);
     } catch (error) {
-      console.log(error);
       navigate("/");
     }
-  }, []);
+  }, [itemEditHandler, location, navigate]);
 
   return (
     <>

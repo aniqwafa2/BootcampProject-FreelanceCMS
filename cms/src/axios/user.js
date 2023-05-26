@@ -42,48 +42,6 @@ const createUser = async (data, cb) => {
   }
 };
 
-const deleteUser = async (id) => {
-  try {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        await axios.delete(`${url}/${id}`, {
-          headers: { Authorization: getToken() },
-        });
-
-        Swal.fire("Deleted!", "User has been deleted.", "success").then(() => {
-          window.location.reload();
-        });
-      }
-    });
-  } catch (error) {
-    console.log(error);
-    Swal.fire("Failed", "Failed to delete user", "error");
-  }
-};
-
-const updateUser = async (id, data, cb) => {
-  try {
-    const result = await axios.putForm(`${url}/${id}`, data, {
-      headers: { Authorization: getToken() },
-    });
-
-    console.log(result);
-    cb(result);
-    Swal.fire("Success", "Succesfully updated the user", "success");
-  } catch (error) {
-    console.log(error);
-    Swal.fire("Failed", "Failed to update user", "error");
-  }
-};
-
 const loginUser = async (data, cb) => {
   try {
     const result = await axios.post(`${url}/login`, data);
@@ -121,11 +79,4 @@ const loginUser = async (data, cb) => {
   }
 };
 
-export {
-  readUser,
-  readUserDetail,
-  createUser,
-  updateUser,
-  deleteUser,
-  loginUser,
-};
+export { readUser, readUserDetail, createUser, loginUser };

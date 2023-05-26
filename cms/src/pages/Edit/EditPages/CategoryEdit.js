@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { updateCategory } from "../../../axios/category";
 
 const CategoryEdit = (props) => {
-  const [loading, setloading] = useState(false);
   const [form, setForm] = useState();
 
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const CategoryEdit = (props) => {
     if (props.data) {
       setForm(props.data);
     }
-  }, []);
+  }, [props]);
 
   return (
     <div className="container px-5">

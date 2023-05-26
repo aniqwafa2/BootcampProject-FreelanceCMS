@@ -42,7 +42,7 @@ const createCategory = async (data, cb) => {
   }
 };
 
-const deleteCategory = async (id) => {
+const deleteCategory = async (id, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -60,7 +60,7 @@ const deleteCategory = async (id) => {
 
         Swal.fire("Deleted!", "Category has been deleted.", "success").then(
           () => {
-            window.location.reload();
+            cb(true);
           }
         );
       }
