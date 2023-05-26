@@ -35,7 +35,6 @@ const MessageCreate = () => {
         <div className="col-md">
           <div className="dashboard-content">
             <div className="p-3 my-3 rounded-4 bg-white">
-              {/* <form> */}
               <div className="row justify-content-between m-2  mb-3">
                 <div className="col-md">
                   <label

@@ -38,7 +38,7 @@ const readApplicantDetail = async (jobId, cb) => {
   }
 };
 
-const deleteApplicantbyUserId = async (id) => {
+const deleteApplicantbyUserId = async (id, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -59,7 +59,7 @@ const deleteApplicantbyUserId = async (id) => {
           "All request by this applicant has been deleted.",
           "success"
         ).then(() => {
-          window.location.reload();
+          cb(true);
         });
       }
     });
@@ -69,7 +69,7 @@ const deleteApplicantbyUserId = async (id) => {
   }
 };
 
-const acceptApplicant = async (jobId, userId) => {
+const acceptApplicant = async (jobId, userId, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -95,7 +95,7 @@ const acceptApplicant = async (jobId, userId) => {
           "Success",
           "Succesfully accepted the applicant",
           "success"
-        ).then(() => window.location.reload());
+        ).then(() => cb(true));
       }
     });
   } catch (error) {

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { readCategory, deleteCategory } from "../../../axios/category";
-import { useNavigate } from "react-router-dom";
-import LoadData from "../../../helpers/LoadData";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -10,7 +8,11 @@ const Category = () => {
   const location = useLocation();
 
   const deleteHandler = (id) => {
-    deleteCategory(id);
+    deleteCategory(id, (result) => {
+      if (result) {
+        window.location.reload();
+      }
+    });
   };
 
   useEffect(() => {
@@ -35,7 +37,10 @@ const Category = () => {
                     <h2 className="fw-bold"> Category Table</h2>
                   </div>
                   <div class="col-md-4 text-end">
-                    <Link to="/dashboard/createcategory" className="btn btn-default btn-primary fw-bold">
+                    <Link
+                      to="/dashboard/createcategory"
+                      className="btn btn-default btn-primary fw-bold"
+                    >
                       +Category
                     </Link>
                   </div>
@@ -46,7 +51,6 @@ const Category = () => {
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
-                        {/* <th scope="col">Sallary</th> */}
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -71,7 +75,10 @@ const Category = () => {
                                 </Link>
                               </div>
                               <div class="d-inline p-1">
-                                <button className="btn btn-sm btn-danger rounded-4" onClick={() => deleteHandler(item.id)}>
+                                <button
+                                  className="btn btn-sm btn-danger rounded-4"
+                                  onClick={() => deleteHandler(item.id)}
+                                >
                                   Delete
                                 </button>
                               </div>

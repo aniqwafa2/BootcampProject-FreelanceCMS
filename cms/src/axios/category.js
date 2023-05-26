@@ -20,7 +20,7 @@ const readCategoryDetail = async (id, cb) => {
   try {
     const result = await axios.get(`${url}/${id}`);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
@@ -42,7 +42,7 @@ const createCategory = async (data, cb) => {
   }
 };
 
-const deleteCategory = async (id) => {
+const deleteCategory = async (id, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -60,7 +60,7 @@ const deleteCategory = async (id) => {
 
         Swal.fire("Deleted!", "Category has been deleted.", "success").then(
           () => {
-            window.location.reload();
+            cb(true);
           }
         );
       }
@@ -73,7 +73,7 @@ const deleteCategory = async (id) => {
 
 const updateCategory = async (id, data, cb) => {
   try {
-    const result = await axios.putForm(`${url}/${id}`, data, {
+    const result = await axios.put(`${url}/${id}`, data, {
       headers: { Authorization: getToken() },
     });
 

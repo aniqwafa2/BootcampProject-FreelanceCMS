@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import { useLocation } from "react-router-dom";
 import {
@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   const location = useLocation();
 
-  const pageHandler = () => {
+  const pageHandler = useCallback(() => {
     switch (location.pathname) {
       case "/dashboard/category":
         return <Category></Category>;
@@ -31,11 +31,11 @@ const Dashboard = () => {
       default:
         return <DashboardHome></DashboardHome>;
     }
-  };
+  }, [location]);
 
   useEffect(() => {
     setLocationPage(pageHandler());
-  }, [location]);
+  }, [pageHandler]);
 
   return (
     <>

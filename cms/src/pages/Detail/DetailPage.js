@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { readJobDetail } from "../../axios/job";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
@@ -11,40 +11,40 @@ const DetailPage = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  // const params = useParams();
 
-  const itemDetailHandler = (id) => {
-    switch (location.state.prevPath) {
-      case "/dashboard/jobs":
-        readJobDetail(id, (result) => {
-          setTitle("Job Detail");
-          setDetailPage(<JobDetail data={result}></JobDetail>);
-        });
-        break;
+  const itemDetailHandler = useCallback(
+    (id) => {
+      switch (location.state.prevPath) {
+        case "/dashboard/jobs":
+          readJobDetail(id, (result) => {
+            setTitle("Job Detail");
+            setDetailPage(<JobDetail data={result}></JobDetail>);
+          });
+          break;
 
-      // TODO: nerusin buat detail lainnya
-      case "/dashboard/messages":
-        setTitle("Message Conversation");
-        setDetailPage(<MessageDetail data={id}></MessageDetail>);
-        break;
+        case "/dashboard/messages":
+          setTitle("Message Conversation");
+          setDetailPage(<MessageDetail data={id}></MessageDetail>);
+          break;
 
-      case "/dashboard/users":
-        break;
+        case "/dashboard/users":
+          break;
 
-      default:
-        break;
-    }
-  };
+        default:
+          break;
+      }
+    },
+    [location]
+  );
 
   useEffect(() => {
     try {
       const id = location.state.id;
       itemDetailHandler(id);
     } catch (error) {
-      console.log(error);
       navigate("/");
     }
-  }, []);
+  }, [itemDetailHandler, location, navigate]);
 
   return (
     <>
