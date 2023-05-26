@@ -32,8 +32,6 @@ const MessageList = () => {
     });
   }, []);
 
-  // console.log(messagesList);
-
   return (
     <div className="container">
       <div className="row">

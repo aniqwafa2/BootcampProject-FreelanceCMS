@@ -43,12 +43,6 @@ const JobDetail = (props) => {
     postMessage(data, (result) => {
       if (result) {
         window.location.replace("/dashboard/messages");
-        // navigate("/dashboard", {
-        //   state: {
-        //     prevPath: location.pathname,
-        //     id: result.data.messageContactId,
-        //   },
-        // });
       }
     });
   };
@@ -56,8 +50,6 @@ const JobDetail = (props) => {
   useEffect(() => {
     appplicantHandler();
   }, []);
-
-  // console.log(acceptedApply);
 
   return (
     <div className="row">
@@ -239,7 +231,6 @@ const JobDetail = (props) => {
                   <tbody className="align-middle">
                     {applicantList.map((item, id) => {
                       return (
-                        // TODO: ndaktau ini keynya oke engga
                         <tr key={id + 1}>
                           <th scope="row">{id + 1}</th>
                           <td>{item.user.name}</td>

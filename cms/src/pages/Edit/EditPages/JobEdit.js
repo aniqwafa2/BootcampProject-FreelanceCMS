@@ -29,12 +29,6 @@ const JobEdit = (props) => {
     updateJob(props.data.id, formData, (result) => {
       if (result) {
         window.location.replace("/dashboard/jobs");
-        // navigate("/dashboard", {
-        //   state: {
-        //     prevPath: location.pathname,
-        //     id: result.data.messageContactId,
-        //   },
-        // });
       }
     });
   };
@@ -52,8 +46,6 @@ const JobEdit = (props) => {
         <div className="col-md">
           <div className="dashboard-content">
             <div className="p-3 my-3 rounded-4 bg-white">
-              {/* <h3 className="mb-4 ms-3 fw-bold">Post a New Job</h3> */}
-              {/* <form> */}
               <div className="row justify-content-between m-2  mb-3">
                 <div className="col-md">
                   <label
@@ -225,7 +217,6 @@ const JobEdit = (props) => {
                       type="file"
                       id="formFileMultiple"
                       onChange={(e) => setFormFile(e.target.files[0])}
-                      // multiple
                     />
                   </div>
                 </div>
@@ -251,7 +242,6 @@ const JobEdit = (props) => {
                   </button>
                 </div>
               </div>
-              {/* </form> */}
             </div>
           </div>
         </div>

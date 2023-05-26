@@ -72,7 +72,6 @@ const CategoryEdit = (props) => {
                     rows="3"
                     value={form ? form.description : ""}
                     placeholder="Description..."
-                    // required
                     onChange={(e) =>
                       setForm({ ...form, description: e.target.value })
                     }

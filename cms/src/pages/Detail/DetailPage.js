@@ -11,7 +11,6 @@ const DetailPage = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  // const params = useParams();
 
   const itemDetailHandler = (id) => {
     switch (location.state.prevPath) {
@@ -22,7 +21,6 @@ const DetailPage = () => {
         });
         break;
 
-      // TODO: nerusin buat detail lainnya
       case "/dashboard/messages":
         setTitle("Message Conversation");
         setDetailPage(<MessageDetail data={id}></MessageDetail>);

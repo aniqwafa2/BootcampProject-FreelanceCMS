@@ -20,7 +20,7 @@ const readCategoryDetail = async (id, cb) => {
   try {
     const result = await axios.get(`${url}/${id}`);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
@@ -73,7 +73,7 @@ const deleteCategory = async (id) => {
 
 const updateCategory = async (id, data, cb) => {
   try {
-    const result = await axios.putForm(`${url}/${id}`, data, {
+    const result = await axios.put(`${url}/${id}`, data, {
       headers: { Authorization: getToken() },
     });
 

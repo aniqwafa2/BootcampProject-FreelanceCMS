@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import { FiMapPin } from "react-icons/fi";
 import { readJob, readJobDetail } from "../axios/job";
 import { dateFormat, isTokenExpired, priceFormat, getToken } from "../helpers";
 
@@ -9,11 +8,6 @@ const Home = () => {
   const [loginStatus, setLoginStatus] = useState();
   const [jobsList, setJobsList] = useState([]);
   const [jobItemSelected, setJobItemSelected] = useState();
-  // TODO: buat pagination kalo bisa
-  const [jobsProperties, setJobsProperties] = useState({});
-  const [jobsPages, setJobsPages] = useState(1);
-  const [minPages, setMinPages] = useState(1);
-  const [maxPages, setMaxPages] = useState(3);
 
   const logoutHandler = () => {
     localStorage.removeItem("access_token");
@@ -22,11 +16,6 @@ const Home = () => {
   };
 
   const loginHandler = () => {
-    // if (localStorage.getItem("access_token")) {
-    //   setLoginStatus(true);
-    // } else {
-    //   setLoginStatus(false);
-    // }
     if (!getToken()) {
       return setLoginStatus(false);
     }
@@ -47,10 +36,7 @@ const Home = () => {
 
     readJob((result) => {
       setJobsList(result.data);
-      setJobsProperties(result.pages);
       setJobItemSelected(result.data[0]);
-      // setMaxPages(result.pages.totalPage);
-      // setJobsPages(result.pages.currentPage);
     });
 
     const sidebar = document.querySelector(".sidebar");
@@ -105,7 +91,6 @@ const Home = () => {
                     Find Projects
                   </Link>
                 </li>
-                
               </ul>
               <ul className="navbar-nav ms-auto">
                 {loginStatus ? (
@@ -243,7 +228,6 @@ const Home = () => {
 
                       <div className="text-center mt-2 lh-sm">
                         <div className="row row-cols-lg-3 g-lg-3">
-                          {/* <div className="row row-cols-6 row-cols-lg-2 g-3 g-lg-3"> */}
                           <div className="col me-2">
                             <div className="py-2 border border-2 rounded-4 fw-bold">
                               Rp. {priceFormat(item.price)} <br />
@@ -253,7 +237,6 @@ const Home = () => {
                             </div>
                           </div>
                           <div className="col me-2">
-                            {/* <div className="col md"> */}
                             <div className="py-2 border border-2 rounded-4 fw-bold">
                               {dateFormat(item.dueDate)} <br />
                               <span className="text-secondary fs-6 mono">

@@ -118,9 +118,6 @@ const loginUser = async (data, cb) => {
         clearInterval(timerInterval);
       },
     });
-    // .then(() => {
-    //   window.location.reload();
-    // });
   }
 };
 

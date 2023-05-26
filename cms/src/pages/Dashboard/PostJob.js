@@ -216,7 +216,6 @@ const PostJob = () => {
                         type="file"
                         id="formFileMultiple"
                         onChange={(e) => setFormFile(e.target.files[0])}
-                        // multiple
                       />
                     </div>
                   </div>
