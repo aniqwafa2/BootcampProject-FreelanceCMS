@@ -847,7 +847,7 @@
           "Applicants"
         ],
         "summary": "Get All Applicants by Job ID or User ID",
-        "description": "",
+        "description": "find by job ID will return list of applicant by the job ID and <br/> find by user ID will return list of job applied by the user ID",
         "parameters": [
           {
             "name": "jobId",
@@ -891,7 +891,7 @@
           "Applicants"
         ],
         "summary": "Get All Applicants by Job ID or User ID",
-        "description": "",
+        "description": "find by job ID will return list of applicant by the job ID and <br/> find by user ID will return list of job applied by the user ID",
         "parameters": [
           {
             "name": "userId",
