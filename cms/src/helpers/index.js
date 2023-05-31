@@ -1,7 +1,13 @@
 const dateFormat = (date) => {
   try {
-    date = new Date(date).toDateString();
-    return date;
+    date = new Date(date);
+    const option = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+
+    return date.toLocaleDateString(undefined, option);
   } catch (error) {}
 };
 
