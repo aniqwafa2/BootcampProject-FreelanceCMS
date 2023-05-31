@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
+// import { BsSearch } from "react-icons/bs";
 import { readJob, readJobDetail } from "../axios/job";
 import { dateFormat, isTokenExpired, priceFormat, getToken } from "../helpers";
 
@@ -43,7 +43,8 @@ const Home = () => {
     let lastScrollTop = 0;
 
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop) {
         sidebar.classList.add("sidebar-hide");
       } else {
@@ -68,22 +69,40 @@ const Home = () => {
             <Link className="navbar-brand" to="#">
               <span className="fs-4 fw-bold">GigGenie</span>
             </Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-5 ">
+              {/* <ul className="navbar-nav ms-5 ">
                 <li className="nav-item ">
-                  <Link className="nav-link active navigation" aria-current="page" to="#">
+                  <Link
+                    className="nav-link active navigation"
+                    aria-current="page"
+                    to="#"
+                  >
                     Find Projects
                   </Link>
                 </li>
-              </ul>
+              </ul> */}
               <ul className="navbar-nav ms-auto">
                 {loginStatus ? (
                   <>
                     <li className="nav-item dropdown">
-                      <Link className="nav-link dropdown-toggle fw-bold active" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <Link
+                        className="nav-link dropdown-toggle fw-bold active"
+                        to="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
                         JohnDoe
                       </Link>
                       <ul className="dropdown-menu">
@@ -126,7 +145,10 @@ const Home = () => {
                 </div>
 
                 <li className="nav-item ">
-                  <Link className="btn btn-sm btn-custom mt-1 text-white fw-bold" to="/post">
+                  <Link
+                    className="btn btn-sm btn-custom mt-1 text-white fw-bold"
+                    to="/post"
+                  >
                     Employers / Post Job
                   </Link>
                 </li>
@@ -138,10 +160,13 @@ const Home = () => {
 
       {/* Forn Search */}
       <div className="container py-5">
-        <div className="container text-center">
+        {/* <div className="container text-center">
           <div className="row mt-5">
             <div className="col-5">
-              <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
+              <select
+                className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary"
+                aria-label=".form-select-lg example"
+              >
                 <option selected>job title, keyword or company</option>
                 <option data-icon="bi bi-heart">Option 2</option>
                 <option value="1">One</option>
@@ -150,7 +175,10 @@ const Home = () => {
               </select>
             </div>
             <div className="col-5">
-              <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
+              <select
+                className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary"
+                aria-label=".form-select-lg example"
+              >
                 <option selected data-icon="bi bi-funnel">
                   All location
                 </option>
@@ -160,13 +188,16 @@ const Home = () => {
               </select>
             </div>
             <div className="col-2">
-              <button type="button" className="border border-0 btn btn-lg btn-custom w-100 text-white fs-5 lh-base">
+              <button
+                type="button"
+                className="border border-0 btn btn-lg btn-custom w-100 text-white fs-5 lh-base"
+              >
                 <BsSearch className="me-2"></BsSearch>Search
               </button>
             </div>
             <hr />
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* main */}
@@ -179,29 +210,45 @@ const Home = () => {
             {jobsList &&
               jobsList.map((item) => {
                 return (
-                  <div className="card border border-0 rounded-4 mb-3" key={item.id} onClick={() => jobSelectHandler(item.id)}>
+                  <div
+                    className="card border border-0 rounded-4 mb-3"
+                    key={item.id}
+                    onClick={() => jobSelectHandler(item.id)}
+                  >
                     <div className="card-body">
-                      <h5 className="card-subtitle text-body-secondary fw-bold ps-1 pt-1">{item.name}</h5>
-                      <div className="card-text text-secondary small ps-1">Posted in {dateFormat(item.createdAt)}</div>
-
-                      <div className="p-1 py-3">
-                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">Rp. {priceFormat(item.price)}</div>
-                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-bold small border text-secondary">{dateFormat(item.dueDate)} last update</div>
+                      <h5 className="card-subtitle text-body-secondary fw-bold ps-1 pt-1">
+                        {item.name}
+                      </h5>
+                      <div className="card-text text-secondary small ps-1">
+                        Posted in {dateFormat(item.createdAt)}
                       </div>
 
-                      <div className="card-text text-container text-secondary lh-sm p-1 display-endline">{item.description}</div>
+                      <div className="p-1 py-3">
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">
+                          Rp. {priceFormat(item.price)}
+                        </div>
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-bold small border text-secondary">
+                          Last apply, {dateFormat(item.dueDate)}
+                        </div>
+                      </div>
+
+                      <div className="card-text text-container text-secondary lh-sm p-1 display-endline">
+                        {item.description}
+                      </div>
 
                       <hr />
 
                       <div className="p-1">
-                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">{item.category.name}</div>
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">
+                          {item.category.name}
+                        </div>
                       </div>
                     </div>
                   </div>
                 );
               })}
 
-            <nav aria-label="Page navigation example">
+            {/* <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
                 <li className="page-item disabled">
                   <Link className="page-link">Previous</Link>
@@ -227,29 +274,45 @@ const Home = () => {
                   </Link>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
           </div>
 
           {/* sidebar */}
           <div className="container col-7 sidebar sidebar-hide">
             {jobItemSelected ? (
               <>
-                <div className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show" role="alert">
+                <div
+                  className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show"
+                  role="alert"
+                >
                   <div className="card-body">
-                    <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">{jobItemSelected.name}</h2>
+                    <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">
+                      {jobItemSelected.name}
+                    </h2>
 
                     <Link to="https:client_app_link">
-                      <button type="submit" className="btn btn-md btn-custom text-white fw-bold">
+                      <button
+                        type="submit"
+                        className="btn btn-md btn-custom text-white fw-bold"
+                      >
                         Apply Now
                       </button>
                     </Link>
                   </div>
                   {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
                 </div>
-                <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" className="scrollable-content border border-2 px-4 py-4 rounded-3 bg-white" tabIndex="0">
+                <div
+                  data-bs-spy="scroll"
+                  data-bs-target="#navbar-example3"
+                  data-bs-smooth-scroll="true"
+                  className="scrollable-content border border-2 px-4 py-4 rounded-3 bg-white"
+                  tabIndex="0"
+                >
                   <div id="item-1">
                     <h5 className="fw-bold">Job Descriptions</h5>
-                    <p className="text-secondary lh-sm display-endline">{jobItemSelected.description}</p>
+                    <p className="text-secondary lh-sm display-endline">
+                      {jobItemSelected.description}
+                    </p>
                   </div>
                 </div>
               </>
@@ -273,7 +336,11 @@ const Home = () => {
                 <div className="d-inline p-2">
                   <Link to="https://www.code.id/">
                     <i>Powered by</i>
-                    <img src="https://static.wixstatic.com/media/ab2f5c_4090dbbaeafb4b0d975bd44c6cd498f6~mv2_d_5000_3314_s_4_2.png/v1/fill/w_262,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/code-colored.png" className="img-footer" alt="" />
+                    <img
+                      src="https://static.wixstatic.com/media/ab2f5c_4090dbbaeafb4b0d975bd44c6cd498f6~mv2_d_5000_3314_s_4_2.png/v1/fill/w_262,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/code-colored.png"
+                      className="img-footer"
+                      alt=""
+                    />
                   </Link>
                 </div>
               </div>

@@ -34,14 +34,14 @@ const Category = () => {
               <div className="p-3 my-3 rounded-4 bg-white">
                 <div class="row justify-content-between m-2 lh-lg mb-3">
                   <div class="col-4">
-                    <h2 className="fw-bold"> Category Table</h2>
+                    <h2 className="fw-bold">Category Lists</h2>
                   </div>
                   <div class="col-md-4 text-end">
                     <Link
                       to="/dashboard/createcategory"
                       className="btn btn-default btn-primary fw-bold"
                     >
-                      +Category
+                      +New Category
                     </Link>
                   </div>
                 </div>

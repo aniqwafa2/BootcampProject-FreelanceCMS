@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { BsArrowRight } from "react-icons/bs";
 import { imageUrl } from "../../../config/config";
 import { readMessage } from "../../../axios/message";
 import {
@@ -41,20 +40,20 @@ const MessageList = () => {
         {/* content */}
         <div className="col-md">
           <div className="dashboard-content">
-            <div>
-              <h5 className="fw-bold border-bottom lh-lg">Message Lists</h5>
-            </div>
             <div className="p-3 my-3 rounded-4 bg-white">
-              <div className="row justify-content-end m-2 border-bottom lh-lg">
-                <div className="col-4 text-end">
+              <div class="row justify-content-between m-2 lh-lg mb-3">
+                <div class="col-4">
+                  <h2 className="fw-bold">Message Lists</h2>
+                </div>
+                <div class="col-md-4 text-end">
                   <Link
-                    to={`/dashboard/create`}
+                    to="/dashboard/create"
                     state={{
                       prevPath: location.pathname,
                     }}
-                    className="icon-link icon-link-hover"
+                    className="btn btn-default btn-primary fw-bold"
                   >
-                    Create New Chat <BsArrowRight></BsArrowRight>
+                    +New Chat
                   </Link>
                 </div>
               </div>
