@@ -1,4 +1,11 @@
-const { applicant, job, user, sequelize, userProfile } = require("../models");
+const {
+  applicant,
+  job,
+  user,
+  sequelize,
+  userProfile,
+  category,
+} = require("../models");
 const { Op } = require("sequelize");
 
 class ApplicantController {
@@ -39,6 +46,7 @@ class ApplicantController {
   static async getApplicantById(req, res) {
     /* 
       #swagger.summary = "Get All Applicants by Job ID or User ID"
+      #swagger.description = 'find by job ID will return list of applicant by the job ID and <br/> find by user ID will return list of job applied by the user ID'
       #swagger.parameters['limit'] = {
         type: 'integer',
       } 
@@ -56,18 +64,21 @@ class ApplicantController {
     let jobId = +req.params.jobId;
 
     let typeId;
+    let include;
     if (jobId) {
       typeId = { jobId };
+      include = [{ model: user, include: [userProfile] }];
     } else {
       typeId = { userId };
+      include = [{ model: job, include: [category] }];
     }
 
     let queryProperties = {
       where: typeId,
-      include: [job, { model: user, include: [userProfile] }],
+      include,
     };
     if (limit && limit !== 0) {
-      queryProperties = { limit, offset, where: typeId, include: [job, user] };
+      queryProperties = { limit, offset, where: typeId, include };
     }
 
     // console.log(typeId, jobId, req.params);

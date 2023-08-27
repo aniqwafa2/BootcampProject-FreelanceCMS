@@ -8,7 +8,7 @@ const readMessage = async (id, cb) => {
   try {
     const result = await axios.get(`${url}/${id}`);
 
-    console.log(result);
+    // console.log(result);
     cb(result.data);
   } catch (error) {
     console.log(error);
@@ -34,11 +34,6 @@ const postMessage = async (data, cb) => {
 
     // console.log(result);
     cb(result.data);
-    // if (window.location.pathname === "/dashboard/detail") {
-    //   Swal.fire("Success", "Succesfully sent the message", "success").then(() =>
-    //     window.location.reload()
-    //   );
-    // }
   } catch (error) {
     console.log(error);
     Swal.fire("Failed", "Failed to sent message", "error");

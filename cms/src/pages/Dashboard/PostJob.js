@@ -1,16 +1,39 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { readCategory } from "../../axios/category";
+import { createJob } from "../../axios/job";
 
 const PostJob = () => {
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4"]; // Opsi yang tersedia
+  const [categoryList, setCategoryList] = useState([]);
+  const [form, setForm] = useState();
+  const [formFile, setFormFile] = useState();
 
-  const [selectedOptions, setSelectedOptions] = useState([]); // State untuk menyimpan opsi yang dipilih
+  const navigate = useNavigate();
 
-  const handleSelectChange = (event) => {
-    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-    setSelectedOptions(selectedOptions);
+  const sendFormHandler = () => {
+    const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("price", form.price);
+    formData.append("description", form.description);
+    formData.append("dueDate", form.dueDate);
+
+    if (form.categoryId !== null || form.categoryId !== "") {
+      formData.append("categoryId", form.categoryId);
+    }
+    if (form.file !== null || form.file !== "") {
+      formData.append("file", formFile);
+    }
+
+    createJob(formData, (result) => {
+      if (result) {
+        window.location.replace("/dashboard/jobs");
+      }
+    });
   };
+
+  useEffect(() => {
+    readCategory((result) => setCategoryList(result.data));
+  }, []);
 
   return (
     <>
@@ -25,92 +48,201 @@ const PostJob = () => {
             <div className="dashboard-content">
               <div className="p-3 my-3 rounded-4 bg-white">
                 <h3 className="mb-4 ms-3 fw-bold">Post a New Job</h3>
-                <form>
-                  <div class="row justify-content-between m-2  mb-3">
-                    <div class="col-md">
-                      <label for="exampleFormControlInput1" class="form-label fw-bold" />
-                      Job title
-                      <br />
-                      <small className="text-secondary">A job title must describe one position only</small>
-                    </div>
-                    <div class="col-md">
-                      <input type="text" class="form-control border border-2" id="exampleFormControlInput1" placeholder="e.g. 'UX Design'" required />
-                    </div>
-                  </div>
-                  <hr />
 
-                  <div class="row justify-content-between m-2  mb-3">
-                    <div class="col-md">
-                      <label for="exampleFormControlInput1" class="form-label fw-bold" />
-                      Job description
-                      <br />
-                      <small className="text-secondary">Provide a short description about the job. Keep it short and to the point.</small>
-                    </div>
-                    <div class="col-md">
-                      <textarea class="form-control border border-2" id="exampleFormControlTextarea1" rows="3" placeholder="Description..." required />
-                    </div>
-                  </div>
-                  <hr />
+                <div className="row justify-content-between m-2  mb-3">
+                  <div className="col-md">
+                    <label
+                      htmlFor="exampleFormControlInput1"
+                      className="form-label fw-bold"
+                    />
+                    Job title
+                    <br />
+                    <small className="text-secondary">
+                      A job title must describe one position only
+                    </small>
 
-                  <div class="row justify-content-between m-2  mb-3">
-                    <div class="col-md">
-                      <label for="exampleFormControlInput1" class="form-label fw-bold" />
-                      Sallary
-                      <br />
-                      <small className="text-secondary">Choose how you prefer to pay for this job</small>
-                    </div>
-                    <div class="col-md">
-                      <input type="text" class="form-control border border-2" id="exampleFormControlTextarea1" rows="3" required />
-                    </div>
                   </div>
-                  <hr />
+                  <div className="col-md">
+                    <input
+                      type="text"
+                      className="form-control border border-2"
+                      id="exampleFormControlInput1"
+                      placeholder="e.g. 'UX Design'"
+                      required
+                      onChange={(e) =>
+                        setForm({ ...form, name: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+                <hr />
 
-                  <div class="row justify-content-between m-2  mb-3">
-                    <div class="col-md">
-                      <label for="exampleFormControlInput1" class="form-label fw-bold" />
-                      Category
-                      <br />
-                      <small className="text-secondary">Category for this jobs</small>
-                    </div>
-                    <div class="col-md">
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">UI/UX Design</option>
-                        <option value="2">FrontEnd Developer</option>
-                        <option value="3">BackEnd Developer</option>
-                        <option value="4">Fullstack</option>
-                        <option value="5">Web Designer</option>
-                      </select>
-                    </div>
+                <div className="row justify-content-between m-2  mb-3">
+                  <div className="col-md">
+                    <label
+                      htmlFor="exampleFormControlInput1"
+                      className="form-label fw-bold"
+                    />
+                    Job description
+                    <br />
+                    <small className="text-secondary">
+                      Provide a short description about the job. Keep it short
+                      and to the point.
+                    </small>
                   </div>
-                  <hr />
+                  <div className="col-md">
+                    <textarea
+                      className="form-control border border-2"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      placeholder="Description..."
+                      required
+                      onChange={(e) =>
+                        setForm({ ...form, description: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+                <hr />
 
-                  <div class="row justify-content-between m-2  mb-3">
-                    <div class="col-md">
-                      <label for="exampleFormControlInput1" class="form-label fw-bold" />
-                      Sample File
-                      <br />
-                      <small className="text-secondary">example for this project</small>
-                    </div>
-                    <div class="col-md">
-                      <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label"></label>
-                        <input class="form-control" type="file" id="formFileMultiple" multiple />
-                      </div>
-                    </div>
+                <div className="row justify-content-between m-2  mb-3">
+                  <div className="col-md">
+                    <label
+                      htmlFor="exampleFormControlInput1"
+                      className="form-label fw-bold"
+                    />
+                    Sallary
+                    <br />
+                    <small className="text-secondary">
+                      Choose how you prefer to pay for this job
+                    </small>
                   </div>
+                  <div className="col-md">
+                    <input
+                      type="text"
+                      className="form-control border border-2"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      required
+                      onChange={(e) =>
+                        setForm({ ...form, price: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+                <hr />
 
-                  <div class="row justify-content-between m-2  mb-3">
-                    <div class="col-md">
-                      <Link to="/post" className="btn btn-outline-primary w-100 fw-bold">
-                        Cancel
-                      </Link>
-                    </div>
-                    <div class="col-md">
-                      <button className="btn btn-primary w-100 fw-bold">Publish</button>
+                <div className="row justify-content-between m-2  mb-3">
+                  <div className="col-md">
+                    <label
+                      htmlFor="exampleFormControlInput1"
+                      className="form-label fw-bold"
+                    />
+                    Last Apply Date
+                    <br />
+                    <small className="text-secondary">
+                      Choose last apply date for this job
+                    </small>
+                  </div>
+                  <div className="col-md">
+                    <input
+                      type="date"
+                      className="form-control border border-2"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      required
+                      onChange={(e) =>
+                        setForm({ ...form, dueDate: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+                <hr />
+
+                <div className="row justify-content-between m-2  mb-3">
+                  <div className="col-md">
+                    <label
+                      htmlFor="exampleFormControlInput1"
+                      className="form-label fw-bold"
+                    />
+                    Category
+                    <br />
+                    <small className="text-secondary">
+                      Category for this jobs
+                    </small>
+                  </div>
+                  <div className="col-md">
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      onChange={(e) =>
+                        setForm({ ...form, categoryId: e.target.value })
+                      }
+                    >
+                      <option disabled selected hidden value="">
+                        Pilih opsi
+                      </option>
+                      {categoryList.length > 0 &&
+                        categoryList.map((item) => {
+                          return (
+                            <option key={item.id} value={item.id}>
+                              {item.name}
+                            </option>
+                          );
+                        })}
+                    </select>
+                  </div>
+                </div>
+                <hr />
+
+                <div className="row justify-content-between m-2  mb-3">
+                  <div className="col-md">
+                    <label
+                      htmlFor="exampleFormControlInput1"
+                      className="form-label fw-bold"
+                    />
+                    Sample File
+                    <br />
+                    <small className="text-secondary">
+                      example for this project
+                    </small>
+                  </div>
+                  <div className="col-md">
+                    <div className="mb-3">
+                      <label
+                        htmlFor="formFileMultiple"
+                        className="form-label"
+                      ></label>
+                      <input
+                        className="form-control"
+                        type="file"
+                        id="formFileMultiple"
+                        onChange={(e) => setFormFile(e.target.files[0])}
+                      />
                     </div>
                   </div>
-                </form>
+                </div>
+
+                <div className="row justify-content-between m-2  mb-3">
+                  <div className="col-md">
+                    <button
+                      className="btn btn-outline-primary w-100 fw-bold"
+                      onClick={() => {
+                        navigate(-1);
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                  <div className="col-md">
+                    <button
+                      className="btn btn-primary w-100 fw-bold"
+                      onClick={() => sendFormHandler()}
+                    >
+                      Publish
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

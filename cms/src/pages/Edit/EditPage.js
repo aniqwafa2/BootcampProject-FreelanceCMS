@@ -1,33 +1,33 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { readJobDetail } from "../../axios/job";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
-import { JobDetail, MessageDetail } from "./DetailPages";
+import { JobEdit, CategoryEdit } from "./EditPages";
+import { readJobDetail } from "../../axios/job";
+import { readCategoryDetail } from "../../axios/category";
 
-const DetailPage = () => {
+const EditPage = () => {
   const [title, setTitle] = useState();
-  const [detailPage, setDetailPage] = useState();
+  const [editPage, setEditPage] = useState();
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const itemDetailHandler = useCallback(
+  const itemEditHandler = useCallback(
     (id) => {
       switch (location.state.prevPath) {
         case "/dashboard/jobs":
           readJobDetail(id, (result) => {
-            setTitle("Job Detail");
-            setDetailPage(<JobDetail data={result}></JobDetail>);
+            setTitle(`Editing Job: ${result.name}`);
+            setEditPage(<JobEdit data={result}></JobEdit>);
           });
           break;
 
-        case "/dashboard/messages":
-          setTitle("Message Conversation");
-          setDetailPage(<MessageDetail data={id}></MessageDetail>);
-          break;
-
-        case "/dashboard/users":
+        case "/dashboard/category":
+          readCategoryDetail(id, (result) => {
+            setTitle(`Editing Category: ${result.name}`);
+            setEditPage(<CategoryEdit data={result}></CategoryEdit>);
+          });
           break;
 
         default:
@@ -40,15 +40,15 @@ const DetailPage = () => {
   useEffect(() => {
     try {
       const id = location.state.id;
-      itemDetailHandler(id);
+      itemEditHandler(id);
     } catch (error) {
       navigate("/");
     }
-  }, [itemDetailHandler, location, navigate]);
+  }, [itemEditHandler, location, navigate]);
 
   return (
     <>
-      {detailPage && (
+      {editPage && (
         <div className="container">
           <div className="row">
             {/* content */}
@@ -71,7 +71,7 @@ const DetailPage = () => {
                     <h5 className="fw-bold lh-lg">{title}</h5>
                   </div>
                 </div>
-                {detailPage}
+                {editPage}
               </div>
             </div>
           </div>
@@ -81,4 +81,4 @@ const DetailPage = () => {
   );
 };
 
-export default DetailPage;
+export default EditPage;

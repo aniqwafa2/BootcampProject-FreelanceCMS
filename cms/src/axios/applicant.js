@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import getToken, { apiUrl } from "../config/config";
+import { apiUrl } from "../config/config";
+import { getToken } from "../helpers";
 
 const url = `${apiUrl}/applicants`;
 
@@ -37,7 +38,7 @@ const readApplicantDetail = async (jobId, cb) => {
   }
 };
 
-const deleteApplicantbyUserId = async (id) => {
+const deleteApplicantbyUserId = async (id, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -50,7 +51,7 @@ const deleteApplicantbyUserId = async (id) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         await axios.delete(`${url}/${id}`, {
-          headers: { Authorization: getToken.toString() },
+          headers: { Authorization: getToken() },
         });
 
         Swal.fire(
@@ -58,7 +59,7 @@ const deleteApplicantbyUserId = async (id) => {
           "All request by this applicant has been deleted.",
           "success"
         ).then(() => {
-          window.location.reload();
+          cb(true);
         });
       }
     });
@@ -68,7 +69,7 @@ const deleteApplicantbyUserId = async (id) => {
   }
 };
 
-const acceptApplicant = async (jobId, userId) => {
+const acceptApplicant = async (jobId, userId, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -94,7 +95,7 @@ const acceptApplicant = async (jobId, userId) => {
           "Success",
           "Succesfully accepted the applicant",
           "success"
-        ).then(() => window.location.reload());
+        ).then(() => cb(true));
       }
     });
   } catch (error) {

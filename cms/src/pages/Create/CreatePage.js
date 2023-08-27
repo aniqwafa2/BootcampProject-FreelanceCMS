@@ -1,54 +1,43 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { readJobDetail } from "../../axios/job";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { IconContext } from "react-icons/lib";
-import { JobDetail, MessageDetail } from "./DetailPages";
+import MessageCreate from "./CreatePages/MessageCreate";
 
-const DetailPage = () => {
+const CreatePage = () => {
   const [title, setTitle] = useState();
-  const [detailPage, setDetailPage] = useState();
+  const [createPage, setCreatePage] = useState();
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const itemDetailHandler = useCallback(
-    (id) => {
-      switch (location.state.prevPath) {
-        case "/dashboard/jobs":
-          readJobDetail(id, (result) => {
-            setTitle("Job Detail");
-            setDetailPage(<JobDetail data={result}></JobDetail>);
-          });
-          break;
+  const itemCreateHandler = useCallback(() => {
+    switch (location.state.prevPath) {
+      case "/dashboard/messages":
+        setTitle(`Create new chat`);
+        setCreatePage(<MessageCreate></MessageCreate>);
+        break;
 
-        case "/dashboard/messages":
-          setTitle("Message Conversation");
-          setDetailPage(<MessageDetail data={id}></MessageDetail>);
-          break;
+      case "/dashboard/category":
+        break;
 
-        case "/dashboard/users":
-          break;
-
-        default:
-          break;
-      }
-    },
-    [location]
-  );
+      default:
+        break;
+    }
+  }, [location]);
 
   useEffect(() => {
     try {
-      const id = location.state.id;
-      itemDetailHandler(id);
+      itemCreateHandler();
     } catch (error) {
+      console.log(error);
       navigate("/");
     }
-  }, [itemDetailHandler, location, navigate]);
+  }, [itemCreateHandler, location, navigate]);
 
   return (
     <>
-      {detailPage && (
+      {createPage && (
         <div className="container">
           <div className="row">
             {/* content */}
@@ -71,7 +60,7 @@ const DetailPage = () => {
                     <h5 className="fw-bold lh-lg">{title}</h5>
                   </div>
                 </div>
-                {detailPage}
+                {createPage}
               </div>
             </div>
           </div>
@@ -81,4 +70,4 @@ const DetailPage = () => {
   );
 };
 
-export default DetailPage;
+export default CreatePage;

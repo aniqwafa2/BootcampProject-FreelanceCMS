@@ -1,22 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Home, Login, Register, Dashboard, YourPost, PostJob, DetailPage } from "../pages";
+import {
+  Home,
+  Login,
+  Register,
+  Dashboard,
+  YourPost,
+  PostJob,
+  DetailPage,
+  EditPage,
+  CreatePage,
+} from "../pages";
+import { isTokenExpired, getToken } from "../helpers";
 
 const Content = () => {
   const [loginStatus, setLoginStatus] = useState();
   const [loadingStatus, setLoadingStatus] = useState(true);
 
   const loginHandler = () => {
-    if (localStorage.getItem("access_token")) {
-      setLoginStatus(true);
-    } else {
-      setLoginStatus(false);
+    if (!getToken()) {
+      return setLoginStatus(false);
     }
+    if (isTokenExpired()) {
+      localStorage.removeItem("access_token");
+      return setLoginStatus(false);
+    }
+
+    setLoginStatus(true);
   };
+
   useEffect(() => {
     loginHandler();
     setLoadingStatus(false);
-  });
+  }, []);
 
   if (loadingStatus) {
     return <div>{/* Loading ... */}</div>;
@@ -39,18 +55,19 @@ const Content = () => {
                 <Route path="createcategory" element={<Dashboard />}></Route>
 
                 <Route path="jobs" element={<Dashboard />}></Route>
-                <Route path="applicants" element={<Dashboard />}></Route>
-                {/* TODO: child dashboard menu lainnya bisa taruh dibawah comment ini */}
+                {/* Messages */}
                 <Route path="messages" element={<Dashboard />}></Route>
               </Route>
               <Route path="/dashboard/detail" element={<DetailPage />}></Route>
+              <Route path="/dashboard/edit" element={<EditPage />}></Route>
+              <Route path="/dashboard/create" element={<CreatePage />}></Route>
               <Route path="/post" element={<YourPost></YourPost>}></Route>
               <Route path="/post-job" element={<PostJob></PostJob>}></Route>
-              <Route path="*" element={<Navigate replace to="/login"></Navigate>}></Route>
+              <Route path="*" element={<Navigate replace to="/login" />} />
             </>
           ) : (
             <>
-              <Route path="*" element={<Navigate replace to="/login"></Navigate>}></Route>
+              <Route path="*" element={<Navigate replace to="/login" />} />
             </>
           )}
         </>

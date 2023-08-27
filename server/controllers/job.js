@@ -200,7 +200,8 @@ class JobController {
         file = filename;
       }
     } catch (error) {
-      console.error(error);
+      const find = await job.findByPk(id);
+      file = find.file;
     }
 
     try {

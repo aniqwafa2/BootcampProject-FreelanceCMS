@@ -1,7 +1,15 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { BsUbuntu, BsGrid1X2, BsArchive, BsCardChecklist, BsCheck2Square, BsFolderCheck, BsFolder2Open } from "react-icons/bs";
-import { FiArchive, FiGrid, FiExternalLink, FiBell } from "react-icons/fi";
+
+import {
+  BsUbuntu,
+  BsGrid1X2,
+  BsArchive,
+  BsCardChecklist,
+  BsFolder2Open,
+} from "react-icons/bs";
+import { FiArchive, FiExternalLink } from "react-icons/fi";
+
 
 const Navbar = () => {
   const location = useLocation();
@@ -33,17 +41,34 @@ const Navbar = () => {
                     <BsArchive className="fs-5 me-2"></BsArchive> Post Job
                   </Link>
                 </li>
-                <li className={location.pathname === "/dashboard/category" ? "active" : ""}>
+
+                <li
+                  className={
+                    location.pathname === "/dashboard/category" ? "active" : ""
+                  }
+                >
                   <Link to="/dashboard/category" activeclassname="active">
-                    <BsCardChecklist className="fs-5 me-2"></BsCardChecklist> Category
+                    <BsCardChecklist className="fs-5 me-2"></BsCardChecklist>{" "}
+                    Category
                   </Link>
                 </li>
-                <li className={location.pathname === "/dashboard/category" ? "active" : ""} hidden>
+                <li
+                  className={
+                    location.pathname === "/dashboard/category" ? "active" : ""
+                  }
+                  hidden
+                >
                   <Link to="/dashboard/createcategory" activeclassname="active">
-                    <BsCardChecklist className="fs-5 me-2"></BsCardChecklist> Category
+                    <BsCardChecklist className="fs-5 me-2"></BsCardChecklist>{" "}
+                    Category
                   </Link>
                 </li>
-                <li className={location.pathname === "/dashboard/jobs" ? "active" : ""}>
+                <li
+                  className={
+                    location.pathname === "/dashboard/jobs" ? "active" : ""
+                  }
+                >
+
                   <Link to="/dashboard/jobs">
                     <BsFolder2Open className="fs-5 me-2" /> Jobs Lists
                   </Link>
@@ -53,11 +78,6 @@ const Navbar = () => {
                     <BsFolderCheck className="fs-5 me-2" /> Applicants Lists
                   </Link>
                 </li>
-                {/* <li>
-                  <Link to="/post" activeClassName="active">
-                    <FiSettings className="fs-5 me-2"></FiSettings> Settings
-                  </Link>
-                </li> */}
               </ul>
             </nav>
           </div>
@@ -79,14 +99,7 @@ const Navbar = () => {
                         <FiExternalLink className="fs-5" />
                       </Link>
                     </li>
-                    {/* <li className="nav-item ">
-                      <button type="button" className="btn btn-sm mt-1 fw-bold position-relative shadow-sm bg-white rounded-3" to="#" title="Notification">
-                        <FiBell className="text-dark fs-5" />
-                        <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
-                          <span className="visually-hidden">New alerts</span>
-                        </span>
-                      </button>
-                    </li> */}
+
 
                     <div>
                       <span className="fs-4 mx-4">|</span>

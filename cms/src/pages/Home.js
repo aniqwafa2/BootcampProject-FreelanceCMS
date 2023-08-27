@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { BsSearch } from "react-icons/bs";
-import { FiMapPin } from "react-icons/fi";
+// import { BsSearch } from "react-icons/bs";
 import { readJob, readJobDetail } from "../axios/job";
-import { dateFormat, priceFormat } from "../helpers";
-import { FiDollarSign } from "react-icons/fi";
+
+import { dateFormat, isTokenExpired, priceFormat, getToken } from "../helpers";
+
 
 const Home = () => {
   const [loginStatus, setLoginStatus] = useState();
   const [jobsList, setJobsList] = useState([]);
   const [jobItemSelected, setJobItemSelected] = useState();
-  // TODO: buat pagination kalo bisa
-  const [jobsProperties, setJobsProperties] = useState({});
-  const [jobsPages, setJobsPages] = useState(1);
-  const [minPages, setMinPages] = useState(1);
-  const [maxPages, setMaxPages] = useState(3);
 
   const logoutHandler = () => {
     localStorage.removeItem("access_token");
@@ -22,23 +17,28 @@ const Home = () => {
     window.location.reload();
   };
 
+  const loginHandler = () => {
+    if (!getToken()) {
+      return setLoginStatus(false);
+    }
+    if (isTokenExpired()) {
+      localStorage.removeItem("access_token");
+      return setLoginStatus(false);
+    }
+
+    setLoginStatus(true);
+  };
+
   const jobSelectHandler = async (id) => {
     await readJobDetail(id, (result) => setJobItemSelected(result));
   };
 
   useEffect(() => {
-    if (localStorage.getItem("access_token")) {
-      setLoginStatus(true);
-    } else {
-      setLoginStatus(false);
-    }
+    loginHandler();
 
     readJob((result) => {
       setJobsList(result.data);
-      setJobsProperties(result.pages);
       setJobItemSelected(result.data[0]);
-      // setMaxPages(result.pages.totalPage);
-      // setJobsPages(result.pages.currentPage);
     });
 
     const sidebar = document.querySelector(".sidebar");
@@ -74,13 +74,15 @@ const Home = () => {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-5 ">
+              {/* <ul className="navbar-nav ms-5 ">
                 <li className="nav-item ">
                   <Link className="nav-link active navigation" aria-current="page" to="#">
                     Find Projects
                   </Link>
                 </li>
-              </ul>
+
+              </ul> */}
+
               <ul className="navbar-nav ms-auto">
                 {loginStatus ? (
                   <>
@@ -90,18 +92,20 @@ const Home = () => {
                       </Link>
                       <ul className="dropdown-menu">
                         <li>
-                          <Link className="dropdown-item" to="#">
-                            My Profile
-                          </Link>
-                        </li>
-                        <li>
-                          <Link className="dropdown-item" to="/dashboard-user">
-                            Setting
+                          <Link className="dropdown-item" to="/dashboard">
+                            Dashboard
                           </Link>
                         </li>
                         <hr />
                         <li>
-                          <button className="dropdown-item fw-bold" onClick={logoutHandler}>
+
+                          <button
+                            className="dropdown-item fw-bold"
+                            onClick={() => {
+                              logoutHandler();
+                            }}
+                          >
+
                             Sign out
                           </button>
                         </li>
@@ -128,7 +132,12 @@ const Home = () => {
                 </div>
 
                 <li className="nav-item ">
-                  <Link className="btn btn-sm btn-custom mt-1 text-white fw-bold" to="/dashboard">
+
+                  <Link
+                    className="btn btn-sm btn-custom mt-1 text-white fw-bold"
+                    to="/post"
+                  >
+
                     Employers / Post Job
                   </Link>
                 </li>
@@ -140,7 +149,7 @@ const Home = () => {
 
       {/* Forn Search */}
       <div className="container py-5">
-        <div className="container text-center">
+        {/* <div className="container text-center">
           <div className="row mt-5">
             <div className="col-md-5">
               <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
@@ -168,7 +177,7 @@ const Home = () => {
             </div>
             <hr />
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* main */}
@@ -181,29 +190,47 @@ const Home = () => {
             {jobsList &&
               jobsList.map((item) => {
                 return (
-                  <div className="card border border-0 rounded-4 card-style mb-3" key={item.id} onClick={() => jobSelectHandler(item.id)}>
+
+                  <div
+                    className="card border border-0 rounded-4 mb-3"
+                    key={item.id}
+                    onClick={() => jobSelectHandler(item.id)}
+                  >
                     <div className="card-body">
-                      <h5 className="card-subtitle px-2 text-body-secondary fw-bold">{item.name}</h5>
-
-                      <small className="card-text text-secondary small p-2 ">Posted in {dateFormat(item.createdAt)}</small>
-
-                      <div class="p-2">
-                        <div class="d-inline p-2 me-2 border border-1 small rounded-2 fw-semibold text-bg-light"> Rp. {priceFormat(item.price)}</div>
-                        <div class="d-inline p-2 me-2 border border-1 small rounded-2 fw-semibold text-bg-light">{dateFormat(item.dueDate)} last update</div>
+                      <h5 className="card-subtitle text-body-secondary fw-bold ps-1 pt-1">
+                        {item.name}
+                      </h5>
+                      <div className="card-text text-secondary small ps-1">
+                        Posted in {dateFormat(item.createdAt)}
                       </div>
 
-                      <p className="card-text text-container text-secondary lh-sm display-endline p-2 pb-0 mb-0">{item.description}</p>
+                      <div className="p-1 py-3">
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">
+                          Rp. {priceFormat(item.price)}
+                        </div>
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-bold small border text-secondary">
+                          Last apply, {dateFormat(item.dueDate)}
+                        </div>
+                      </div>
+
+                      <div className="card-text text-container text-secondary lh-sm p-1 display-endline">
+                        {item.description}
+                      </div>
+
                       <hr />
 
-                      <div class="ps-2">
-                        <div class="d-inline p-2 me-2 text-bg-light small fw-bold rounded-2 border border-1">{item.category.name}</div>
+                      <div className="p-1">
+                        <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">
+                          {item.category.name}
+                        </div>
+
                       </div>
                     </div>
                   </div>
                 );
               })}
 
-            <nav aria-label="Page navigation example">
+            {/* <nav aria-label="Page navigation example">
               <ul className="pagination justify-content-end">
                 <li className="page-item disabled">
                   <Link className="page-link">Previous</Link>
@@ -229,7 +256,7 @@ const Home = () => {
                   </Link>
                 </li>
               </ul>
-            </nav>
+            </nav> */}
           </div>
 
           {/* sidebar */}
@@ -238,16 +265,32 @@ const Home = () => {
               <>
                 <div className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show" role="alert">
                   <div className="card-body">
-                    <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">{jobItemSelected.name}</h2>
-                    {/* <Link to="https:client_app_link">
-                      <button type="submit" className="btn btn-md btn-custom text-white fw-bold">
+
+                    <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">
+                      {jobItemSelected.name}
+                    </h2>
+
+                    <Link to="https:client_app_link">
+                      <button
+                        type="submit"
+                        className="btn btn-md btn-custom text-white fw-bold"
+                      >
+
                         Apply Now
                       </button>
                     </Link> */}
                   </div>
                   {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
                 </div>
-                <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" className="scrollable-content border border-2 px-4 py-4 rounded-2" tabIndex="0">
+
+                <div
+                  data-bs-spy="scroll"
+                  data-bs-target="#navbar-example3"
+                  data-bs-smooth-scroll="true"
+                  className="scrollable-content border border-2 px-4 py-4 rounded-3 bg-white"
+                  tabIndex="0"
+                >
+
                   <div id="item-1">
                     <h5 className="fw-bold">Job Descriptions</h5>
                     <p className="text-secondary lh-sm display-endline">{jobItemSelected.description}</p>

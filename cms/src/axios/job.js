@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import getToken, { apiUrl } from "../config/config";
+import { apiUrl } from "../config/config";
+import { getToken } from "../helpers";
 
 const url = `${apiUrl}/jobs`;
 
@@ -28,8 +29,8 @@ const readJobDetail = async (id, cb) => {
 
 const createJob = async (data, cb) => {
   try {
-    await axios.post(url, data, {
-      headers: { Authorization: getToken.toString() },
+    await axios.postForm(url, data, {
+      headers: { Authorization: getToken() },
     });
 
     Swal.fire("Success", "Job has been added", "success").then(() => {
@@ -41,7 +42,7 @@ const createJob = async (data, cb) => {
   }
 };
 
-const deleteJob = async (id) => {
+const deleteJob = async (id, cb) => {
   try {
     Swal.fire({
       title: "Are you sure?",
@@ -58,7 +59,7 @@ const deleteJob = async (id) => {
         });
 
         Swal.fire("Deleted!", "Job has been deleted.", "success").then(() => {
-          window.location.reload();
+          cb(true);
         });
       }
     });
@@ -71,12 +72,13 @@ const deleteJob = async (id) => {
 const updateJob = async (id, data, cb) => {
   try {
     const result = await axios.putForm(`${url}/${id}`, data, {
-      headers: { Authorization: getToken.toString() },
+      headers: { Authorization: getToken() },
     });
 
     console.log(result);
-    cb(result);
-    Swal.fire("Success", "Succesfully updated the job", "success");
+    Swal.fire("Success", "Succesfully updated the job", "success").then(() => {
+      cb(true);
+    });
   } catch (error) {
     console.log(error);
     Swal.fire("Failed", "Failed to update job", "error");

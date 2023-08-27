@@ -1,6 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import getToken, { apiUrl } from "../config/config";
+import { apiUrl } from "../config/config";
+import { getToken } from "../helpers";
 
 const url = `${apiUrl}/users`;
 
@@ -18,7 +19,7 @@ const readUser = async (cb) => {
 const readUserDetail = async (id, cb) => {
   try {
     const result = await axios.get(`${url}/${id}`, {
-      headers: { Authorization: getToken.toString() },
+      headers: { Authorization: getToken() },
     });
 
     console.log(result);
@@ -38,48 +39,6 @@ const createUser = async (data, cb) => {
   } catch (error) {
     // console.log(error);
     Swal.fire("Failed", "Failed to create user", "error");
-  }
-};
-
-const deleteUser = async (id) => {
-  try {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        await axios.delete(`${url}/${id}`, {
-          headers: { Authorization: getToken.toString() },
-        });
-
-        Swal.fire("Deleted!", "User has been deleted.", "success").then(() => {
-          window.location.reload();
-        });
-      }
-    });
-  } catch (error) {
-    console.log(error);
-    Swal.fire("Failed", "Failed to delete user", "error");
-  }
-};
-
-const updateUser = async (id, data, cb) => {
-  try {
-    const result = await axios.putForm(`${url}/${id}`, data, {
-      headers: { Authorization: getToken.toString() },
-    });
-
-    console.log(result);
-    cb(result);
-    Swal.fire("Success", "Succesfully updated the user", "success");
-  } catch (error) {
-    console.log(error);
-    Swal.fire("Failed", "Failed to update user", "error");
   }
 };
 
@@ -117,17 +76,7 @@ const loginUser = async (data, cb) => {
         clearInterval(timerInterval);
       },
     });
-    // .then(() => {
-    //   window.location.reload();
-    // });
   }
 };
 
-export {
-  readUser,
-  readUserDetail,
-  createUser,
-  updateUser,
-  deleteUser,
-  loginUser,
-};
+export { readUser, readUserDetail, createUser, loginUser };
