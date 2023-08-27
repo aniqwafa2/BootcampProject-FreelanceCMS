@@ -48,6 +48,7 @@ const PostJob = () => {
             <div className="dashboard-content">
               <div className="p-3 my-3 rounded-4 bg-white">
                 <h3 className="mb-4 ms-3 fw-bold">Post a New Job</h3>
+
                 <div className="row justify-content-between m-2  mb-3">
                   <div className="col-md">
                     <label
@@ -59,6 +60,7 @@ const PostJob = () => {
                     <small className="text-secondary">
                       A job title must describe one position only
                     </small>
+
                   </div>
                   <div className="col-md">
                     <input

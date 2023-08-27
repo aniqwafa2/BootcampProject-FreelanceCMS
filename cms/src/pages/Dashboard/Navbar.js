@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+
 import {
   BsUbuntu,
   BsGrid1X2,
@@ -8,6 +9,7 @@ import {
   BsFolder2Open,
 } from "react-icons/bs";
 import { FiArchive, FiExternalLink } from "react-icons/fi";
+
 
 const Navbar = () => {
   const location = useLocation();
@@ -29,9 +31,7 @@ const Navbar = () => {
                 <BsUbuntu className="me-2"></BsUbuntu>GigGenie
               </h3>
               <ul className="menu-list">
-                <li
-                  className={location.pathname === "/dashboard" ? "active" : ""}
-                >
+                <li className={location.pathname === "/dashboard" ? "active" : ""}>
                   <Link to="/dashboard" activeclassname="active">
                     <BsGrid1X2 className="fs-5 me-2"></BsGrid1X2> Dashboard
                   </Link>
@@ -41,6 +41,7 @@ const Navbar = () => {
                     <BsArchive className="fs-5 me-2"></BsArchive> Post Job
                   </Link>
                 </li>
+
                 <li
                   className={
                     location.pathname === "/dashboard/category" ? "active" : ""
@@ -67,17 +68,14 @@ const Navbar = () => {
                     location.pathname === "/dashboard/jobs" ? "active" : ""
                   }
                 >
+
                   <Link to="/dashboard/jobs">
                     <BsFolder2Open className="fs-5 me-2" /> Jobs Lists
                   </Link>
                 </li>
-                <li
-                  className={
-                    location.pathname === "/dashboard/messages" ? "active" : ""
-                  }
-                >
-                  <Link to="/dashboard/messages">
-                    <FiArchive className="fs-5 me-2" /> Messages Lists
+                <li className={location.pathname === "/dashboard/applicants" ? "active" : ""}>
+                  <Link to="/dashboard/applicants">
+                    <BsFolderCheck className="fs-5 me-2" /> Applicants Lists
                   </Link>
                 </li>
               </ul>
@@ -91,41 +89,24 @@ const Navbar = () => {
                 <Link className="navbar-brand " to="/">
                   <span className="fs-3 fw-bold">Welcome to Dashboard</span>
                 </Link>
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav"
-                  aria-controls="navbarNav"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                   <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                   <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
-                      <Link
-                        to="/"
-                        className="btn btn-sm fw-bold mt-1 rounded-3 bg-white shadow-sm m-2"
-                        title="Homepage"
-                      >
+                      <Link to="/" className="btn btn-sm fw-bold mt-1 rounded-3 bg-white shadow-sm m-2" title="Homepage">
                         <FiExternalLink className="fs-5" />
                       </Link>
                     </li>
+
 
                     <div>
                       <span className="fs-4 mx-4">|</span>
                     </div>
 
                     <li className="nav-item dropdown">
-                      <Link
-                        className="nav-link dropdown-toggle fw-bold"
-                        to="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                      <Link className="nav-link dropdown-toggle fw-bold" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         JohnDoe
                       </Link>
                       <ul className="dropdown-menu">

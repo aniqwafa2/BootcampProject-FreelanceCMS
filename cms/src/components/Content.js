@@ -43,10 +43,7 @@ const Content = () => {
       <Routes>
         <>
           <Route path="" element={<Home></Home>}></Route>
-          <Route
-            path="/login"
-            element={<Login loginState={setLoginStatus}></Login>}
-          ></Route>
+          <Route path="/login" element={<Login loginState={setLoginStatus}></Login>}></Route>
           <Route path="/register" element={<Register></Register>}></Route>
 
           {/* DashboardUser */}
@@ -56,7 +53,7 @@ const Content = () => {
                 {/* Category */}
                 <Route path="category" element={<Dashboard />}></Route>
                 <Route path="createcategory" element={<Dashboard />}></Route>
-                {/* Jobs */}
+
                 <Route path="jobs" element={<Dashboard />}></Route>
                 {/* Messages */}
                 <Route path="messages" element={<Dashboard />}></Route>

@@ -20,7 +20,6 @@ const Category = () => {
       setCategories(result.data);
     });
   }, []);
-
   return (
     <>
       <div className="container">
@@ -51,10 +50,14 @@ const Category = () => {
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+
+                        {/* <th scope="col">Sallary</th> */}
+
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
+
                       {categories.map((item, id) => {
                         return (
                           <tr key={item.id}>
@@ -86,6 +89,7 @@ const Category = () => {
                           </tr>
                         );
                       })}
+
                     </tbody>
                   </table>
                 </div>

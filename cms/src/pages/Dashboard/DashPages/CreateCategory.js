@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createCategory } from "../../../axios/category";
@@ -31,17 +32,20 @@ const CreateCategory = () => {
                   <div class="row justify-content-between m-2  mb-3">
                     <div class="col-md">
                       <label for="exampleFormControlInput1" class="form-label fw-bold" />
+
                       Category
                       <br />
                     </div>
                     <div class="col-md">
                       <input onChange={(e) => setForm({ ...form, name: e.target.value })} type="text" class="form-control border border-2" id="exampleFormControlInput1" placeholder="..." required autofocus />
+
                     </div>
                   </div>
                   <hr />
 
                   <div class="row justify-content-between m-2  mb-3">
                     <div class="col-md">
+
                       <label for="exampleFormControlInput1" class="form-label fw-bold" />
                       Description
                       <br />
@@ -53,15 +57,18 @@ const CreateCategory = () => {
 
                   <div class="row justify-content-between m-2  mb-3">
                     <div class="col-md">
+
                       <Link to="/dashboard/category" className="btn btn-outline-primary w-100 fw-bold">
                         Cancel
                       </Link>
                     </div>
                     <div class="col-md">
+
                       <button onClick={() => submitHandler()} className="btn btn-primary w-100 fw-bold">
                         {" "}
                         Publish
                       </button>
+
                     </div>
                   </div>
                 </form>

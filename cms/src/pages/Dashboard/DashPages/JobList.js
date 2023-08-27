@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+
 import { readJob, deleteJob } from "../../../axios/job";
+
 import { dateFormat } from "../../../helpers";
 
 const JobList = () => {
@@ -66,28 +68,17 @@ const JobList = () => {
                               <th scope="row">{id + 1}</th>
                               <td className="fw-bold">{item.name}</td>
                               <td>
-                                <small
-                                  className={`text-white rounded-4 px-3 py-1 fw-bold btn btn-sm ${
-                                    Date.parse(item.dueDate) < Date.now()
-                                      ? "text-bg-danger"
-                                      : "text-bg-info"
-                                  }`}
-                                >
-                                  {dateFormat(item.dueDate)}
-                                </small>
+                                <small className={`text-white rounded-4 px-3 py-1 fw-bold btn btn-sm ${Date.parse(item.dueDate) < Date.now() ? "text-bg-danger" : "text-bg-info"}`}>{dateFormat(item.dueDate)}</small>
                               </td>
                               <td>
                                 {item.status ? (
-                                  <small className="rounded-4 px-3 py-1 text-bg-success fw-bold btn btn-sm">
-                                    Applicant accepted
-                                  </small>
+                                  <small className="rounded-4 px-3 py-1 text-bg-success fw-bold btn btn-sm">Applicant accepted</small>
                                 ) : (
-                                  <small className="rounded-4 px-3 py-1 text-bg-warning fw-bold btn btn-sm">
-                                    No applicant accepted
-                                  </small>
+                                  <small className="rounded-4 px-3 py-1 text-bg-warning fw-bold btn btn-sm">No applicant accepted</small>
                                 )}
                               </td>
                               <td>
+
                                 <div class="dropdown">
                                   <button
                                     class="text-bg-primary text-white p-1 rounded-4 px-3 fw-bold btn btn-sm dropdown-toggle"
@@ -135,6 +126,7 @@ const JobList = () => {
                                       </button>
                                     </li>
                                   </ul>
+
                                 </div>
                               </td>
                             </tr>

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // import { BsSearch } from "react-icons/bs";
 import { readJob, readJobDetail } from "../axios/job";
+
 import { dateFormat, isTokenExpired, priceFormat, getToken } from "../helpers";
+
 
 const Home = () => {
   const [loginStatus, setLoginStatus] = useState();
@@ -43,8 +45,7 @@ const Home = () => {
     let lastScrollTop = 0;
 
     const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop) {
         sidebar.classList.add("sidebar-hide");
       } else {
@@ -69,40 +70,24 @@ const Home = () => {
             <Link className="navbar-brand" to="#">
               <span className="fs-4 fw-bold">GigGenie</span>
             </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               {/* <ul className="navbar-nav ms-5 ">
                 <li className="nav-item ">
-                  <Link
-                    className="nav-link active navigation"
-                    aria-current="page"
-                    to="#"
-                  >
+                  <Link className="nav-link active navigation" aria-current="page" to="#">
                     Find Projects
                   </Link>
                 </li>
+
               </ul> */}
+
               <ul className="navbar-nav ms-auto">
                 {loginStatus ? (
                   <>
                     <li className="nav-item dropdown">
-                      <Link
-                        className="nav-link dropdown-toggle fw-bold active"
-                        to="#"
-                        role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
+                      <Link className="nav-link dropdown-toggle fw-bold active" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         JohnDoe
                       </Link>
                       <ul className="dropdown-menu">
@@ -113,12 +98,14 @@ const Home = () => {
                         </li>
                         <hr />
                         <li>
+
                           <button
                             className="dropdown-item fw-bold"
                             onClick={() => {
                               logoutHandler();
                             }}
                           >
+
                             Sign out
                           </button>
                         </li>
@@ -145,10 +132,12 @@ const Home = () => {
                 </div>
 
                 <li className="nav-item ">
+
                   <Link
                     className="btn btn-sm btn-custom mt-1 text-white fw-bold"
                     to="/post"
                   >
+
                     Employers / Post Job
                   </Link>
                 </li>
@@ -162,11 +151,8 @@ const Home = () => {
       <div className="container py-5">
         {/* <div className="container text-center">
           <div className="row mt-5">
-            <div className="col-5">
-              <select
-                className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary"
-                aria-label=".form-select-lg example"
-              >
+            <div className="col-md-5">
+              <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example">
                 <option selected>job title, keyword or company</option>
                 <option data-icon="bi bi-heart">Option 2</option>
                 <option value="1">One</option>
@@ -174,13 +160,10 @@ const Home = () => {
                 <option value="3">Three</option>
               </select>
             </div>
-            <div className="col-5">
-              <select
-                className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary"
-                aria-label=".form-select-lg example"
-              >
+            <div className="col-md-5">
+              <select className="custom-color form-select form-select-lg mb-3 fs-5 border border-0 text-secondary" aria-label=".form-select-lg example" readonly>
                 <option selected data-icon="bi bi-funnel">
-                  All location
+                  All
                 </option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
@@ -188,10 +171,7 @@ const Home = () => {
               </select>
             </div>
             <div className="col-2">
-              <button
-                type="button"
-                className="border border-0 btn btn-lg btn-custom w-100 text-white fs-5 lh-base"
-              >
+              <button type="button" className="border border-0 btn btn-lg btn-custom w-100 text-white fs-5 lh-base">
                 <BsSearch className="me-2"></BsSearch>Search
               </button>
             </div>
@@ -210,6 +190,7 @@ const Home = () => {
             {jobsList &&
               jobsList.map((item) => {
                 return (
+
                   <div
                     className="card border border-0 rounded-4 mb-3"
                     key={item.id}
@@ -242,6 +223,7 @@ const Home = () => {
                         <div class="d-inline p-2 me-2 text-bg-light rounded-2 fw-semibold small border text-secondary">
                           {item.category.name}
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -281,11 +263,9 @@ const Home = () => {
           <div className="container col-7 sidebar sidebar-hide">
             {jobItemSelected ? (
               <>
-                <div
-                  className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show"
-                  role="alert"
-                >
+                <div className="card card-styles alert bg-white border border-2 border-bottom-0 alert-dismissible fade show" role="alert">
                   <div className="card-body">
+
                     <h2 className="card-subtitle mb-2 text-body-secondary fw-bold">
                       {jobItemSelected.name}
                     </h2>
@@ -295,12 +275,14 @@ const Home = () => {
                         type="submit"
                         className="btn btn-md btn-custom text-white fw-bold"
                       >
+
                         Apply Now
                       </button>
-                    </Link>
+                    </Link> */}
                   </div>
                   {/* <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> */}
                 </div>
+
                 <div
                   data-bs-spy="scroll"
                   data-bs-target="#navbar-example3"
@@ -308,11 +290,10 @@ const Home = () => {
                   className="scrollable-content border border-2 px-4 py-4 rounded-3 bg-white"
                   tabIndex="0"
                 >
+
                   <div id="item-1">
                     <h5 className="fw-bold">Job Descriptions</h5>
-                    <p className="text-secondary lh-sm display-endline">
-                      {jobItemSelected.description}
-                    </p>
+                    <p className="text-secondary lh-sm display-endline">{jobItemSelected.description}</p>
                   </div>
                 </div>
               </>
@@ -336,11 +317,7 @@ const Home = () => {
                 <div className="d-inline p-2">
                   <Link to="https://www.code.id/">
                     <i>Powered by</i>
-                    <img
-                      src="https://static.wixstatic.com/media/ab2f5c_4090dbbaeafb4b0d975bd44c6cd498f6~mv2_d_5000_3314_s_4_2.png/v1/fill/w_262,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/code-colored.png"
-                      className="img-footer"
-                      alt=""
-                    />
+                    <img src="https://static.wixstatic.com/media/ab2f5c_4090dbbaeafb4b0d975bd44c6cd498f6~mv2_d_5000_3314_s_4_2.png/v1/fill/w_262,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/code-colored.png" className="img-footer" alt="" />
                   </Link>
                 </div>
               </div>
